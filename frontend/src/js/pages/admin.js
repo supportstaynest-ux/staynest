@@ -587,7 +587,7 @@ export async function renderAdminUsers() {
           const id = t.dataset.id;
           const isChecked = t.checked;
           const token = await getAccessToken();
-          const response = await fetch('http://localhost:3001/api/update-user-role', {
+          const response = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/update-user-role`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
             body: JSON.stringify({ userId: id, role: isChecked ? 'vendor' : 'user' })
@@ -618,7 +618,7 @@ export async function renderAdminUsers() {
     showLoading();
     try {
       const token = await getAccessToken();
-      const response = await fetch('http://localhost:3001/api/suspend-user', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/suspend-user`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ userId: id, suspend: !isSuspended })
@@ -658,7 +658,7 @@ export async function renderAdminUsers() {
     showLoading();
     try {
       const token = await getAccessToken();
-      const response = await fetch('http://localhost:3001/api/delete-user', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/delete-user`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ userId })

@@ -187,7 +187,7 @@ export async function resendVerification(email) {
 
 export async function sendVerificationEmail(email, token) {
     console.log(`📧 Calling backend to send verification email to: ${email}`);
-    const response = await fetch('http://localhost:3001/api/send-verification-email', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/send-verification-email`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
