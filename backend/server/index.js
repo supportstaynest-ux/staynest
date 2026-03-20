@@ -334,6 +334,57 @@ app.post('/api/send-verification-email', authLimiter, validateVerificationEmail,
 });
 
 // ══════════════════════════════════════════════════════════════════
+// GET /api/verify-email
+// 🔒 Public (user clicks link in email)
+// Verifies the user's email token
+// ══════════════════════════════════════════════════════════════════
+app.get('/api/verify-email', async (req, res) => {
+    try {
+        const token = req.query.token;
+        if (!token) {
+            return res.status(400).json({ success: false, error: 'Token is required' });
+        }
+
+        console.log(`🔍 Verifying email token...`);
+
+        // Check if token matches and is not expired
+        const { data: profile, error: fetchError } = await supabase
+            .from('profiles')
+            .select('id')
+            .eq('verification_token', token)
+            .gt('verification_token_expires_at', new Date().toISOString())
+            .single();
+
+        if (fetchError || !profile) {
+            console.warn('⚠️ Invalid or expired verification link for token:', token);
+            return res.status(400).json({ success: false, error: 'Invalid or expired verification link' });
+        }
+
+        // Token is valid, update user profile
+        const { error: updateError } = await supabase
+            .from('profiles')
+            .update({
+                is_verified: true,
+                verification_token: null,          // Single-use token
+                verification_token_expires_at: null
+            })
+            .eq('id', profile.id);
+
+        if (updateError) {
+            console.error('❌ Error updating profile during verification:', updateError.message);
+            return res.status(500).json({ success: false, error: 'Failed to complete verification' });
+        }
+
+        console.log(`✅ User ${profile.id.slice(0, 8)} email verified successfully.`);
+        return res.json({ success: true });
+
+    } catch (err) {
+        console.error('❌ Verify email API error:', err.message);
+        return res.status(500).json({ success: false, error: 'Internal server error' });
+    }
+});
+
+// ══════════════════════════════════════════════════════════════════
 // GET /test-email
 // 🔒 Protected: Admin only (test endpoint)
 // Simple test endpoint to verify Resend independently
