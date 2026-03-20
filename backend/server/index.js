@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import { createClient } from '@supabase/supabase-js';
 import { Resend } from 'resend';
+import crypto from 'crypto';
 
 // Middleware imports
 import { verifyToken, authorizeRoles } from './middleware/auth.js';
@@ -286,7 +287,6 @@ app.post('/api/send-verification-email', authLimiter, validateVerificationEmail,
         const { email, origin } = req.body;
 
         // 1. Generate a secure backend token
-        const crypto = require('crypto');
         const newToken = crypto.randomUUID();
         const expiry = new Date(Date.now() + 10 * 60 * 1000).toISOString(); // 10 minutes expiry
 
