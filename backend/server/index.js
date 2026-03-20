@@ -29,23 +29,21 @@ const app = express();
 app.use(helmet({ contentSecurityPolicy: false })); // CSP off for API server
 
 // CORS – Restrict to known frontend origins
-const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:5173')
-    .split(',')
-    .map(o => o.trim());
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || "")
+  .split(",")
+  .map(o => o.trim());
 
 app.use(cors({
-    origin: function (origin, callback) {
-        // Allow requests with no origin (curl, server-to-server)
-        if (!origin) return callback(null, true);
-        
-        if (allowedOrigins.includes(origin)) {
-            return callback(null, true);
-        }
-        
-        console.warn(`⚠️ CORS blocked request from origin: ${origin}`);
-        return callback(new Error('Not allowed by CORS'), false);
-    },
-    credentials: true,
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error("Not allowed by CORS"));
+  },
+  credentials: true,
 }));
 
 app.use(express.json({ limit: '10kb' })); // Limit body size to prevent payload attacks
