@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<title>StayNest - What's New</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen pb-24">
+<!-- Header Section -->
+<header class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center p-4 max-w-2xl mx-auto">
+<button class="flex items-center justify-center p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-slate-700 dark:text-slate-300">arrow_back</span>
+</button>
+<div class="flex-1 text-center">
+<h1 class="text-lg font-bold tracking-tight">What's New</h1>
+</div>
+<button class="flex items-center justify-center p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-slate-700 dark:text-slate-300">notifications</span>
+</button>
+</div>
+</header>
+<main class="max-w-2xl mx-auto px-4 py-6">
+<!-- Hero Banner -->
+<div class="@container mb-8">
+<div class="relative overflow-hidden rounded-xl bg-primary px-6 py-8 text-white shadow-lg shadow-primary/20">
+<div class="relative z-10 max-w-md">
+<h2 class="text-2xl font-extrabold mb-2">Stay updated with the latest platform releases.</h2>
+<p class="text-primary/10 text-sm mb-4 text-blue-100">Explore new tools and improvements designed to help you manage your properties better.</p>
+<button class="bg-white text-primary px-4 py-2 rounded-lg font-bold text-sm hover:bg-blue-50 transition-colors flex items-center gap-2">
+                        Subscribe to Updates
+                        <span class="material-symbols-outlined text-sm">mail</span>
+</button>
+</div>
+<div class="absolute -right-10 -bottom-10 opacity-10">
+<span class="material-symbols-outlined text-[160px]">campaign</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold">Release Timeline</h3>
+<button class="text-primary text-sm font-semibold flex items-center gap-1">
+                Filter by category
+                <span class="material-symbols-outlined text-sm">filter_list</span>
+</button>
+</div>
+<!-- Release Feed -->
+<div class="space-y-8 relative">
+<!-- Connector Line -->
+<div class="absolute left-[19px] top-4 bottom-4 w-0.5 bg-slate-200 dark:bg-slate-800"></div>
+<!-- Release Item 1 -->
+<div class="relative pl-12">
+<div class="absolute left-0 top-1 size-10 rounded-full bg-primary flex items-center justify-center border-4 border-background-light dark:border-background-dark z-10">
+<span class="material-symbols-outlined text-white text-lg">rocket_launch</span>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+<div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+<div class="flex items-center gap-2">
+<span class="text-lg font-bold">v2.4.0</span>
+<span class="px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">New Feature</span>
+</div>
+<span class="text-slate-500 dark:text-slate-400 text-sm font-medium">Oct 24, 2023</span>
+</div>
+<h4 class="text-base font-bold mb-2">Smart Pricing Algorithm v2</h4>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
+                        We've overhauled our pricing engine. Now it considers local events, weather patterns, and real-time competitor data to suggest the optimal rate for your listings.
+                    </p>
+<div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800">
+<a class="text-primary text-sm font-bold flex items-center gap-1 hover:underline" href="#">
+                            Read detailed notes
+                            <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</a>
+<div class="flex -space-x-2">
+<div class="size-6 rounded-full bg-slate-200 border-2 border-white dark:border-slate-900 overflow-hidden" data-alt="User profile avatar placeholder">
+<img alt="Author" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfkcxWlclI36cYkWHrpiu_3iak6OmGE6yX9zdzTSzl9uhP_w4s6JnS7UYv5TwVtOdAf3u6UpHIoKZgTS7nVpbIJqpfPMRlgMKNvavT4TGeJ45SUkDs4ki9Awe00abNlNA9K1dEkiNSyd4XxDXDXaw60xogRzVwiHJdtSGsZBC0k0d2TV5sMl_Hqmkops3fAAH38Kjn3NOtqifoqhWJvxmgUlWwP1eTs-3nCjHxCRPZbLc8UpN3ubvb7K1RZBLb5DIBmF0oySTxUkU"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Release Item 2 -->
+<div class="relative pl-12">
+<div class="absolute left-0 top-1 size-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center border-4 border-background-light dark:border-background-dark z-10">
+<span class="material-symbols-outlined text-primary text-lg">auto_fix_high</span>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+<div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+<div class="flex items-center gap-2">
+<span class="text-lg font-bold">v2.3.8</span>
+<span class="px-2.5 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-bold uppercase tracking-wider">Improvement</span>
+</div>
+<span class="text-slate-500 dark:text-slate-400 text-sm font-medium">Oct 18, 2023</span>
+</div>
+<h4 class="text-base font-bold mb-2">Multi-channel Sync Performance</h4>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                        Calendar synchronization with Airbnb and VRBO is now 40% faster. We've optimized the webhook handling to ensure zero booking overlaps.
+                    </p>
+</div>
+</div>
+<!-- Release Item 3 -->
+<div class="relative pl-12">
+<div class="absolute left-0 top-1 size-10 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center border-4 border-background-light dark:border-background-dark z-10">
+<span class="material-symbols-outlined text-orange-600 text-lg">security</span>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+<div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+<div class="flex items-center gap-2">
+<span class="text-lg font-bold">v2.3.5</span>
+<span class="px-2.5 py-0.5 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 text-xs font-bold uppercase tracking-wider">Security Update</span>
+</div>
+<span class="text-slate-500 dark:text-slate-400 text-sm font-medium">Oct 12, 2023</span>
+</div>
+<h4 class="text-base font-bold mb-2">Two-Factor Auth Hardening</h4>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-3">
+                        Added support for hardware security keys (WebAuthn) and improved the session timeout management for better account protection.
+                    </p>
+<a class="text-primary text-sm font-bold flex items-center gap-1 hover:underline" href="#">
+                        View security log
+                        <span class="material-symbols-outlined text-xs">open_in_new</span>
+</a>
+</div>
+</div>
+<!-- Release Item 4 -->
+<div class="relative pl-12">
+<div class="absolute left-0 top-1 size-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center border-4 border-background-light dark:border-background-dark z-10">
+<span class="material-symbols-outlined text-red-600 text-lg">bug_report</span>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+<div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+<div class="flex items-center gap-2">
+<span class="text-lg font-bold">v2.3.2</span>
+<span class="px-2.5 py-0.5 rounded-full bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-xs font-bold uppercase tracking-wider">Bug Fix</span>
+</div>
+<span class="text-slate-500 dark:text-slate-400 text-sm font-medium">Oct 05, 2023</span>
+</div>
+<h4 class="text-base font-bold mb-2">Dashboard Charting Fix</h4>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                        Resolved an issue where revenue charts displayed incorrect data for users in specific time zones during month transitions.
+                    </p>
+</div>
+</div>
+</div>
+<!-- Feedback Section -->
+<div class="mt-12 p-6 bg-slate-100 dark:bg-slate-800/50 rounded-xl text-center">
+<h4 class="font-bold mb-2">Have a suggestion?</h4>
+<p class="text-slate-600 dark:text-slate-400 text-sm mb-4">We're always looking to improve StayNest. Let us know what feature you'd like to see next.</p>
+<button class="w-full sm:w-auto px-6 py-2.5 bg-primary text-white rounded-lg font-bold hover:bg-primary/90 transition-all">
+                Send Feedback
+            </button>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-background-dark/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 pb-safe-area-inset-bottom">
+<div class="max-w-2xl mx-auto flex items-center justify-around py-2 px-2">
+<a class="flex flex-col items-center gap-1 p-2 text-slate-500 dark:text-slate-400 transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Dash</span>
+</a>
+<a class="flex flex-col items-center gap-1 p-2 text-slate-500 dark:text-slate-400 transition-colors" href="#">
+<span class="material-symbols-outlined">view_list</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Listings</span>
+</a>
+<a class="flex flex-col items-center gap-1 p-2 text-slate-500 dark:text-slate-400 transition-colors" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Reports</span>
+</a>
+<a class="flex flex-col items-center gap-1 p-2 text-slate-500 dark:text-slate-400 transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Vendors</span>
+</a>
+<a class="flex flex-col items-center gap-1 p-2 text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">new_releases</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">What's New</span>
+</a>
+<a class="flex flex-col items-center gap-1 p-2 text-slate-500 dark:text-slate-400 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Settings</span>
+</a>
+</div>
+</nav>
+</body></html>

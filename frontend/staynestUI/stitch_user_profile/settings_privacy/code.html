@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StayNest - Settings &amp; Privacy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2BB3C0",
+                        "background-light": "#f8fafa",
+                        "background-dark": "#121d1e",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Public Sans', sans-serif;
+        }
+        .custom-toggle:checked + .toggle-dot {
+            transform: translateX(100%);
+            background-color: white;
+        }
+        .custom-toggle:checked ~ .toggle-bg {
+            background-color: #2BB3C0;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex min-h-screen flex-col overflow-x-hidden">
+<!-- Header -->
+<header class="sticky top-0 z-10 flex items-center bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-4 py-4 border-b border-slate-200 dark:border-slate-800">
+<button class="flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 p-2 transition-colors">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-400">arrow_back</span>
+</button>
+<h1 class="ml-4 text-xl font-bold tracking-tight">Settings &amp; Privacy</h1>
+</header>
+<main class="flex-1 pb-24">
+<!-- Account Settings Section -->
+<section class="mt-6">
+<h2 class="px-6 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">Account Settings</h2>
+<div class="mx-4 bg-white dark:bg-slate-900/50 rounded-xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800">
+<a class="flex items-center justify-between px-4 py-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors" href="#">
+<div class="flex items-center gap-4">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">person</span>
+</div>
+<span class="font-medium">Edit Profile</span>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</a>
+<div class="h-px bg-slate-100 dark:bg-slate-800 mx-4"></div>
+<a class="flex items-center justify-between px-4 py-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors" href="#">
+<div class="flex items-center gap-4">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">lock</span>
+</div>
+<span class="font-medium">Change Password</span>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</a>
+<div class="h-px bg-slate-100 dark:bg-slate-800 mx-4"></div>
+<a class="flex items-center justify-between px-4 py-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors" href="#">
+<div class="flex items-center gap-4">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">verified_user</span>
+</div>
+<span class="font-medium">Email/Phone Verification</span>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</a>
+</div>
+</section>
+<!-- Privacy & Security Section -->
+<section class="mt-8">
+<h2 class="px-6 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">Privacy &amp; Security</h2>
+<div class="mx-4 bg-white dark:bg-slate-900/50 rounded-xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="flex items-center justify-between px-4 py-4">
+<div class="flex items-center gap-4">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">visibility</span>
+</div>
+<span class="font-medium">Profile Visibility</span>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input checked="" class="peer sr-only custom-toggle" type="checkbox"/>
+<div class="toggle-bg h-6 w-11 rounded-full bg-slate-200 dark:bg-slate-700 transition-colors"></div>
+<div class="toggle-dot absolute left-1 top-1 h-4 w-4 rounded-full bg-white transition-transform"></div>
+</label>
+</div>
+<div class="h-px bg-slate-100 dark:bg-slate-800 mx-4"></div>
+<div class="flex items-center justify-between px-4 py-4">
+<div class="flex items-center gap-4">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">security</span>
+</div>
+<span class="font-medium">Two-Factor Authentication</span>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input class="peer sr-only custom-toggle" type="checkbox"/>
+<div class="toggle-bg h-6 w-11 rounded-full bg-slate-200 dark:bg-slate-700 transition-colors"></div>
+<div class="toggle-dot absolute left-1 top-1 h-4 w-4 rounded-full bg-white transition-transform"></div>
+</label>
+</div>
+<div class="h-px bg-slate-100 dark:bg-slate-800 mx-4"></div>
+<a class="flex items-center justify-between px-4 py-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors" href="#">
+<div class="flex items-center gap-4">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">block</span>
+</div>
+<span class="font-medium">Manage Blocked Users</span>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</a>
+</div>
+</section>
+<!-- Notifications Section -->
+<section class="mt-8">
+<h2 class="px-6 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">Notifications</h2>
+<div class="mx-4 bg-white dark:bg-slate-900/50 rounded-xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="flex items-center justify-between px-4 py-4">
+<div class="flex items-center gap-4">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">notifications_active</span>
+</div>
+<span class="font-medium">Push Notifications</span>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input checked="" class="peer sr-only custom-toggle" type="checkbox"/>
+<div class="toggle-bg h-6 w-11 rounded-full bg-slate-200 dark:bg-slate-700 transition-colors"></div>
+<div class="toggle-dot absolute left-1 top-1 h-4 w-4 rounded-full bg-white transition-transform"></div>
+</label>
+</div>
+<div class="h-px bg-slate-100 dark:bg-slate-800 mx-4"></div>
+<div class="flex items-center justify-between px-4 py-4">
+<div class="flex items-center gap-4">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<span class="font-medium">Email Alerts</span>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input checked="" class="peer sr-only custom-toggle" type="checkbox"/>
+<div class="toggle-bg h-6 w-11 rounded-full bg-slate-200 dark:bg-slate-700 transition-colors"></div>
+<div class="toggle-dot absolute left-1 top-1 h-4 w-4 rounded-full bg-white transition-transform"></div>
+</label>
+</div>
+<div class="h-px bg-slate-100 dark:bg-slate-800 mx-4"></div>
+<div class="flex items-center justify-between px-4 py-4">
+<div class="flex items-center gap-4">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">sms</span>
+</div>
+<span class="font-medium">SMS Notifications</span>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input class="peer sr-only custom-toggle" type="checkbox"/>
+<div class="toggle-bg h-6 w-11 rounded-full bg-slate-200 dark:bg-slate-700 transition-colors"></div>
+<div class="toggle-dot absolute left-1 top-1 h-4 w-4 rounded-full bg-white transition-transform"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Data & Storage Section -->
+<section class="mt-8">
+<h2 class="px-6 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">Data &amp; Storage</h2>
+<div class="mx-4 bg-white dark:bg-slate-900/50 rounded-xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800">
+<button class="flex w-full items-center justify-between px-4 py-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="flex items-center gap-4">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">delete_sweep</span>
+</div>
+<div class="text-left">
+<p class="font-medium">Clear Cache</p>
+<p class="text-xs text-slate-500">124 MB used</p>
+</div>
+</div>
+</button>
+<div class="h-px bg-slate-100 dark:bg-slate-800 mx-4"></div>
+<button class="flex w-full items-center justify-between px-4 py-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="flex items-center gap-4">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">download</span>
+</div>
+<span class="font-medium">Download My Data</span>
+</div>
+</button>
+</div>
+</section>
+<!-- Support & About Section -->
+<section class="mt-8">
+<h2 class="px-6 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">Support &amp; About</h2>
+<div class="mx-4 bg-white dark:bg-slate-900/50 rounded-xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800">
+<a class="flex items-center justify-between px-4 py-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors" href="#">
+<span class="font-medium">Privacy Policy</span>
+<span class="material-symbols-outlined text-slate-400">open_in_new</span>
+</a>
+<div class="h-px bg-slate-100 dark:bg-slate-800 mx-4"></div>
+<a class="flex items-center justify-between px-4 py-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors" href="#">
+<span class="font-medium">Terms of Service</span>
+<span class="material-symbols-outlined text-slate-400">open_in_new</span>
+</a>
+<div class="h-px bg-slate-100 dark:bg-slate-800 mx-4"></div>
+<div class="flex items-center justify-between px-4 py-4">
+<span class="font-medium">App Version</span>
+<span class="text-slate-500 text-sm">v2.4.1 (Stable)</span>
+</div>
+</div>
+</section>
+<!-- Logout Button -->
+<div class="mt-10 px-4">
+<button class="flex w-full items-center justify-center gap-2 rounded-xl border border-red-200 bg-red-50 py-4 font-bold text-red-600 hover:bg-red-100 transition-colors dark:bg-red-900/10 dark:border-red-900/20">
+<span class="material-symbols-outlined">logout</span>
+                    Logout
+                </button>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 z-20 w-full border-t border-slate-200 bg-white/95 dark:bg-background-dark/95 backdrop-blur-md px-4 pb-6 pt-2 dark:border-slate-800">
+<div class="mx-auto flex max-w-md gap-2">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">home</span>
+<p class="text-[10px] font-medium leading-normal tracking-tight">Home</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">search</span>
+<p class="text-[10px] font-medium leading-normal tracking-tight">Search</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<p class="text-[10px] font-medium leading-normal tracking-tight">Bookings</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<p class="text-[10px] font-medium leading-normal tracking-tight">Inbox</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary" href="#">
+<span class="material-symbols-outlined font-fill-1">person</span>
+<p class="text-[10px] font-bold leading-normal tracking-tight">Profile</p>
+</a>
+</div>
+</nav>
+</div>
+</body></html>

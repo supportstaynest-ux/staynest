@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen pb-24">
+<!-- Header -->
+<header class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 py-3">
+<div class="flex items-center justify-between max-w-5xl mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl">arrow_back</span>
+<h1 class="text-xl font-bold tracking-tight">Admin Settings</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-background-dark"></span>
+</button>
+</div>
+</div>
+</header>
+<main class="max-w-5xl mx-auto p-4 md:p-6 space-y-8">
+<!-- Navigation Tabs -->
+<nav class="flex overflow-x-auto no-scrollbar gap-2 border-b border-slate-200 dark:border-slate-800 mb-6">
+<a class="px-4 py-3 text-sm font-bold border-b-2 border-primary text-primary whitespace-nowrap" href="#">Profile</a>
+<a class="px-4 py-3 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary whitespace-nowrap" href="#">Notifications</a>
+<a class="px-4 py-3 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary whitespace-nowrap" href="#">Security</a>
+<a class="px-4 py-3 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary whitespace-nowrap" href="#">Team</a>
+<a class="px-4 py-3 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary whitespace-nowrap" href="#">Platform Config</a>
+</nav>
+<!-- Profile Section -->
+<section class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-6">
+<h2 class="text-lg font-bold mb-6">Profile Settings</h2>
+<div class="flex flex-col md:flex-row gap-8 items-start">
+<div class="relative group">
+<div class="w-32 h-32 rounded-full bg-slate-100 dark:bg-slate-800 border-4 border-white dark:border-slate-700 overflow-hidden shadow-lg bg-cover bg-center" data-alt="Admin user profile picture avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBGS8z-clcr5RLyqBVYhUjyNIUvKNrMU1AuUHLAAuqfOPvHk6i5PznMGEY-sfQ2vjpcE3T6O_9X22qVJCuLqnmxEogGMxRxaSppi5OxjP2k9lYejaVo5LLNfje9zV-Iv14-Wiaz0xDUeJEX0uXr8w7vIsbFqk89R1vrD_6gh_UNLgZjSEcouR3HXuD9bsLU5pHBLuwSgdmV6AvB07dvaokgaKFQWfq3wMg9riYu3Qeisowhm_V7rH3KiFViy5UhF5Xmq2d-D-ZerFE')"></div>
+<button class="absolute bottom-0 right-0 bg-primary text-white p-2 rounded-full shadow-md hover:bg-blue-700 transition-colors">
+<span class="material-symbols-outlined text-sm">photo_camera</span>
+</button>
+</div>
+<div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+<div class="space-y-1">
+<label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Full Name</label>
+<input class="w-full bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg p-2.5 text-sm focus:ring-primary focus:border-primary" type="text" value="Alex Johnson"/>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Email Address</label>
+<input class="w-full bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg p-2.5 text-sm focus:ring-primary focus:border-primary" type="email" value="alex.j@staynest.com"/>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Role</label>
+<div class="w-full bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg p-2.5 text-sm font-medium text-slate-600 dark:text-slate-300">Super Admin</div>
+</div>
+<div class="flex items-end">
+<button class="bg-primary text-white font-bold py-2.5 px-6 rounded-lg text-sm hover:opacity-90 transition-opacity w-full md:w-auto">Save Profile</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Notification Preferences -->
+<section class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-6">
+<h2 class="text-lg font-bold mb-6">Notification Preferences</h2>
+<div class="space-y-4">
+<div class="flex items-center justify-between py-3 border-b border-slate-100 dark:border-slate-800 last:border-0">
+<div>
+<p class="font-semibold text-sm">New Listings</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Get notified when a host adds a new property</p>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center gap-1">
+<span class="text-[10px] text-slate-400 font-bold uppercase">Email</span>
+<div class="w-10 h-5 bg-primary rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div></div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="text-[10px] text-slate-400 font-bold uppercase">Push</span>
+<div class="w-10 h-5 bg-slate-300 dark:bg-slate-700 rounded-full relative cursor-pointer"><div class="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div></div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between py-3 border-b border-slate-100 dark:border-slate-800 last:border-0">
+<div>
+<p class="font-semibold text-sm">Reports &amp; Analytics</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Monthly summaries and trend alerts</p>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center gap-1">
+<span class="text-[10px] text-slate-400 font-bold uppercase">Email</span>
+<div class="w-10 h-5 bg-primary rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div></div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="text-[10px] text-slate-400 font-bold uppercase">Push</span>
+<div class="w-10 h-5 bg-primary rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div></div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between py-3">
+<div>
+<p class="font-semibold text-sm">Support Tickets</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">High priority escalation notifications</p>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center gap-1">
+<span class="text-[10px] text-slate-400 font-bold uppercase">Email</span>
+<div class="w-10 h-5 bg-primary rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div></div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="text-[10px] text-slate-400 font-bold uppercase">Push</span>
+<div class="w-10 h-5 bg-primary rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Security -->
+<section class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-6">
+<h2 class="text-lg font-bold mb-6">Security Settings</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-4">
+<p class="text-sm font-bold text-slate-700 dark:text-slate-300">Change Password</p>
+<input class="w-full bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg p-2.5 text-sm" placeholder="Current Password" type="password"/>
+<input class="w-full bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg p-2.5 text-sm" placeholder="New Password" type="password"/>
+<button class="text-primary text-sm font-bold hover:underline">Update Password</button>
+</div>
+<div class="bg-primary/5 dark:bg-primary/10 p-5 rounded-xl border border-primary/20">
+<div class="flex items-start gap-3 mb-4">
+<div class="bg-primary text-white p-2 rounded-lg">
+<span class="material-symbols-outlined">shield</span>
+</div>
+<div>
+<p class="font-bold text-sm">Two-Factor Authentication</p>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Add an extra layer of security to your account.</p>
+</div>
+</div>
+<div class="flex items-center justify-between mt-6 bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-100 dark:border-slate-700">
+<span class="text-sm font-medium">Status: <span class="text-green-500">Enabled</span></span>
+<div class="w-10 h-5 bg-primary rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Team Management -->
+<section class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-6">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-lg font-bold">Team Management</h2>
+<button class="bg-primary/10 text-primary hover:bg-primary/20 transition-colors px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span> Add Member
+                </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider border-b border-slate-100 dark:border-slate-800">
+<th class="pb-3 px-2">User</th>
+<th class="pb-3 px-2">Role</th>
+<th class="pb-3 px-2">Last Login</th>
+<th class="pb-3 px-2 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr class="text-sm">
+<td class="py-4 px-2">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-primary font-bold">AJ</div>
+<div>
+<p class="font-bold">Alex Johnson</p>
+<p class="text-xs text-slate-500">alex.j@staynest.com</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-2"><span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded-full uppercase">Super Admin</span></td>
+<td class="py-4 px-2 text-slate-500">Today, 10:45 AM</td>
+<td class="py-4 px-2 text-right">
+<button class="text-slate-400 hover:text-slate-600"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<tr class="text-sm">
+<td class="py-4 px-2">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-bold">SM</div>
+<div>
+<p class="font-bold">Sarah Miller</p>
+<p class="text-xs text-slate-500">s.miller@staynest.com</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-2"><span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-bold rounded-full uppercase">Moderator</span></td>
+<td class="py-4 px-2 text-slate-500">Yesterday, 4:20 PM</td>
+<td class="py-4 px-2 text-right">
+<button class="text-slate-400 hover:text-slate-600"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<tr class="text-sm">
+<td class="py-4 px-2">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 font-bold">DW</div>
+<div>
+<p class="font-bold">David Wong</p>
+<p class="text-xs text-slate-500">dwong@staynest.com</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-2"><span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-bold rounded-full uppercase">Support</span></td>
+<td class="py-4 px-2 text-slate-500">2 days ago</td>
+<td class="py-4 px-2 text-right">
+<button class="text-slate-400 hover:text-slate-600"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Platform Config -->
+<section class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-6">
+<h2 class="text-lg font-bold mb-6">Platform Configuration</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+<div>
+<p class="font-bold text-sm">Maintenance Mode</p>
+<p class="text-xs text-slate-500">Disable platform for users</p>
+</div>
+<div class="w-10 h-5 bg-slate-300 dark:bg-slate-700 rounded-full relative cursor-pointer"><div class="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div></div>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Default Commission Rate (%)</label>
+<div class="relative">
+<input class="w-full bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg p-2.5 text-sm font-bold" type="number" value="12"/>
+<span class="absolute right-4 top-2.5 text-slate-400">%</span>
+</div>
+<p class="text-[10px] text-slate-400 italic">This rate is applied to all new listings globally.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Nav Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-background-dark/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 flex justify-around items-center px-4 py-2 z-50">
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-bold">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">list_alt</span>
+<span class="text-[10px] font-bold">Listings</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] font-bold">Reports</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px] font-bold">Vendors</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-[1]">settings</span>
+<span class="text-[10px] font-bold">Settings</span>
+</a>
+</nav>
+</body></html>

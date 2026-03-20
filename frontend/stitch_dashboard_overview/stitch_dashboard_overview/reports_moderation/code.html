@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reports &amp; Moderation - PG Marketplace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab {
+            border-bottom: 3px solid #135bec;
+            color: #135bec;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Header -->
+<header class="sticky top-0 z-10 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center justify-between px-4 py-4 max-w-5xl mx-auto w-full">
+<div class="flex items-center gap-3">
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">gavel</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight">Moderation Hub</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 flex h-2 w-2 rounded-full bg-red-500"></span>
+</button>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex px-4 overflow-x-auto gap-6 max-w-5xl mx-auto w-full no-scrollbar">
+<a class="pb-3 pt-2 text-sm font-semibold border-b-3 border-transparent hover:text-primary transition-colors whitespace-nowrap" href="#">All Reports</a>
+<a class="pb-3 pt-2 text-sm font-semibold active-tab whitespace-nowrap" href="#">Pending (12)</a>
+<a class="pb-3 pt-2 text-sm font-semibold border-b-3 border-transparent text-slate-500 dark:text-slate-400 hover:text-primary transition-colors whitespace-nowrap" href="#">Under Review</a>
+<a class="pb-3 pt-2 text-sm font-semibold border-b-3 border-transparent text-slate-500 dark:text-slate-400 hover:text-primary transition-colors whitespace-nowrap" href="#">Resolved</a>
+</nav>
+</header>
+<!-- Main Content -->
+<main class="flex-1 max-w-5xl mx-auto w-full p-4 space-y-4">
+<!-- Summary Cards -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
+<p class="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">New Today</p>
+<p class="text-2xl font-bold mt-1">08</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
+<p class="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Urgent</p>
+<p class="text-2xl font-bold mt-1 text-red-500">03</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 hidden md:block">
+<p class="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Avg. Response</p>
+<p class="text-2xl font-bold mt-1">2.4h</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 hidden md:block">
+<p class="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Resolved</p>
+<p class="text-2xl font-bold mt-1 text-green-500">142</p>
+</div>
+</div>
+<h2 class="text-lg font-bold pt-2">Recent Flags</h2>
+<!-- Report List -->
+<div class="space-y-3">
+<!-- Report Card 1 -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+<div class="p-4">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="px-2 py-1 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-[10px] font-bold rounded uppercase tracking-tight">Fake Listing</span>
+<span class="px-2 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 text-[10px] font-bold rounded uppercase tracking-tight">Pending</span>
+</div>
+<span class="text-xs text-slate-400">Oct 24, 2:30 PM</span>
+</div>
+<div class="flex gap-4">
+<div class="w-16 h-16 rounded-lg bg-slate-100 dark:bg-slate-800 shrink-0 overflow-hidden">
+<img alt="Room preview" class="w-full h-full object-cover" data-alt="Modern hostel room interior with bunk beds" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2aCMRUsf8NrG4zmEwqzBfPT9MJCh8VeLCZDSWqwIlSMvKS5dmzQBU7O0y8EgYwU6Ry87gC3QcpQcETQ_R_N423TDM-mB8YmM4Ef7g92NbUUidvFYf73FADmKO_m8S5z40VOK4UVuXOSzPQQ6xnimWTk-qJvT5iCalLAETV_K3vcYxhpLE4--hplGKDAboix2atghzh9b1Th0vCDLAQTkWGufqizi1b9iCKMtVr5OzFxjbmEulUxlrJfwn7Pv-Yp7juIaMkdaiJbk"/>
+</div>
+<div class="flex-1">
+<h3 class="font-bold text-base leading-tight">Green Valley PG - Premium Boys</h3>
+<p class="text-sm text-slate-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span> Sector 62, Noida
+                            </p>
+<p class="text-xs mt-2 text-slate-600 dark:text-slate-400">
+<span class="font-semibold text-slate-800 dark:text-slate-200">Reported by:</span> John Doe
+                            </p>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap gap-2">
+<button class="flex-1 bg-primary text-white text-xs font-bold py-2.5 rounded-lg hover:bg-primary/90 transition-colors">
+                            Under Review
+                        </button>
+<button class="flex-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold py-2.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                            Warn Vendor
+                        </button>
+<button class="px-3 bg-red-50 dark:bg-red-900/10 text-red-600 dark:text-red-400 text-xs font-bold py-2.5 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/20 transition-colors">
+                            Remove
+                        </button>
+</div>
+</div>
+</div>
+<!-- Report Card 2 -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+<div class="p-4">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded uppercase tracking-tight">Inaccurate Info</span>
+<span class="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-[10px] font-bold rounded uppercase tracking-tight">Under Review</span>
+</div>
+<span class="text-xs text-slate-400">Oct 24, 11:15 AM</span>
+</div>
+<div class="flex gap-4">
+<div class="w-16 h-16 rounded-lg bg-slate-100 dark:bg-slate-800 shrink-0 overflow-hidden">
+<img alt="Apartment preview" class="w-full h-full object-cover" data-alt="Close up of a luxury apartment balcony" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfF6B-g5dgB--_gb9ctKdSGZnXA7ojsbSTXwFcdh1tpqkmjJWETWdL4fwm5b5X2hpcST8bHO2z0olFUDUbsK71qXBuAOINTb9zu2QSOXG_zyGho7NDFjpSH4vDfLBupGYYhrvTos-XBUO5sJi_Wxo-H_KoafMjndEwFE2rAX381MrMtxH5KVzLKy5Wy3zayE-jsQO0RTPC8KyAmkIROFh_CmixooTN7UNX-8-DY-RC9S2lRxfK3dgOkEkcSi8jB1QOAFZwsC--57M"/>
+</div>
+<div class="flex-1">
+<h3 class="font-bold text-base leading-tight">Skyline Residency</h3>
+<p class="text-sm text-slate-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span> Koramangala, Bengaluru
+                            </p>
+<p class="text-xs mt-2 text-slate-600 dark:text-slate-400">
+<span class="font-semibold text-slate-800 dark:text-slate-200">Reported by:</span> Priya Sharma
+                            </p>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap gap-2">
+<button class="flex-1 bg-green-600 text-white text-xs font-bold py-2.5 rounded-lg hover:bg-green-700 transition-colors">
+                            Resolve
+                        </button>
+<button class="flex-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold py-2.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                            Edit Listing
+                        </button>
+<button class="px-3 bg-slate-100 dark:bg-slate-800 text-slate-400 text-xs font-bold py-2.5 rounded-lg">
+<span class="material-symbols-outlined text-sm">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Report Card 3 (Spam) -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm opacity-80">
+<div class="p-4">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-bold rounded uppercase tracking-tight">Spam Content</span>
+<span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-[10px] font-bold rounded uppercase tracking-tight">Resolved</span>
+</div>
+<span class="text-xs text-slate-400">Oct 23, 5:45 PM</span>
+</div>
+<div class="flex gap-4">
+<div class="w-16 h-16 rounded-lg bg-slate-100 dark:bg-slate-800 shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400 text-3xl">mail</span>
+</div>
+<div class="flex-1">
+<h3 class="font-bold text-base leading-tight">Vendor Account: SuperStay_99</h3>
+<p class="text-sm text-slate-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">warning</span> Multiple spam comments
+                            </p>
+<p class="text-xs mt-2 text-slate-600 dark:text-slate-400">
+<span class="font-semibold text-slate-800 dark:text-slate-200">System Flagged</span>
+</p>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap gap-2">
+<button class="flex-1 bg-slate-50 dark:bg-slate-800/50 text-slate-400 text-xs font-bold py-2.5 rounded-lg cursor-not-allowed" disabled="">
+                            Closed
+                        </button>
+<button class="flex-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold py-2.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                            View History
+                        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination (Simple) -->
+<div class="flex items-center justify-between py-6">
+<button class="text-sm font-bold text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">chevron_left</span> Previous
+            </button>
+<p class="text-xs text-slate-500 font-medium tracking-wide">PAGE 1 OF 12</p>
+<button class="text-sm font-bold text-primary flex items-center gap-1">
+                Next <span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</main>
+<!-- Spacer for bottom nav -->
+<div class="h-20"></div>
+<!-- Bottom Navigation Bar -->
+<div class="fixed bottom-0 left-0 right-0 bg-white dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 px-2 pb-6 pt-2 z-20">
+<div class="max-w-md mx-auto flex justify-between items-center">
+<a class="flex flex-1 flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Home</span>
+</a>
+<a class="flex flex-1 flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">apartment</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Listings</span>
+</a>
+<a class="flex flex-1 flex-col items-center gap-1 text-primary" href="#">
+<div class="bg-primary/10 rounded-full px-4 py-1 flex flex-col items-center">
+<span class="material-symbols-outlined font-variation-fill">flag</span>
+<span class="text-[10px] font-black uppercase tracking-wider">Reports</span>
+</div>
+</a>
+<a class="flex flex-1 flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Vendors</span>
+</a>
+<a class="flex flex-1 flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Settings</span>
+</a>
+</div>
+</div>
+</body></html>

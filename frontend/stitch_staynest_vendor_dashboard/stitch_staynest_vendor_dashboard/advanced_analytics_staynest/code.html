@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2ab4c0",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#121e20",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Work Sans', sans-serif; }
+        .chart-gradient { background: linear-gradient(180deg, rgba(42, 180, 192, 0.1) 0%, rgba(42, 180, 192, 0) 100%); }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="flex min-h-screen">
+<!-- Sidebar Navigation -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col fixed h-full z-10">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary rounded-lg p-1.5 text-white">
+<span class="material-symbols-outlined text-2xl">analytics</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">StayNest</h1>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">home_work</span>
+<span class="text-sm font-medium">My Listings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">Leads</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 bg-primary/10 text-primary rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="text-sm font-medium">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 p-2 rounded-xl bg-slate-50 dark:bg-slate-800">
+<div class="size-10 rounded-full bg-slate-300 overflow-hidden" data-alt="Portrait of a smiling professional host" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDCHLGAJ7nErPR1reLh-X8Urp8IsPjvreyXO_1tsgAJPEm8eEY0cyjIJKYCs2RynH1SWzJnY42knM7gE84VeRZK7IydeqBzUG0vppQMJ2njjflcTbUD1-yq7Yg9LHu7Edf64qRyq7zT2oDHE6Fv2_-g3Zti4TsewQ0h_Yx8wDgckDmi0vBZnYtoPigMfek4lKifPzF_xIUQFBNLJi9_5nxxaRYblZpMv8cTUJi8rz1NI8P5OAewTGxn59-V98OWla_JWcBnkxtufLSX'); background-size: cover;"></div>
+<div class="flex-1 overflow-hidden">
+<p class="text-xs font-bold truncate">Alex Thompson</p>
+<p class="text-[10px] text-primary font-medium">Premium Host</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 flex-1">
+<!-- Header -->
+<header class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md flex items-center justify-between px-8 sticky top-0 z-10">
+<h2 class="text-lg font-semibold">Performance Analytics</h2>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Search analytics..." type="text"/>
+</div>
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+</div>
+</header>
+<!-- Content Area -->
+<div class="p-8 space-y-8">
+<!-- Filter & Summary Row -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h1 class="text-3xl font-bold tracking-tight">Overview</h1>
+<p class="text-slate-500 text-sm">Real-time performance metrics for your properties.</p>
+</div>
+<div class="flex gap-2 p-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm">
+<button class="px-4 py-1.5 text-xs font-semibold rounded-lg bg-primary text-white shadow-sm transition-all">This Week</button>
+<button class="px-4 py-1.5 text-xs font-semibold rounded-lg text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">Last Week</button>
+<button class="px-4 py-1.5 text-xs font-semibold rounded-lg text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">Last Month</button>
+<button class="px-4 py-1.5 text-xs font-semibold rounded-lg text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">Last 3 Months</button>
+</div>
+</div>
+<!-- Metric Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-4">
+<div class="size-10 rounded-lg bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600">
+<span class="material-symbols-outlined">visibility</span>
+</div>
+<span class="flex items-center gap-1 text-green-600 bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded text-xs font-bold">
+<span class="material-symbols-outlined text-sm">trending_up</span> 12.5%
+                        </span>
+</div>
+<p class="text-slate-500 text-sm font-medium">Total Views</p>
+<h3 class="text-3xl font-bold mt-1">12,402</h3>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-4">
+<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-fill">send</span>
+</div>
+<span class="flex items-center gap-1 text-green-600 bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded text-xs font-bold">
+<span class="material-symbols-outlined text-sm">trending_up</span> 5.2%
+                        </span>
+</div>
+<p class="text-slate-500 text-sm font-medium">Total Leads</p>
+<h3 class="text-3xl font-bold mt-1">842</h3>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-4">
+<div class="size-10 rounded-lg bg-amber-50 dark:bg-amber-900/20 flex items-center justify-center text-amber-600">
+<span class="material-symbols-outlined">cached</span>
+</div>
+<span class="flex items-center gap-1 text-red-600 bg-red-50 dark:bg-red-900/20 px-2 py-0.5 rounded text-xs font-bold">
+<span class="material-symbols-outlined text-sm">trending_down</span> 0.4%
+                        </span>
+</div>
+<p class="text-slate-500 text-sm font-medium">Avg. Conversion</p>
+<h3 class="text-3xl font-bold mt-1">6.8%</h3>
+</div>
+</div>
+<!-- Primary Area Chart (Visualization Placeholder) -->
+<div class="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h4 class="text-lg font-bold">Inquiry Pipeline</h4>
+<p class="text-slate-500 text-sm">Performance funnel over the selected period</p>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-full bg-blue-500"></div>
+<span class="text-xs font-medium text-slate-500">Views</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-full bg-primary"></div>
+<span class="text-xs font-medium text-slate-500">Contacts</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-full bg-slate-300"></div>
+<span class="text-xs font-medium text-slate-500">Leads</span>
+</div>
+</div>
+</div>
+<!-- Mock Chart Area -->
+<div class="h-[300px] w-full relative">
+<div class="absolute inset-0 flex items-end justify-between gap-2 px-4">
+<div class="flex-1 bg-slate-100 dark:bg-slate-800 rounded-t h-[40%]"></div>
+<div class="flex-1 bg-slate-100 dark:bg-slate-800 rounded-t h-[60%]"></div>
+<div class="flex-1 bg-slate-100 dark:bg-slate-800 rounded-t h-[55%]"></div>
+<div class="flex-1 bg-slate-100 dark:bg-slate-800 rounded-t h-[80%]"></div>
+<div class="flex-1 bg-slate-100 dark:bg-slate-800 rounded-t h-[45%]"></div>
+<div class="flex-1 bg-slate-100 dark:bg-slate-800 rounded-t h-[70%]"></div>
+<div class="flex-1 bg-slate-100 dark:bg-slate-800 rounded-t h-[90%]"></div>
+</div>
+<div class="absolute inset-0 flex flex-col justify-between text-[10px] text-slate-400 font-medium">
+<div class="border-t border-slate-100 dark:border-slate-800 w-full pt-1">15,000</div>
+<div class="border-t border-slate-100 dark:border-slate-800 w-full pt-1">10,000</div>
+<div class="border-t border-slate-100 dark:border-slate-800 w-full pt-1">5,000</div>
+<div class="border-t border-slate-100 dark:border-slate-800 w-full pt-1">0</div>
+</div>
+<!-- Area Stroke Mockup using SVG -->
+<svg class="absolute inset-0 h-full w-full pointer-events-none" preserveaspectratio="none">
+<path d="M0,200 Q100,150 200,180 T400,100 T600,130 T800,50 T1000,80" fill="none" opacity="0.8" stroke="#2ab4c0" stroke-width="3"></path>
+<path d="M0,220 Q100,170 200,200 T400,120 T600,150 T800,70 T1000,100" fill="none" opacity="0.8" stroke="#3b82f6" stroke-width="3"></path>
+</svg>
+</div>
+<div class="flex justify-between mt-4 text-[11px] text-slate-400 font-bold px-4">
+<span>MON</span>
+<span>TUE</span>
+<span>WED</span>
+<span>THU</span>
+<span>FRI</span>
+<span>SAT</span>
+<span>SUN</span>
+</div>
+</div>
+<!-- Second Row: Geographic and Device -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Map Section -->
+<div class="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h4 class="text-lg font-bold">Geographic Interest</h4>
+<span class="text-xs text-primary font-bold hover:underline cursor-pointer">View full report</span>
+</div>
+<div class="aspect-video bg-slate-100 dark:bg-slate-800 rounded-xl relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center grayscale opacity-50" data-alt="Stylized map showing global activity dots" data-location="World Map" style="background-image: url('https://placeholder.pics/svg/300')"></div>
+<div class="absolute top-1/4 left-1/3 size-6 bg-primary/40 rounded-full animate-pulse flex items-center justify-center">
+<div class="size-2 bg-primary rounded-full"></div>
+</div>
+<div class="absolute top-1/2 left-2/3 size-8 bg-primary/40 rounded-full animate-pulse flex items-center justify-center">
+<div class="size-3 bg-primary rounded-full"></div>
+</div>
+<div class="absolute bottom-1/4 left-1/2 size-10 bg-primary/40 rounded-full animate-pulse flex items-center justify-center">
+<div class="size-4 bg-primary rounded-full"></div>
+</div>
+</div>
+<div class="mt-6 space-y-3">
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<span class="size-2 bg-primary rounded-full"></span>
+<span class="text-slate-600 dark:text-slate-400">United States</span>
+</div>
+<span class="font-bold">42%</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<span class="size-2 bg-primary/60 rounded-full"></span>
+<span class="text-slate-600 dark:text-slate-400">United Kingdom</span>
+</div>
+<span class="font-bold">28%</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<span class="size-2 bg-primary/30 rounded-full"></span>
+<span class="text-slate-600 dark:text-slate-400">Canada</span>
+</div>
+<span class="font-bold">15%</span>
+</div>
+</div>
+</div>
+<!-- Traffic Source -->
+<div class="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h4 class="text-lg font-bold">Traffic Breakdown</h4>
+<span class="material-symbols-outlined text-slate-400">more_horiz</span>
+</div>
+<div class="flex items-center justify-center py-6">
+<!-- Donut Chart Mockup -->
+<div class="size-48 rounded-full border-[16px] border-slate-100 dark:border-slate-800 flex items-center justify-center relative">
+<div class="absolute inset-[-16px] rounded-full border-[16px] border-primary border-r-transparent border-b-transparent"></div>
+<div class="text-center">
+<p class="text-2xl font-black">74%</p>
+<p class="text-[10px] uppercase font-bold text-slate-400">Mobile</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mt-8">
+<div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">smartphone</span>
+<div>
+<p class="text-xs text-slate-500 font-bold">Mobile</p>
+<p class="font-bold text-lg">9.2k</p>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">laptop</span>
+<div>
+<p class="text-xs text-slate-500 font-bold">Desktop</p>
+<p class="font-bold text-lg">3.2k</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Listing Comparison -->
+<div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="p-8 border-b border-slate-100 dark:border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h4 class="text-lg font-bold">Listing Comparison</h4>
+<p class="text-slate-500 text-sm">Compare performance side-by-side</p>
+</div>
+<div class="flex gap-2">
+<select class="rounded-lg border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm py-2 px-4 focus:ring-primary">
+<option>Select Listing 1</option>
+</select>
+<select class="rounded-lg border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm py-2 px-4 focus:ring-primary">
+<option>Select Listing 2</option>
+</select>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 text-xs font-bold uppercase tracking-wider">
+<th class="px-8 py-4">Property Name</th>
+<th class="px-8 py-4">Views</th>
+<th class="px-8 py-4">Leads</th>
+<th class="px-8 py-4">Conv. Rate</th>
+<th class="px-8 py-4">Growth</th>
+<th class="px-8 py-4">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr>
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-cover bg-center" data-alt="Modern penthouse interior with large windows" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA16Yn2C4uoPG1ONUlI63usL3vhxzt7jTBKQQP_bWfedlx_PCCDK0GSFGSnjBsEsHjSULl9PYlkdrVK5wQWJnbx0YYaFL0Id76JwVGigpsPEF_TbgsgSWvMPixG6jSdKsAqtdXZy4J_I821noZWRzPaJcU86OkaTnRIZWDBfTRpLRYjsdabvRo-E3yh0DggJ_Bxnm-YIf0KShSQopFKpEaYoRW50SEiwmHO8djNm8lmbiNASipS3ZGx9J0mIf2AQEwaXUhNg9ZYoymi')"></div>
+<span class="text-sm font-semibold">Skyline Penthouse</span>
+</div>
+</td>
+<td class="px-8 py-5 text-sm font-medium">4,209</td>
+<td class="px-8 py-5 text-sm font-medium">312</td>
+<td class="px-8 py-5 text-sm font-medium">7.4%</td>
+<td class="px-8 py-5">
+<span class="text-green-600 text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> 14%
+                                    </span>
+</td>
+<td class="px-8 py-5">
+<button class="text-primary font-bold text-xs hover:underline">Details</button>
+</td>
+</tr>
+<tr>
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-cover bg-center" data-alt="Cozy cottage exterior with garden" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBXHOzUC5VzupPsQ_ru5Euct-nPoB1Kdx0zE-7ia9y1uiQzLCdo42cdmuyqn9grxn27OLB7hE-haUNA835sWK3arp5-YsVhbSOyTnurqBF7oZU1GTi9A2UiBdYDrRxUAqbVwysutWnlDa83VjeeZU_sLjEx1OHVGWledqsVCzM1M-q42go66qawuLrqEkcm7_mvkpF0QLfh2B8hFLlFA3I_PAHQhUVPu55Ey_hfzikWSx2swmsvecAY4X89VMt-ckK5z1ew6jsdn8_7')"></div>
+<span class="text-sm font-semibold">Garden Cottage</span>
+</div>
+</td>
+<td class="px-8 py-5 text-sm font-medium">2,840</td>
+<td class="px-8 py-5 text-sm font-medium">198</td>
+<td class="px-8 py-5 text-sm font-medium">6.9%</td>
+<td class="px-8 py-5">
+<span class="text-slate-400 text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">flatware</span> 0%
+                                    </span>
+</td>
+<td class="px-8 py-5">
+<button class="text-primary font-bold text-xs hover:underline">Details</button>
+</td>
+</tr>
+<tr>
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-cover bg-center" data-alt="Minimalist urban studio apartment" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA3HsNfJsWHk26Dcz4DWMrmvYlYRxfjlM11z0k3DVyse2S_pro6I3uJltpLFNsgrg1oTxv2Vm5zlczILEKooDpiKB6b7F8PUYoOB8kF8ddFyebJAp8rSdjoYId5f-f4FHom5YilbjL6Rp_QXnexh5EKYmaZ7hcu64--ymhRs8Zt_Cld66ShXsih93OqqyPgVX4UI-gOn3upccLlgjNB_enn81t-jLoqNaVEC3iSnPtwyHD2IByDUgCp4tJUZ08oKeXRTuDNZS5WEOkU')"></div>
+<span class="text-sm font-semibold">Urban Studio Loft</span>
+</div>
+</td>
+<td class="px-8 py-5 text-sm font-medium">1,105</td>
+<td class="px-8 py-5 text-sm font-medium">42</td>
+<td class="px-8 py-5 text-sm font-medium">3.8%</td>
+<td class="px-8 py-5">
+<span class="text-red-600 text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_down</span> 2%
+                                    </span>
+</td>
+<td class="px-8 py-5">
+<button class="text-primary font-bold text-xs hover:underline">Details</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

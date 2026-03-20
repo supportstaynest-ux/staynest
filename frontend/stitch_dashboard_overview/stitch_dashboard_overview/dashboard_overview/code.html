@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StayNest Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .chart-gradient {
+            background: linear-gradient(180deg, rgba(19, 91, 236, 0.1) 0%, rgba(19, 91, 236, 0) 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen flex flex-col">
+<header class="sticky top-0 z-30 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center justify-between px-4 h-16">
+<div class="flex items-center gap-3">
+<button class="p-2 -ml-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-400">menu</span>
+</button>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-xl">holiday_village</span>
+</div>
+<h1 class="font-bold text-lg tracking-tight">StayNest</h1>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-400">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/20">
+<img alt="Admin Profile" data-alt="Professional portrait of a male administrative user" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjwFvFT8noeCbNSu7-nPlGiFeeohpQdcplry4xg0MEZ6VKFJsqsp0l_sj07mqBuK19BW7kA9CGfvAD-Y9szYbt-MO4WDV6Bs2wNlFdPG3I5hUvAEeflFksokUvxYdJ0KDNK29UPRi1S9zcgpqVME2GAQSVOfnncgCjzr680qP79z1QOzM_KVHYcyLCQA-1RkdAD5xB7parjzUvX7WJSQHdIzp4kZmJysit_8STbBPxxxaQFn2nX5_0GS7QKpKGPybiG5FLBHmz0UQ"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto pb-24">
+<div class="px-4 py-6">
+<header class="mb-6">
+<h2 class="text-2xl font-extrabold tracking-tight">Dashboard Overview</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Welcome back, Admin. Here's what's happening today.</p>
+</header>
+<section class="grid grid-cols-2 gap-4 mb-8">
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">group</span>
+</div>
+<div>
+<p class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Users</p>
+<p class="text-xl font-bold mt-1">12,543</p>
+</div>
+<div class="flex items-center gap-1 text-emerald-500 font-bold text-xs">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>+12%</span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col gap-3">
+<div class="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-indigo-500">storefront</span>
+</div>
+<div>
+<p class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Vendors</p>
+<p class="text-xl font-bold mt-1">843</p>
+</div>
+<div class="flex items-center gap-1 text-emerald-500 font-bold text-xs">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>+5%</span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col gap-3">
+<div class="w-10 h-10 rounded-lg bg-sky-500/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-sky-500">bed</span>
+</div>
+<div>
+<p class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Listings</p>
+<p class="text-xl font-bold mt-1">2,108</p>
+</div>
+<div class="flex items-center gap-1 text-emerald-500 font-bold text-xs">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>+8%</span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col gap-3">
+<div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-emerald-500">payments</span>
+</div>
+<div>
+<p class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Revenue</p>
+<p class="text-xl font-bold mt-1">$145.2k</p>
+</div>
+<div class="flex items-center gap-1 text-emerald-500 font-bold text-xs">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>+15%</span>
+</div>
+</div>
+</section>
+<section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden mb-8">
+<div class="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white">User Growth Trend</h3>
+<p class="text-xs text-slate-500">Monthly active user signups</p>
+</div>
+<select class="text-xs border-slate-200 dark:border-slate-700 bg-transparent rounded-lg focus:ring-primary">
+<option>Last 30 days</option>
+<option>Last 6 months</option>
+</select>
+</div>
+<div class="p-5 pt-10 relative h-48 w-full flex items-end gap-1">
+<div class="absolute inset-0 p-5 flex flex-col justify-between pointer-events-none opacity-30">
+<div class="border-b border-slate-200 dark:border-slate-700 w-full h-0"></div>
+<div class="border-b border-slate-200 dark:border-slate-700 w-full h-0"></div>
+<div class="border-b border-slate-200 dark:border-slate-700 w-full h-0"></div>
+</div>
+<div class="flex-1 bg-primary/20 hover:bg-primary transition-colors rounded-t-sm h-1/4"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary transition-colors rounded-t-sm h-2/4"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary transition-colors rounded-t-sm h-3/4"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary transition-colors rounded-t-sm h-2/4"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary transition-colors rounded-t-sm h-4/5"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary transition-colors rounded-t-sm h-full"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary transition-colors rounded-t-sm h-3/5"></div>
+<div class="flex-1 bg-primary/30 hover:bg-primary transition-colors rounded-t-sm h-4/6"></div>
+<div class="flex-1 bg-primary/30 hover:bg-primary transition-colors rounded-t-sm h-5/6"></div>
+<div class="flex-1 bg-primary hover:bg-primary/80 transition-colors rounded-t-sm h-full"></div>
+</div>
+<div class="px-5 pb-4 flex justify-between text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+<span>Week 1</span>
+<span>Week 2</span>
+<span>Week 3</span>
+<span>Week 4</span>
+</div>
+</section>
+<section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+<h3 class="font-bold">Recent Activities</h3>
+<button class="text-primary text-xs font-bold">View All</button>
+</div>
+<div class="divide-y divide-slate-100 dark:divide-slate-800">
+<div class="p-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary text-xl">person_add</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold truncate">New User Registration</p>
+<p class="text-xs text-slate-500">Alex Johnson joined StayNest</p>
+</div>
+<span class="text-[10px] text-slate-400 whitespace-nowrap">2m ago</span>
+</div>
+<div class="p-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-amber-500 text-xl">add_home</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold truncate">New Listing Added</p>
+<p class="text-xs text-slate-500">Mountain Retreat by Peak Rentals</p>
+</div>
+<span class="text-[10px] text-slate-400 whitespace-nowrap">45m ago</span>
+</div>
+<div class="p-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-emerald-500 text-xl">check_circle</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold truncate">Vendor Verified</p>
+<p class="text-xs text-slate-500">Coastal Dreams has been approved</p>
+</div>
+<span class="text-[10px] text-slate-400 whitespace-nowrap">2h ago</span>
+</div>
+</div>
+</section>
+</div>
+</main>
+<nav class="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 z-40">
+<div class="flex items-center justify-around h-20 px-4">
+<a class="flex flex-col items-center gap-1 group" href="#">
+<div class="p-2 rounded-xl bg-primary text-white transition-all">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+</div>
+<span class="text-[10px] font-bold text-primary">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<div class="p-2 rounded-xl text-slate-400 group-hover:bg-slate-100 dark:group-hover:bg-slate-800 transition-all">
+<span class="material-symbols-outlined text-[24px]">group</span>
+</div>
+<span class="text-[10px] font-bold text-slate-400">Users</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<div class="p-2 rounded-xl text-slate-400 group-hover:bg-slate-100 dark:group-hover:bg-slate-800 transition-all">
+<span class="material-symbols-outlined text-[24px]">apartment</span>
+</div>
+<span class="text-[10px] font-bold text-slate-400">Listings</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<div class="p-2 rounded-xl text-slate-400 group-hover:bg-slate-100 dark:group-hover:bg-slate-800 transition-all">
+<span class="material-symbols-outlined text-[24px]">payments</span>
+</div>
+<span class="text-[10px] font-bold text-slate-400">Finance</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<div class="p-2 rounded-xl text-slate-400 group-hover:bg-slate-100 dark:group-hover:bg-slate-800 transition-all">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+</div>
+<span class="text-[10px] font-bold text-slate-400">Settings</span>
+</a>
+</div>
+</nav>
+</body></html>

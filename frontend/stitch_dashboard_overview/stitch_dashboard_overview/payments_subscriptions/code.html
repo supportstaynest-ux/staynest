@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StayNest Admin - Payments &amp; Subscriptions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab {
+            border-bottom: 2px solid #135bec;
+            color: #135bec;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
+<!-- Top Header -->
+<header class="sticky top-0 z-10 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-4 py-4 border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center justify-between mb-4">
+<h1 class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">Payments &amp; Subscriptions</h1>
+<div class="flex gap-2">
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-400">search</span>
+</button>
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-400">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Tabs -->
+<nav class="flex space-x-6 overflow-x-auto no-scrollbar">
+<a class="pb-2 text-sm font-bold active-tab whitespace-nowrap" href="#">History</a>
+<a class="pb-2 text-sm font-medium text-slate-500 dark:text-slate-400 whitespace-nowrap" href="#">Payouts</a>
+<a class="pb-2 text-sm font-medium text-slate-500 dark:text-slate-400 whitespace-nowrap" href="#">Plan Management</a>
+</nav>
+</header>
+<main class="p-4 space-y-6 pb-24">
+<!-- Summary Cards Horizontal Scroll -->
+<section class="flex gap-4 overflow-x-auto no-scrollbar pb-2">
+<!-- Total Revenue -->
+<div class="min-w-[280px] flex-1 bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Total Revenue</p>
+<span class="flex items-center text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/30 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-sm mr-1">trending_up</span>+12%
+                    </span>
+</div>
+<h2 class="text-3xl font-extrabold text-slate-900 dark:text-slate-100">$425,000</h2>
+<p class="text-xs text-slate-400 mt-2">v.s. last month</p>
+</div>
+<!-- Pending Payouts -->
+<div class="min-w-[280px] flex-1 bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Pending Payouts</p>
+<span class="text-xs font-bold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/30 px-2 py-1 rounded-full">Action Required</span>
+</div>
+<h2 class="text-3xl font-extrabold text-slate-900 dark:text-slate-100">$18,420</h2>
+<p class="text-xs text-slate-400 mt-2">14 vendors awaiting approval</p>
+</div>
+<!-- Active Subscriptions -->
+<div class="min-w-[280px] flex-1 bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Active Subscriptions</p>
+<span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">Target: 1k</span>
+</div>
+<h2 class="text-3xl font-extrabold text-slate-900 dark:text-slate-100">842</h2>
+<p class="text-xs text-slate-400 mt-2">Across all tiers</p>
+</div>
+</section>
+<!-- Subscription Breakdown -->
+<section class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<h3 class="text-sm font-bold text-slate-900 dark:text-slate-100 mb-4 uppercase tracking-wider">Plan Distribution</h3>
+<div class="space-y-4">
+<div class="flex h-3 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+<div class="bg-primary/40 h-full" style="width: 45%" title="Basic"></div>
+<div class="bg-primary h-full" style="width: 35%" title="Pro"></div>
+<div class="bg-slate-900 dark:bg-white h-full" style="width: 20%" title="Elite"></div>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<div class="flex flex-col">
+<span class="flex items-center text-xs font-medium text-slate-500">
+<span class="size-2 rounded-full bg-primary/40 mr-2"></span>Basic
+                        </span>
+<span class="text-sm font-bold">45%</span>
+</div>
+<div class="flex flex-col">
+<span class="flex items-center text-xs font-medium text-slate-500">
+<span class="size-2 rounded-full bg-primary mr-2"></span>Pro
+                        </span>
+<span class="text-sm font-bold">35%</span>
+</div>
+<div class="flex flex-col">
+<span class="flex items-center text-xs font-medium text-slate-500">
+<span class="size-2 rounded-full bg-slate-900 dark:bg-white mr-2"></span>Elite
+                        </span>
+<span class="text-sm font-bold">20%</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Transaction History List -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">Recent Transactions</h3>
+<button class="text-sm font-bold text-primary">View All</button>
+</div>
+<div class="space-y-3">
+<!-- Transaction Row 1 -->
+<div class="flex items-center gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
+<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">home_work</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between">
+<p class="text-sm font-bold text-slate-900 dark:text-slate-100 truncate">Maple Leaf PG</p>
+<p class="text-sm font-extrabold text-slate-900 dark:text-slate-100">$299</p>
+</div>
+<div class="flex justify-between items-center mt-1">
+<p class="text-xs text-slate-500">Pro Plan • Oct 24</p>
+<span class="text-[10px] uppercase font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-0.5 rounded">Success</span>
+</div>
+</div>
+<button class="text-slate-400">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<!-- Transaction Row 2 -->
+<div class="flex items-center gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
+<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">apartment</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between">
+<p class="text-sm font-bold text-slate-900 dark:text-slate-100 truncate">Skyline Residency</p>
+<p class="text-sm font-extrabold text-slate-900 dark:text-slate-100">$599</p>
+</div>
+<div class="flex justify-between items-center mt-1">
+<p class="text-xs text-slate-500">Elite Plan • Oct 23</p>
+<span class="text-[10px] uppercase font-bold text-amber-600 bg-amber-50 dark:bg-amber-900/20 px-2 py-0.5 rounded">Pending</span>
+</div>
+</div>
+<button class="text-slate-400">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<!-- Transaction Row 3 -->
+<div class="flex items-center gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
+<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">cottage</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between">
+<p class="text-sm font-bold text-slate-900 dark:text-slate-100 truncate">Zenith PG</p>
+<p class="text-sm font-extrabold text-slate-900 dark:text-slate-100">$99</p>
+</div>
+<div class="flex justify-between items-center mt-1">
+<p class="text-xs text-slate-500">Basic Plan • Oct 22</p>
+<span class="text-[10px] uppercase font-bold text-red-600 bg-red-50 dark:bg-red-900/20 px-2 py-0.5 rounded">Failed</span>
+</div>
+</div>
+<button class="text-slate-400">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<!-- Transaction Row 4 -->
+<div class="flex items-center gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
+<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">villa</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between">
+<p class="text-sm font-bold text-slate-900 dark:text-slate-100 truncate">Heritage Suites</p>
+<p class="text-sm font-extrabold text-slate-900 dark:text-slate-100">$299</p>
+</div>
+<div class="flex justify-between items-center mt-1">
+<p class="text-xs text-slate-500">Pro Plan • Oct 21</p>
+<span class="text-[10px] uppercase font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-0.5 rounded">Success</span>
+</div>
+</div>
+<button class="text-slate-400">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 flex justify-around items-center px-4 py-3 z-20">
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500 group-hover:text-primary transition-colors">dashboard</span>
+<span class="text-[10px] font-bold text-slate-400 dark:text-slate-500 group-hover:text-primary">Dashboard</span>
+</a>
+<a class="flex flex-col items-center gap-1" href="#">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">payments</span>
+<span class="text-[10px] font-bold text-primary">Payments</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500 group-hover:text-primary transition-colors">group</span>
+<span class="text-[10px] font-bold text-slate-400 dark:text-slate-500 group-hover:text-primary">Users</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500 group-hover:text-primary transition-colors">settings</span>
+<span class="text-[10px] font-bold text-slate-400 dark:text-slate-500 group-hover:text-primary">Settings</span>
+</a>
+</nav>
+</body></html>

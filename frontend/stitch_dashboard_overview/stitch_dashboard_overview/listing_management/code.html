@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StayNest Listing Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark overflow-x-hidden">
+<!-- Header -->
+<div class="flex items-center bg-white dark:bg-slate-900 p-4 pb-2 justify-between sticky top-0 z-20 border-b border-slate-200 dark:border-slate-800">
+<div class="text-slate-900 dark:text-slate-100 flex size-12 shrink-0 items-center justify-center cursor-pointer">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Manage Listings</h2>
+<div class="flex w-12 items-center justify-end">
+<button class="flex size-10 cursor-pointer items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+<!-- Search Bar -->
+<div class="px-4 py-4 bg-white dark:bg-slate-900">
+<label class="flex flex-col min-w-40 h-12 w-full">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+<div class="text-slate-500 dark:text-slate-400 flex items-center justify-center pl-4">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-slate-900 dark:text-slate-100 focus:outline-0 focus:ring-0 border-none bg-transparent h-full placeholder:text-slate-500 px-4 pl-2 text-base font-normal leading-normal" placeholder="Search by PG name or ID..." value=""/>
+</div>
+</label>
+</div>
+<!-- Horizontal Filter -->
+<div class="flex gap-3 p-4 overflow-x-auto no-scrollbar bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary text-white px-4">
+<span class="text-sm font-semibold">All Cities</span>
+<span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-4 border border-slate-200 dark:border-slate-700">
+<span class="text-sm font-medium">New York</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-4 border border-slate-200 dark:border-slate-700">
+<span class="text-sm font-medium">London</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-4 border border-slate-200 dark:border-slate-700">
+<span class="text-sm font-medium">Tokyo</span>
+</button>
+</div>
+<!-- Listings Content -->
+<div class="flex flex-col gap-4 p-4 pb-24">
+<!-- Listing Item 1: Featured -->
+<div class="flex flex-col items-stretch justify-start rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+<div class="relative w-full aspect-video bg-slate-200 dark:bg-slate-800">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Modern minimalist studio apartment bedroom with large window" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBT9KLZVje-j-YE8wroXnaysp6kLyd7lGGNxYC5fyHl6WFXTDE-v7C3h55Jr5h1My1BGb8HgzIxbztMwT4jkGaUC2eywgfv7XMFAYhSuvU52EeKD3daH-Rl6Ka03Be_33gFNTYziwzfW28RgB1K63fixsVSCEAqgIkqqwVbjMvncPnk9xiOIuUjRlE5iSD_rB1oUPE-T_7n76mDRt8NcPZqM-azHc93mdBt0wwUMeb-ohTb69kRvIF2d88L98EltoOZE92we-6XBso');"></div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="px-2 py-1 rounded bg-amber-500 text-white text-[10px] font-bold uppercase tracking-wider">Featured</span>
+<span class="px-2 py-1 rounded bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined !text-[12px]">verified</span> Verified
+                        </span>
+</div>
+<div class="absolute bottom-3 right-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur px-2 py-1 rounded-lg text-xs font-bold text-primary">
+                        $1,200/mo
+                    </div>
+</div>
+<div class="flex flex-col p-4 gap-3">
+<div>
+<h3 class="text-slate-900 dark:text-white text-lg font-bold leading-tight">Skyline Heights Luxury PG</h3>
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400 mt-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="text-xs">Upper West Side, New York</span>
+</div>
+</div>
+<div class="flex gap-2 mt-2">
+<button class="flex-1 flex items-center justify-center gap-2 bg-primary/10 text-primary py-2 rounded-lg text-sm font-bold hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">edit</span> Edit
+                        </button>
+<button class="flex-1 flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 py-2 rounded-lg text-sm font-bold border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-sm">visibility</span> View
+                        </button>
+<button class="flex px-3 items-center justify-center bg-red-50 dark:bg-red-950/30 text-red-500 py-2 rounded-lg border border-red-100 dark:border-red-900/50">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Listing Item 2: Pending Approval -->
+<div class="flex flex-col items-stretch justify-start rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+<div class="relative w-full aspect-video bg-slate-200 dark:bg-slate-800">
+<div class="absolute inset-0 bg-cover bg-center grayscale-[0.5]" data-alt="Cozy shared bedroom in a PG accommodation" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBeZpfM-CQhcrmo-wFAZ8q5denz1dM9aIFigmdROkp4xdOigbi9Th-L-hnHFaI0HadedxUqR2Ygi0K7l2osCshid1V6jIol-2ISuvrBHUxziaOP2mlu6vLZg0TV3yH5o80hZgSlgo08I1B16ZIJKRKhFhlumKek07eyTUZVwPPE4xW_tGVUKFhuAyqlGYxmtWaAC2I0P6ctWjZDU39SksUZFhaUfzU60DQ5overgaZPvRwo13ilOWCri2HyAIX11pg-cboPeWYCqn4');"></div>
+<div class="absolute top-3 left-3">
+<span class="px-2 py-1 rounded bg-slate-500 text-white text-[10px] font-bold uppercase tracking-wider">Pending Review</span>
+</div>
+<div class="absolute inset-0 bg-slate-900/40 flex items-center justify-center backdrop-blur-[2px]">
+<button class="bg-white text-slate-900 px-4 py-2 rounded-full text-xs font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">check_circle</span> Approve Listing
+                         </button>
+</div>
+</div>
+<div class="flex flex-col p-4 gap-3">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="text-slate-900 dark:text-white text-lg font-bold leading-tight">Greenwood PG for Men</h3>
+<span class="text-xs font-bold text-slate-500">#PG-8821</span>
+</div>
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400 mt-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="text-xs">Camden, London</span>
+</div>
+</div>
+<div class="flex gap-2 mt-2">
+<button class="flex-[2] flex items-center justify-center gap-2 bg-primary text-white py-2 rounded-lg text-sm font-bold">
+                            Approve
+                        </button>
+<button class="flex-1 flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 py-2 rounded-lg text-sm font-bold border border-slate-200 dark:border-slate-700">
+                            Details
+                        </button>
+<button class="flex px-3 items-center justify-center bg-red-50 dark:bg-red-950/30 text-red-500 py-2 rounded-lg border border-red-100 dark:border-red-900/50">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Listing Item 3: Standard -->
+<div class="flex flex-col items-stretch justify-start rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+<div class="relative w-full aspect-video bg-slate-200 dark:bg-slate-800">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Simple clean apartment interior with sunlight" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAnFn_OwwxEfdAxmX1bNIYr5AS-7pYEnILqtrB1e2sZCU_zG8ur5shEUrGI0xsV754mSVF4WKnr5-RHVpq9WfE9j7DNwsaFfJXpsM_vhJC1DhdwTPCjuf-bjt958XXs5nm98oDCKCphCemWTwisdJ-oj69_iExLKEsowbYX5R9li43ElHZb-WZN41gVOtGs-AsfW--hpwaxU8GLRLkwFI7RSkQrsY2Lbm1rZsLvbWh6eBFfVYcxMRbTE1acGa_PwZUEF3rRUv6rhg0');"></div>
+<div class="absolute top-3 left-3">
+<span class="px-2 py-1 rounded bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined !text-[12px]">verified</span> Verified
+                        </span>
+</div>
+<div class="absolute bottom-3 right-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur px-2 py-1 rounded-lg text-xs font-bold text-primary">
+                        $450/mo
+                    </div>
+</div>
+<div class="flex flex-col p-4 gap-3">
+<div>
+<h3 class="text-slate-900 dark:text-white text-lg font-bold leading-tight">Shibuya Smart Living</h3>
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400 mt-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="text-xs">Shibuya, Tokyo</span>
+</div>
+</div>
+<div class="flex gap-2 mt-2">
+<button class="flex-1 flex items-center justify-center gap-2 bg-primary/10 text-primary py-2 rounded-lg text-sm font-bold hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">edit</span> Edit
+                        </button>
+<button class="flex-1 flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 py-2 rounded-lg text-sm font-bold border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-sm">visibility</span> View
+                        </button>
+<button class="flex px-3 items-center justify-center bg-red-50 dark:bg-red-950/30 text-red-500 py-2 rounded-lg border border-red-100 dark:border-red-900/50">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation -->
+<div class="fixed bottom-0 left-0 right-0 z-30 flex border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-4 pb-6 pt-3">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 dark:text-slate-400" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="text-[10px] font-semibold">Dashboard</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined material-symbols-fill">list_alt</span>
+<p class="text-[10px] font-bold">Listings</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 dark:text-slate-400" href="#">
+<span class="material-symbols-outlined">group</span>
+<p class="text-[10px] font-semibold">Users</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 dark:text-slate-400" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-[10px] font-semibold">Settings</p>
+</a>
+</div>
+</div>
+</body></html>

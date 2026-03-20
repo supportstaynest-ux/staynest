@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StayNest - Subscription Plans</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2ab4c0",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#121e20",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Work Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav {
+            background-color: #e9f1f2;
+            border-left: 4px solid #2ab4c0;
+        }
+    </style>
+</head>
+<body class="bg-background-light text-slate-900 font-display">
+<div class="flex min-h-screen">
+<!-- Sidebar Navigation -->
+<aside class="w-64 border-r border-slate-200 bg-white flex flex-col shrink-0 sticky top-0 h-screen">
+<div class="p-6 flex flex-col gap-6">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined">home_work</span>
+</div>
+<div>
+<h1 class="text-slate-900 text-base font-bold leading-tight">StayNest</h1>
+<p class="text-slate-500 text-xs">Premium Host</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-500">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-500">list_alt</span>
+<span class="text-sm font-medium">Listings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-500">group</span>
+<span class="text-sm font-medium">Leads</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-500">bar_chart</span>
+<span class="text-sm font-medium">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg active-nav text-primary" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-sm font-semibold">Subscription</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-6 border-t border-slate-100">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 bg-cover bg-center" data-alt="User profile avatar of a professional host" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCHW_o1OllOLkTJkzuwmQ0kbsGYscw51l6lhHprtKMBCGaM9WSh0kIegpY-_qYt6ptiJ2oogfO7t5QhpVsPVgliq45sj1jNksreg2sbuFiMN9PxkBnPfZ9cwvDA81BncD5PuNXhMnTWsGpgYsPwx00yElLLsjOEnoawBWdBWbDIuxdqCA093sx1ik7REGNdyjFiRgIrBecw1Rbqht7Si4divj6hxzP4a1YD_zpPVYI3x3a9ajDmwyBWvpNBhaXLnPNshveTR-hyoyiA')"></div>
+<div>
+<p class="text-xs font-bold">Alex Johnson</p>
+<p class="text-[10px] text-slate-500">alex@staynest.com</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 max-w-6xl mx-auto px-8 py-12">
+<!-- Header Section -->
+<div class="text-center mb-12">
+<h1 class="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">Choose the Right Plan for Your Business</h1>
+<p class="text-slate-600 text-lg max-w-2xl mx-auto">Maximize your reach and find the perfect tenants with our tailored hosting plans. Scale your property business with powerful tools.</p>
+<!-- Toggle -->
+<div class="mt-8 flex justify-center items-center gap-4">
+<span class="text-sm font-medium text-slate-600">Monthly</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+<span class="text-sm font-medium text-slate-900">Annually <span class="ml-1 text-primary font-bold">Save 20%</span></span>
+</div>
+</div>
+<!-- Pricing Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+<!-- Basic Card -->
+<div class="bg-white border border-slate-200 rounded-xl p-8 flex flex-col transition-all hover:shadow-lg">
+<h2 class="text-xl font-bold text-slate-900 mb-2">Basic</h2>
+<p class="text-slate-500 text-sm mb-6">Perfect for solo hosts starting out.</p>
+<div class="flex items-baseline gap-1 mb-8">
+<span class="text-4xl font-black">$0</span>
+<span class="text-slate-500 text-sm">/month</span>
+</div>
+<ul class="flex flex-col gap-4 mb-8 flex-1">
+<li class="flex items-start gap-3 text-sm text-slate-700">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                            Up to 3 listings
+                        </li>
+<li class="flex items-start gap-3 text-sm text-slate-700">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                            Basic analytics
+                        </li>
+<li class="flex items-start gap-3 text-sm text-slate-700">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                            Standard support
+                        </li>
+</ul>
+<button class="w-full py-3 px-4 rounded-lg bg-slate-100 text-slate-900 font-bold hover:bg-slate-200 transition-colors">Get Started</button>
+</div>
+<!-- Pro Card (Recommended) -->
+<div class="bg-white border-2 border-primary rounded-xl p-8 flex flex-col shadow-xl relative scale-105 z-10">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">Most Popular</div>
+<h2 class="text-xl font-bold text-slate-900 mb-2 text-center md:text-left">Pro</h2>
+<p class="text-slate-500 text-sm mb-6">Advanced tools for growing businesses.</p>
+<div class="flex items-baseline gap-1 mb-8">
+<span class="text-4xl font-black">$29</span>
+<span class="text-slate-500 text-sm">/month</span>
+</div>
+<ul class="flex flex-col gap-4 mb-8 flex-1">
+<li class="flex items-start gap-3 text-sm text-slate-700 font-medium">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                            Unlimited listings
+                        </li>
+<li class="flex items-start gap-3 text-sm text-slate-700">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                            Advanced performance analytics
+                        </li>
+<li class="flex items-start gap-3 text-sm text-slate-700">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                            3 Featured listing slots
+                        </li>
+<li class="flex items-start gap-3 text-sm text-slate-700">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                            In-depth lead insights
+                        </li>
+<li class="flex items-start gap-3 text-sm text-slate-700">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                            Priority email &amp; chat support
+                        </li>
+</ul>
+<button class="w-full py-3 px-4 rounded-lg bg-primary text-white font-bold hover:brightness-110 transition-all shadow-md">Upgrade to Pro</button>
+</div>
+<!-- Enterprise Card -->
+<div class="bg-white border border-slate-200 rounded-xl p-8 flex flex-col transition-all hover:shadow-lg">
+<h2 class="text-xl font-bold text-slate-900 mb-2">Enterprise</h2>
+<p class="text-slate-500 text-sm mb-6">Custom solutions for large portfolios.</p>
+<div class="flex items-baseline gap-1 mb-8">
+<span class="text-4xl font-black">Custom</span>
+</div>
+<ul class="flex flex-col gap-4 mb-8 flex-1">
+<li class="flex items-start gap-3 text-sm text-slate-700">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                            Dedicated account manager
+                        </li>
+<li class="flex items-start gap-3 text-sm text-slate-700">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                            Full API access
+                        </li>
+<li class="flex items-start gap-3 text-sm text-slate-700">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                            Bulk listing management
+                        </li>
+<li class="flex items-start gap-3 text-sm text-slate-700">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                            Custom reporting dashboard
+                        </li>
+</ul>
+<button class="w-full py-3 px-4 rounded-lg bg-slate-900 text-white font-bold hover:bg-slate-800 transition-colors">Contact Sales</button>
+</div>
+</div>
+<!-- Compare Features Table -->
+<div class="mb-24">
+<h2 class="text-2xl font-bold text-slate-900 mb-8 text-center">Compare Features</h2>
+<div class="overflow-x-auto bg-white rounded-xl border border-slate-200 shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-slate-100 bg-slate-50/50">
+<th class="p-5 text-sm font-semibold text-slate-600">Feature</th>
+<th class="p-5 text-sm font-semibold text-slate-900">Basic</th>
+<th class="p-5 text-sm font-semibold text-primary">Pro</th>
+<th class="p-5 text-sm font-semibold text-slate-900">Enterprise</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-50">
+<tr>
+<td class="p-5 text-sm text-slate-700">Listings Capacity</td>
+<td class="p-5 text-sm text-slate-600">3 Units</td>
+<td class="p-5 text-sm text-slate-900 font-medium">Unlimited</td>
+<td class="p-5 text-sm text-slate-900 font-medium">Unlimited</td>
+</tr>
+<tr>
+<td class="p-5 text-sm text-slate-700">Analytics Level</td>
+<td class="p-5 text-sm text-slate-600">Standard</td>
+<td class="p-5 text-sm text-slate-900 font-medium">Advanced</td>
+<td class="p-5 text-sm text-slate-900 font-medium">Custom Dashboards</td>
+</tr>
+<tr>
+<td class="p-5 text-sm text-slate-700">Featured Slots</td>
+<td class="p-5 text-sm text-slate-600">—</td>
+<td class="p-5 text-sm text-slate-900 font-medium">3 Slots</td>
+<td class="p-5 text-sm text-slate-900 font-medium">Variable</td>
+</tr>
+<tr>
+<td class="p-5 text-sm text-slate-700">Support Response</td>
+<td class="p-5 text-sm text-slate-600">48 Hours</td>
+<td class="p-5 text-sm text-slate-900 font-medium">2-4 Hours</td>
+<td class="p-5 text-sm text-slate-900 font-medium">Instant</td>
+</tr>
+<tr>
+<td class="p-5 text-sm text-slate-700">Lead Conversion Tools</td>
+<td class="p-5 text-sm text-slate-600">—</td>
+<td class="p-5 text-sm text-slate-900 font-medium">Full Insights</td>
+<td class="p-5 text-sm text-slate-900 font-medium">CRM Integration</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- FAQ Section -->
+<div class="max-w-3xl mx-auto">
+<h2 class="text-2xl font-bold text-slate-900 mb-8 text-center">Frequently Asked Questions</h2>
+<div class="flex flex-col gap-6">
+<div class="bg-white p-6 rounded-lg border border-slate-200">
+<h3 class="text-base font-bold text-slate-900 mb-2">Can I change my plan later?</h3>
+<p class="text-sm text-slate-600">Yes, you can upgrade or downgrade your plan at any time. When upgrading, the new features are available immediately.</p>
+</div>
+<div class="bg-white p-6 rounded-lg border border-slate-200">
+<h3 class="text-base font-bold text-slate-900 mb-2">What are featured listing slots?</h3>
+<p class="text-sm text-slate-600">Featured slots place your property at the top of search results in your area, increasing visibility by up to 5x compared to standard listings.</p>
+</div>
+<div class="bg-white p-6 rounded-lg border border-slate-200">
+<h3 class="text-base font-bold text-slate-900 mb-2">Is there a long-term contract?</h3>
+<p class="text-sm text-slate-600">No, all our plans are month-to-month unless you choose the annual option for the discount. You can cancel anytime.</p>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

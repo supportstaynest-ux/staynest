@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StayNest - Saved PGs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13b6ec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#101d22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="flex min-h-screen">
+<!-- Side Navigation Bar -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col shrink-0">
+<div class="p-6 flex flex-col gap-8 h-full">
+<!-- Logo Section -->
+<div class="flex items-center gap-3">
+<div class="bg-primary size-10 rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">home_work</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-base font-bold leading-none">StayNest</h1>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">Find your home</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex flex-col gap-1 flex-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<span class="text-sm font-semibold">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px] fill-[1]">favorite</span>
+<span class="text-sm font-bold">Saved PGs</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">calendar_month</span>
+<span class="text-sm font-semibold">Bookings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">account_balance_wallet</span>
+<span class="text-sm font-semibold">Payments</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">person</span>
+<span class="text-sm font-semibold">Profile</span>
+</a>
+</nav>
+<!-- Profile Mini -->
+<div class="border-t border-slate-200 dark:border-slate-800 pt-6">
+<div class="flex items-center gap-3">
+<img alt="User avatar" class="size-10 rounded-full bg-slate-200" data-alt="User profile picture looking professional" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRNMXNeQ_2byGLhNlPz8hjmTes8mrcXJJCnrtmBLF0nTDNokcWk3Kx7iiGy3htwVGkpNx2DjfwhHRGn2QEg5xc0_mJaIOz8V7Ag2m1UoIDWB7jiOYXz6PASm8hRKBA1IzzmyBYdU6APfcDIGygQmC35BUntyHNMcPfrMrJybMabJP6pC8B2EkmLJz3A0KkO4QBNLQwlGhwdIZRYnxWaigNl0GfAUVCFD5x991pjyeE2DrXQgoSaen0DCfc9wF82FSnHi3C5t_RMViz"/>
+<div class="flex flex-col overflow-hidden">
+<p class="text-sm font-bold truncate">Alex Johnson</p>
+<p class="text-xs text-slate-500 truncate">Premium Member</p>
+</div>
+<button class="ml-auto text-slate-400 hover:text-slate-600">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</button>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-screen overflow-y-auto">
+<!-- Header -->
+<header class="sticky top-0 z-10 flex items-center justify-between px-8 py-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-4">
+<h2 class="text-xl font-bold tracking-tight">Saved PGs</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative w-72">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">search</span>
+<input class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary" placeholder="Search your bookmarks..." type="text"/>
+</div>
+<button class="p-2 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 transition-colors relative">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-300">notifications</span>
+<span class="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-800"></span>
+</button>
+</div>
+</header>
+<!-- Content -->
+<div class="p-8">
+<!-- Title Section -->
+<div class="mb-8">
+<h1 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Your Bookmarked PGs</h1>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Manage and compare your favorite accommodations for your next stay.</p>
+</div>
+<!-- PG Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- PG Card 1 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 flex flex-col shadow-sm hover:shadow-md transition-shadow">
+<div class="relative h-48">
+<div class="w-full h-full bg-slate-200 dark:bg-slate-800 bg-center bg-cover" data-alt="Modern student PG room with bed and desk" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDNwbZ9lB5s3AJpJEDiGSLFuQBFKm-2Y0SSDKf0wHbHgqpifNx_jlj4GHAdljQ96IiGNLyri43lxr4ccbWXlEif5N-IXsjA2mBqKjXhZa214GvWBjfQ4kjS_HFSrkXudY4K2TbCx9A4tet6u_b4tyS6JVYGKRPiqo8DG6dYeYBqMQiCV-GuTgaXfLW1ITJobi8_NEA3F3ISMP3b2ww2CNCTFXN8NLIZUfp8l4qE0optJplhGs2KqvR-xGeM4wNoMI6UU_58DYyVzxkg')"></div>
+<button class="absolute top-3 right-3 p-1.5 bg-white/90 dark:bg-slate-900/90 rounded-full text-red-500">
+<span class="material-symbols-outlined fill-[1] text-[20px]">favorite</span>
+</button>
+<div class="absolute bottom-3 left-3 bg-primary text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Top Rated</div>
+</div>
+<div class="p-5 flex flex-col gap-1 flex-1">
+<div class="flex justify-between items-start">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Zolo Scholar</h3>
+<div class="flex items-center gap-1 text-amber-500">
+<span class="material-symbols-outlined text-[16px] fill-[1]">star</span>
+<span class="text-sm font-bold">4.5</span>
+</div>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                                Koramangala, Bangalore
+                            </p>
+<p class="mt-2 text-primary font-bold text-lg">₹8,500 <span class="text-xs text-slate-500 font-normal">/month</span></p>
+<div class="grid grid-cols-2 gap-3 mt-6">
+<button class="flex items-center justify-center gap-2 py-2 px-4 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+                                    Remove Save
+                                </button>
+<button class="flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-primary/10 text-primary text-sm font-bold hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-[18px]">compare_arrows</span>
+                                    Compare
+                                </button>
+</div>
+</div>
+</div>
+<!-- PG Card 2 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 flex flex-col shadow-sm hover:shadow-md transition-shadow">
+<div class="relative h-48">
+<div class="w-full h-full bg-slate-200 dark:bg-slate-800 bg-center bg-cover" data-alt="Cozy PG room in Noida with modern furniture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBwz1TtWZogDZLSGWfKBuhRuLZXlaj-nbRj7Tbpdpo_VZRhfXbFjfUZh2N4fbW2vqROE-Hzic3inxXiL5u4EXKQ-2XBhquEBCGu1j-i_rKhiY2QLiY0Qpky0N9eFSqOwRSH1JmpHt3h-Ie3Qq_TUpd38EXYnLMiN9rns8ANrlRwyqqlBOXM_cTbiUHdNGX4WmVOsUooQFSKDB0jXoQAXhfVBdogsUbDctJHhdKklJ7kZZlyxmROLDFTB4tig7Lx2pVxkyhDQ66zOBm4')"></div>
+<button class="absolute top-3 right-3 p-1.5 bg-white/90 dark:bg-slate-900/90 rounded-full text-red-500">
+<span class="material-symbols-outlined fill-[1] text-[20px]">favorite</span>
+</button>
+</div>
+<div class="p-5 flex flex-col gap-1 flex-1">
+<div class="flex justify-between items-start">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Stanza Living Venice</h3>
+<div class="flex items-center gap-1 text-amber-500">
+<span class="material-symbols-outlined text-[16px] fill-[1]">star</span>
+<span class="text-sm font-bold">4.8</span>
+</div>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                                Sector 62, Noida
+                            </p>
+<p class="mt-2 text-primary font-bold text-lg">₹12,000 <span class="text-xs text-slate-500 font-normal">/month</span></p>
+<div class="grid grid-cols-2 gap-3 mt-6">
+<button class="flex items-center justify-center gap-2 py-2 px-4 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+                                    Remove Save
+                                </button>
+<button class="flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-primary/10 text-primary text-sm font-bold hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-[18px]">compare_arrows</span>
+                                    Compare
+                                </button>
+</div>
+</div>
+</div>
+<!-- PG Card 3 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 flex flex-col shadow-sm hover:shadow-md transition-shadow">
+<div class="relative h-48">
+<div class="w-full h-full bg-slate-200 dark:bg-slate-800 bg-center bg-cover" data-alt="Upscale PG apartment interior Delhi" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBpefD512oPzbQwPa696SL6uBp-VPMa1JWOJiDsvPys6jj5kIQ1anP2jRXw4MtzS3vC0G9zFaj8cHlux-3oGG813VnKQe8kvKPxGpSfToWTKvJrGvlijxV9G0nvIjm_C_NakX4pTFOAULEJxOrgKhbaUdET_pC_sRmlIKbT0oBNboNw-CDeY35MvfJUNK_OIbC-KpJuTHuY4vmF3H4O36trnXtcjr1pcYvS7LTI-Aaml_dOSlh3hACWllzvjHNKLUVb8WBha95Lsouf')"></div>
+<button class="absolute top-3 right-3 p-1.5 bg-white/90 dark:bg-slate-900/90 rounded-full text-red-500">
+<span class="material-symbols-outlined fill-[1] text-[20px]">favorite</span>
+</button>
+</div>
+<div class="p-5 flex flex-col gap-1 flex-1">
+<div class="flex justify-between items-start">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Your Space Elite</h3>
+<div class="flex items-center gap-1 text-amber-500">
+<span class="material-symbols-outlined text-[16px] fill-[1]">star</span>
+<span class="text-sm font-bold">4.2</span>
+</div>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                                North Campus, Delhi
+                            </p>
+<p class="mt-2 text-primary font-bold text-lg">₹15,000 <span class="text-xs text-slate-500 font-normal">/month</span></p>
+<div class="grid grid-cols-2 gap-3 mt-6">
+<button class="flex items-center justify-center gap-2 py-2 px-4 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+                                    Remove Save
+                                </button>
+<button class="flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-primary/10 text-primary text-sm font-bold hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-[18px]">compare_arrows</span>
+                                    Compare
+                                </button>
+</div>
+</div>
+</div>
+<!-- PG Card 4 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 flex flex-col shadow-sm hover:shadow-md transition-shadow">
+<div class="relative h-48">
+<div class="w-full h-full bg-slate-200 dark:bg-slate-800 bg-center bg-cover" data-alt="Clean PG accommodation in Hyderabad" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBpWxdkSX_3Kn1V_dssDM6dKXvdchKylbDlBkd--iSSb-MgGmmH5k9GNc7joUpxAXuHB28iTwTMQi3hauRU6TauBpmH7P_IWTcjmu1m4PszgS9Wx7m4uZ8-zTBbiPVQkWPQZe9gjCZfuxo_UmeW1mCGz9GDaeWwhqkKgIrlUANGKG5tGeueTL2mQOJItBF8-WAZzl1FG0bdRiJ2SlzLkuiepFgqy7Nbp23vu-jeMW-kCc_TfC1JTjSVRca8XITMxfZkE-V513yF1Rp-')"></div>
+<button class="absolute top-3 right-3 p-1.5 bg-white/90 dark:bg-slate-900/90 rounded-full text-red-500">
+<span class="material-symbols-outlined fill-[1] text-[20px]">favorite</span>
+</button>
+</div>
+<div class="p-5 flex flex-col gap-1 flex-1">
+<div class="flex justify-between items-start">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">HelloWorld Dawn</h3>
+<div class="flex items-center gap-1 text-amber-500">
+<span class="material-symbols-outlined text-[16px] fill-[1]">star</span>
+<span class="text-sm font-bold">4.6</span>
+</div>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                                Hitech City, Hyderabad
+                            </p>
+<p class="mt-2 text-primary font-bold text-lg">₹9,000 <span class="text-xs text-slate-500 font-normal">/month</span></p>
+<div class="grid grid-cols-2 gap-3 mt-6">
+<button class="flex items-center justify-center gap-2 py-2 px-4 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+                                    Remove Save
+                                </button>
+<button class="flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-primary/10 text-primary text-sm font-bold hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-[18px]">compare_arrows</span>
+                                    Compare
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination/Load More (Optional Aesthetic Addition) -->
+<div class="mt-12 flex justify-center">
+<button class="px-8 py-3 bg-primary text-white font-bold rounded-lg shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
+                        Load More Favorites
+                    </button>
+</div>
+</div>
+<!-- Footer Section -->
+<footer class="mt-auto border-t border-slate-200 dark:border-slate-800 p-8 text-center text-slate-500 dark:text-slate-400 text-sm">
+<p>© 2024 StayNest. All rights reserved. Your comfort is our priority.</p>
+</footer>
+</main>
+</div>
+</body></html>

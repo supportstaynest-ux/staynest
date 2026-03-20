@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Account Settings - StayNest</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2ab4c0",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#121e20",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Work Sans', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
+<div class="flex min-h-screen">
+<!-- Sidebar Navigation -->
+<aside class="w-64 border-r border-primary/10 bg-white dark:bg-background-dark flex flex-col shrink-0">
+<div class="p-6 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined">home_work</span>
+</div>
+<div>
+<h1 class="font-bold text-lg leading-none">StayNest</h1>
+<p class="text-xs text-primary font-medium">Vendor Dashboard</p>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">list_alt</span>
+<span class="text-sm font-medium">My Listings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">group</span>
+<span class="text-sm font-medium">Leads</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">bar_chart</span>
+<span class="text-sm font-medium">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">credit_card</span>
+<span class="text-sm font-medium">Subscription</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-sm font-semibold">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-primary/10">
+<div class="flex items-center gap-3 p-2">
+<div class="w-8 h-8 rounded-full bg-slate-200" data-alt="Profile picture of Alex Johnson" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD6qJ39kDQtuXqrgmRIsj-tO6HlZL8qdiV0iB2SUTuEoN-bcNzlVlpiWZmjEYJnbb5r1EKCJZISqI_-2n3-TcPbfD7rNpDqommpPSccUzb6KtwwysJFQ5cWV77G-81gW7bTQhh1F51uCLSeIMr8oH7vouU2kcNAOEikFGGqFmZuUUJcEoVjIU4-yFRxHrfDuXxsOUo5mptU8rNxT-_zfXxd60MsboesIjBAIxSqjDISJbY-UxLukBTzT91FRil7rFfKCV6SU68u674p'); background-size: cover;"></div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold truncate">Alex Johnson</p>
+<p class="text-xs text-slate-500 truncate">Pro Vendor</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col max-h-screen overflow-y-auto">
+<header class="px-8 pt-8 pb-4">
+<h2 class="text-3xl font-black tracking-tight">Account Settings</h2>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Manage your profile, security, and notification preferences.</p>
+</header>
+<!-- Tabs Navigation -->
+<div class="px-8 sticky top-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-10">
+<div class="flex gap-8 border-b border-slate-200 dark:border-slate-800">
+<button class="py-4 text-sm font-bold border-b-2 border-primary text-primary">Profile</button>
+<button class="py-4 text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300">Security</button>
+<button class="py-4 text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300">Notifications</button>
+<button class="py-4 text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300">Billing &amp; Payouts</button>
+</div>
+</div>
+<div class="p-8 space-y-12 pb-24 max-w-4xl">
+<!-- 1. Profile Settings -->
+<section class="space-y-6" id="profile">
+<div>
+<h3 class="text-xl font-bold">Profile Settings</h3>
+<p class="text-sm text-slate-500">Update your personal information and how others see you.</p>
+</div>
+<div class="flex items-center gap-6 pb-4">
+<div class="w-24 h-24 rounded-full bg-slate-200 shrink-0 relative group" data-alt="Large profile picture placeholder" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDV6N0letv67PlbIEq9C5ptldXqPCINOcOavNXBa4dCc8Fw_NhNbK5RGltx4g3EFVFy3Help9G-bWTwKiAV8MIdNTfp-yNmekx1b98Cl1fP433HZvTI9fQJ8XRDesNizLqHxufiyqO10q91So2VoagKpN9QxGmHlrvYiHIbs6PktwOvdnYPXXvp_yHHVxqTakiMe3fKv4sqHB8pzcrN8xrcEgvEIpkuQx0PWVpzdDMHZ5-qxluH47z13GlsNeW055MChFC3AznUje0U'); background-size: cover;">
+<button class="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white">photo_camera</span>
+</button>
+</div>
+<div class="space-y-2">
+<button class="px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary/90 transition-colors">Upload New Photo</button>
+<p class="text-xs text-slate-500">JPG, GIF or PNG. Max size 2MB.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-sm font-bold text-slate-700 dark:text-slate-300">Full Name</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" type="text" value="Alex Johnson"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-bold text-slate-700 dark:text-slate-300">Email Address</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" type="email" value="alex@staynest.com"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-bold text-slate-700 dark:text-slate-300">Phone Number</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" type="tel" value="+1 (555) 000-0000"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-bold text-slate-700 dark:text-slate-300">Business Name</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" type="text" value="Johnson Premium Rentals"/>
+</div>
+</div>
+</section>
+<hr class="border-slate-200 dark:border-slate-800"/>
+<!-- 2. Security -->
+<section class="space-y-6" id="security">
+<div>
+<h3 class="text-xl font-bold">Security</h3>
+<p class="text-sm text-slate-500">Secure your account with a strong password and 2FA.</p>
+</div>
+<div class="space-y-4 max-w-md">
+<div class="space-y-2">
+<label class="text-sm font-bold text-slate-700 dark:text-slate-300">Current Password</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-primary focus:border-primary outline-none" placeholder="••••••••" type="password"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-bold text-slate-700 dark:text-slate-300">New Password</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-primary focus:border-primary outline-none" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 rounded-xl bg-primary/5 border border-primary/10 max-w-2xl">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+<div>
+<p class="text-sm font-bold">Two-Factor Authentication</p>
+<p class="text-xs text-slate-500">Add an extra layer of security to your account.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</section>
+<hr class="border-slate-200 dark:border-slate-800"/>
+<!-- 3. Notifications -->
+<section class="space-y-6" id="notifications">
+<div>
+<h3 class="text-xl font-bold">Notifications</h3>
+<p class="text-sm text-slate-500">Control when and how you want to be notified.</p>
+</div>
+<div class="space-y-4 max-w-2xl">
+<div class="grid grid-cols-4 border-b border-slate-100 dark:border-slate-800 pb-2 text-xs font-black uppercase text-slate-400">
+<div class="col-span-2">Notification Type</div>
+<div class="text-center">Email</div>
+<div class="text-center">Push</div>
+</div>
+<div class="grid grid-cols-4 items-center py-2">
+<div class="col-span-2">
+<p class="text-sm font-bold">New Leads</p>
+<p class="text-xs text-slate-500">When a customer sends an inquiry</p>
+</div>
+<div class="flex justify-center">
+<input checked="" class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+</div>
+<div class="flex justify-center">
+<input checked="" class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+</div>
+</div>
+<div class="grid grid-cols-4 items-center py-2">
+<div class="col-span-2">
+<p class="text-sm font-bold">System Updates</p>
+<p class="text-xs text-slate-500">New features and platform changes</p>
+</div>
+<div class="flex justify-center">
+<input checked="" class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+</div>
+<div class="flex justify-center">
+<input class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+</div>
+</div>
+<div class="grid grid-cols-4 items-center py-2">
+<div class="col-span-2">
+<p class="text-sm font-bold">Marketing</p>
+<p class="text-xs text-slate-500">Tips to improve your business results</p>
+</div>
+<div class="flex justify-center">
+<input class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+</div>
+<div class="flex justify-center">
+<input class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+</div>
+</div>
+</div>
+</section>
+<hr class="border-slate-200 dark:border-slate-800"/>
+<!-- 4. Billing & Payouts -->
+<section class="space-y-6" id="billing">
+<div>
+<h3 class="text-xl font-bold">Billing &amp; Payouts</h3>
+<p class="text-sm text-slate-500">Manage your subscription plan and payout methods.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="p-6 rounded-xl border border-primary/20 bg-primary/5 space-y-4">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-xs font-black uppercase text-primary tracking-wider">Current Plan</p>
+<h4 class="text-2xl font-black">StayNest Pro</h4>
+</div>
+<span class="px-2 py-1 bg-primary text-white text-[10px] font-bold rounded uppercase">Active</span>
+</div>
+<p class="text-sm text-slate-600 dark:text-slate-400">Next billing date: Sept 12, 2024</p>
+<button class="text-primary text-sm font-bold hover:underline">Change Plan</button>
+</div>
+<div class="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 space-y-4">
+<p class="text-xs font-black uppercase text-slate-400 tracking-wider">Payout Method</p>
+<div class="flex items-center gap-3">
+<div class="w-10 h-6 bg-slate-100 dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">account_balance</span>
+</div>
+<div>
+<p class="text-sm font-bold">Chase Bank •••• 4242</p>
+<p class="text-xs text-slate-500">Linked on July 2023</p>
+</div>
+</div>
+<div class="flex gap-4 pt-2">
+<button class="text-primary text-sm font-bold hover:underline">Manage</button>
+<a class="flex items-center gap-1 text-slate-500 text-sm font-bold hover:text-slate-700" href="#">
+                                    Payout History
+                                    <span class="material-symbols-outlined text-sm">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Save Changes Footer -->
+<div class="pt-8 flex justify-end gap-4 border-t border-slate-200 dark:border-slate-800">
+<button class="px-6 py-2.5 text-sm font-bold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors">Discard Changes</button>
+<button class="px-8 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all">Save Changes</button>
+</div>
+</div>
+</main>
+</div>
+</body></html>

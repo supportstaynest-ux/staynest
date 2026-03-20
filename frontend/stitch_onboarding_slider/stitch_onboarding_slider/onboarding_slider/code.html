@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StayNest - Welcome</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13b6ec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#101d22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 transition-colors duration-300">
+<div class="relative flex h-screen w-full flex-col overflow-hidden">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between px-6 py-4 md:px-12 lg:px-40 border-b border-primary/10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-10">
+<div class="flex items-center gap-2">
+<div class="flex items-center justify-center size-10 rounded-lg bg-primary text-white">
+<span class="material-symbols-outlined text-2xl">home_pin</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100">StayNest</h1>
+</div>
+<button class="text-sm font-semibold text-slate-500 hover:text-primary transition-colors">
+                Skip
+            </button>
+</header>
+<!-- Main Slider Content -->
+<main class="flex-1 overflow-x-auto snap-x snap-mandatory no-scrollbar flex items-center">
+<!-- Slide 1 -->
+<section class="min-w-full h-full snap-start flex flex-col items-center justify-center p-6 md:p-12">
+<div class="max-w-md w-full flex flex-col items-center text-center">
+<div class="w-full aspect-[4/3] rounded-2xl bg-primary/10 mb-8 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover mix-blend-overlay opacity-80" data-alt="Modern apartment interior near a city office complex" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8RzNHLhF-klD37KEPg7TtylFsX2UWpg-R0KkxkzjCMz2Ogw8vVFaVaj2xp-VQq7Q8LwO-_tkRRww5lbvqSBlkymCgd87Dg3h_MFduJOavKYGx7GfaWb3QFUZZLeI3aFrPaKiQoRjXOuUSaeXKotcZuNr4tyUVAW61VfOJ99y24JElum4-NJWuzWCEz3gOi2A2c6snb_94WsXf-l9IjVXDVbKvB3IFm3w2V784RUkaRwo4NT-c1WIQLq7kzTayuY03pWw4bik-P7Vd"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-8xl text-primary opacity-40">location_on</span>
+</div>
+</div>
+<h2 class="text-2xl md:text-3xl font-bold mb-4">Find PGs and Rooms Near Your College or Office</h2>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed">Discover the best living spaces tailored to your location and commute needs.</p>
+</div>
+</section>
+<!-- Slide 2 -->
+<section class="min-w-full h-full snap-start flex flex-col items-center justify-center p-6 md:p-12">
+<div class="max-w-md w-full flex flex-col items-center text-center">
+<div class="w-full aspect-[4/3] rounded-2xl bg-primary/10 mb-8 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover mix-blend-overlay opacity-80" data-alt="Person comparing property prices on a tablet" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHDthoFewtQiMWer0_9XirPNBhok9vCuQIb-sDFQ8Q5qVAdY7-UjZ1pPJ_gvJb-R6qx9vlaETEHec1z3jFnwnLyumezcIOmvBUS148MDOaX6z3nTImjwEZt_rKEll1h_v67iMvEqjpa35OtzHYmSTfD4LrfUHFnhyHS280oJdHB_-S_SwRGHqGT7X18TfUFaa62TgwywsaS_U3b9MNapl61h7E6Z4oU3TrP4O_B9sJpqmhkEsH9u_FCR0MBc42X-zwXB7d1inHdfCL"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-8xl text-primary opacity-40">compare_arrows</span>
+</div>
+</div>
+<h2 class="text-2xl md:text-3xl font-bold mb-4">Compare Prices and Amenities Easily</h2>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed">View transparent pricing, WiFi, AC, and food facilities side by side for a smart choice.</p>
+</div>
+</section>
+<!-- Slide 3 -->
+<section class="min-w-full h-full snap-start flex flex-col items-center justify-center p-6 md:p-12">
+<div class="max-w-md w-full flex flex-col items-center text-center">
+<div class="w-full aspect-[4/3] rounded-2xl bg-primary/10 mb-8 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover mix-blend-overlay opacity-80" data-alt="Handshake between owner and tenant in a room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWFDEQnnlhKM_kBeKAjGTLiyy0OAmidQCIfCNpKb9r4fB5oeAxk3621-Fb-nVifm2Ntvws75-1KPVfO4FLp_PyZZTiRsKx-LAEDnhSO4qJSktdqm8biHSvpalg-AXXI7-jpomrgRiskTaq-bPE340LwImdNGNKyirEEAcatLdDjLWsEYJx8O3O8rdsDS222vLvyLsUlvC0EX8Y_ef8qVF8COoo-vW3i2kIjs-QN_Sbnok9YvYo8AqmVCgQqCq_4T5nZ5ezFlER9HBN"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-8xl text-primary opacity-40">chat</span>
+</div>
+</div>
+<h2 class="text-2xl md:text-3xl font-bold mb-4">Contact Owners Directly Without Brokers</h2>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed">Skip the heavy commission fees. Message or call property owners instantly.</p>
+</div>
+</section>
+<!-- Slide 4 -->
+<section class="min-w-full h-full snap-start flex flex-col items-center justify-center p-6 md:p-12">
+<div class="max-w-md w-full flex flex-col items-center text-center">
+<div class="w-full aspect-[4/3] rounded-2xl bg-primary/10 mb-8 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover mix-blend-overlay opacity-80" data-alt="Beautifully staged room with a verified checkmark icon overlay" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhY58z6ix2Xt8KRR7hu8OOS3o7X56NCfgszt6nRtCyDyzxDJKccFixf8HfKNgAh5evdvYGpDcObB6mATRnNuVVtLN8hTE6na3jTnD785DImXkljQJ-4NvKIGQBkB73-yHzP_BXLBw3ZMt2XWlx2NkijjJb6v8OoD9PkHq6-KMnebFSXJrZ1KA6uQHDnxVtnv7FrkLZgrN51-JrH5Ik0tOhlZR5w3jgvALCsNSijJSFgSLlExir3SNrNIbpt0KpzPkLE4iWDcCjXBm3"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-8xl text-primary opacity-40">verified_user</span>
+</div>
+</div>
+<h2 class="text-2xl md:text-3xl font-bold mb-4">Safe &amp; Verified Listings</h2>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed">Your safety is our priority. Every listing is manually verified by our team.</p>
+<!-- Final Actions -->
+<div class="mt-8 flex flex-col gap-3 w-full">
+<button class="w-full h-14 bg-primary text-slate-900 font-bold rounded-xl flex items-center justify-center gap-2 hover:brightness-110 transition-all shadow-lg shadow-primary/20">
+                            Get Started
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="w-full h-14 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold rounded-xl hover:bg-slate-300 dark:hover:bg-slate-700 transition-all">
+                            Sign In
+                        </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer: Progress & Navigation -->
+<footer class="p-6 md:px-12 lg:px-40 flex flex-col items-center gap-6">
+<!-- Progress Dots -->
+<div class="flex gap-2">
+<div class="h-1.5 w-8 rounded-full bg-primary"></div>
+<div class="h-1.5 w-2 rounded-full bg-slate-300 dark:bg-slate-700"></div>
+<div class="h-1.5 w-2 rounded-full bg-slate-300 dark:bg-slate-700"></div>
+<div class="h-1.5 w-2 rounded-full bg-slate-300 dark:bg-slate-700"></div>
+</div>
+<div class="w-full max-w-md flex items-center justify-between pb-4">
+<p class="text-xs text-slate-400 font-medium uppercase tracking-widest">Swipe to Explore</p>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-2 rounded-full bg-primary text-white hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

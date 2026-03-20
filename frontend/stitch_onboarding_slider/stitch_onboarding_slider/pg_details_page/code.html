@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StayNest - PG Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13b6ec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#101d22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .filled-icon { font-variation-settings: 'FILL' 1; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<header class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 md:px-10 lg:px-40 py-3">
+<div class="max-w-[1200px] mx-auto flex items-center justify-between whitespace-nowrap">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-3xl font-bold">home_pin</span>
+<h2 class="text-slate-900 dark:text-white text-xl font-black leading-tight tracking-tight">StayNest</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-700 dark:text-slate-300 text-sm font-semibold hover:text-primary transition-colors" href="#">Home</a>
+<a class="text-slate-700 dark:text-slate-300 text-sm font-semibold hover:text-primary transition-colors" href="#">PGs</a>
+<a class="text-slate-700 dark:text-slate-300 text-sm font-semibold hover:text-primary transition-colors" href="#">Favorites</a>
+<a class="text-slate-700 dark:text-slate-300 text-sm font-semibold hover:text-primary transition-colors" href="#">Contact</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center bg-slate-100 dark:bg-slate-800 rounded-lg px-3 py-1.5">
+<span class="material-symbols-outlined text-slate-500 text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-40 placeholder:text-slate-500" placeholder="Search PGs..."/>
+</div>
+<div class="size-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30">
+<span class="material-symbols-outlined text-primary">person</span>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto px-4 md:px-10 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+<div class="lg:col-span-8 flex flex-col gap-8">
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div>
+<h1 class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">Stanza Living - Tokyo House</h1>
+<p class="text-slate-500 dark:text-slate-400 flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                                Sector 62, Noida, Uttar Pradesh 201309
+                            </p>
+</div>
+<div class="hidden sm:block">
+<span class="bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Available</span>
+</div>
+</div>
+<div class="grid grid-cols-4 grid-rows-2 gap-2 h-[300px] md:h-[450px] rounded-xl overflow-hidden">
+<div class="col-span-2 row-span-2 bg-cover bg-center relative group cursor-pointer" data-alt="Modern PG exterior view with glass windows" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCxEmI111eygZ6lrYzzhi2jE0v_GFWLdNCo7gCWVLeeFYGHO2R6NdZOw8VRUE2HQa8thQdb2eNAU5Asv9l8iEtPAkKAoKFalmevHXyQaszA6nBIxUxu8hcbimBmZ_rF76dYmw-VPV6J6R8pK13K1T7pCtI3AKGDm3eXTSiuiEDJn5u9QBYtrfPIKgIgH_kuQLrDuM-ORcy7F-y4mEqXt-axf0eP8k_nToPqRG3ROR1wICyVRdJ3fHxB3KND6hFb9bEQX4QAwb1kjv-p')">
+<div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-all"></div>
+</div>
+<div class="col-span-1 row-span-1 bg-cover bg-center" data-alt="Spacious shared bedroom with wooden furniture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCLpAWNPuDcvkvrS2-iUQGoMqM5mXpAXYQMKpdpWkT6dlu6yxZF5BWSN6cJb6Gyz7VDxsAx2-_UBqScuxNCrJy5nH63PJGyXRVm4V2SgdX1KfgWPEdVNMBWK2N6sJmuVquEHVZi114Cl6HcR1-8RjDesjoOJup8X4PNo3ITPIw28GskrqXk3ZZ7AwJH5eDjogsDS_I3XuFv3zpAHnf2vKRWZ5nIG5RYFmyCX96kWBK7TAKx8fNW1zvNL61Hi8-MoHOMUrA_N5JRj9UH')"></div>
+<div class="col-span-1 row-span-1 bg-cover bg-center" data-alt="Clean and modern kitchen area" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBs32p1t6uheNHUCV0XaQN6pVDMElNo2wSXdqznZLTny-DkRLaBdescPrYCr1XFuaGgU8HuYt2Z1MPlJrsl03ptyx3rdcIiRqzxmOy4iiDz8TENHnUwAFh7ej4wS84tHTypIXHESGQ0am8sn7RhB9SHDbvLiVATeEGrp3pI-xV1kD7RwtayCddYhT78drHZtd1hBnHBR72p4z6jRlYCBSGMBSOm74fEh3CigY4kfFGxi5fetTu6-iv6xOxlJ9C-6t4ySF7r5gGPINQO')"></div>
+<div class="col-span-1 row-span-1 bg-cover bg-center" data-alt="Common lounge area with colorful beanbags" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBLbH5QE3SSz5jg_rSMNoKiEHrgq2Eq66Ltr31FmxMb0LAzH4sLo5doibjhWGrNOV1WxcOgUc0KEhCRfSJWYAhcEM9ASW6M7775I1zmexrXFv1twK13-LEQ6AQZCwHQPDY3yC8VWNPWydvseDNp6wgkMmbUjPU8S1_M7A-rfh-QjxlC8sw5lI5EF5O1IeRMd9gQh_KlVoZMYdw0i6YjJsyk52-0XPMHPUfAD20AWE9yJ0i-_XkcQXxHUoL7xM7QSpE8QiSL2i7YBqSI')"></div>
+<div class="col-span-1 row-span-1 bg-slate-200 dark:bg-slate-800 flex items-center justify-center relative group cursor-pointer">
+<img class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity" data-alt="Tiled bathroom with modern shower" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbt2wo53DemuIyCNPRMzbf8Mc_J6XGE9Gs5y8TCfSUB0pAmm4CpinDxNPBv4cG7S-xrLDDsAeysdgS0De_KbKwlWZLeKhQ-gJc3T6gaelnk99fhjvcijh0rD2eOaW6ZlukgYg3vYhHT_KBWHcIGtt4vXEN83KIVJ8fieySqqYJou3SF4ZowxhexDftUNh14YNzSWAkca4T4QFzSlUYvS99vnkqtsF2EuKkj586Y7t4-ZyD_cQxBDKsXFDPPbKtXMO4R9wijhgbmVqb"/>
+<span class="relative z-10 text-white font-bold text-lg">+12 Photos</span>
+</div>
+</div>
+</section>
+<section class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Starting From</p>
+<p class="text-2xl font-black text-primary">₹15,000<span class="text-sm font-normal text-slate-400">/mo</span></p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Security Deposit</p>
+<p class="text-2xl font-black text-slate-800 dark:text-slate-200">₹30,000</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm border-b-4 border-b-primary">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Availability</p>
+<p class="text-2xl font-black text-slate-800 dark:text-slate-200">5 Slots Left</p>
+</div>
+</section>
+<section class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">room_service</span>
+                        Amenities
+                    </h3>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+<div class="flex flex-col items-center gap-2 text-center">
+<div class="size-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">wifi</span>
+</div>
+<span class="text-sm font-medium">High-speed Wi-Fi</span>
+</div>
+<div class="flex flex-col items-center gap-2 text-center">
+<div class="size-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">restaurant</span>
+</div>
+<span class="text-sm font-medium">3 Meals/Day</span>
+</div>
+<div class="flex flex-col items-center gap-2 text-center">
+<div class="size-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">cleaning_services</span>
+</div>
+<span class="text-sm font-medium">Daily Housekeeping</span>
+</div>
+<div class="flex flex-col items-center gap-2 text-center">
+<div class="size-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">local_laundry_service</span>
+</div>
+<span class="text-sm font-medium">Laundry Support</span>
+</div>
+<div class="flex flex-col items-center gap-2 text-center">
+<div class="size-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">ac_unit</span>
+</div>
+<span class="text-sm font-medium">Air Conditioning</span>
+</div>
+<div class="flex flex-col items-center gap-2 text-center">
+<div class="size-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">security</span>
+</div>
+<span class="text-sm font-medium">24/7 Security</span>
+</div>
+<div class="flex flex-col items-center gap-2 text-center">
+<div class="size-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">fitness_center</span>
+</div>
+<span class="text-sm font-medium">In-house Gym</span>
+</div>
+<div class="flex flex-col items-center gap-2 text-center">
+<div class="size-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">power</span>
+</div>
+<span class="text-sm font-medium">Power Backup</span>
+</div>
+</div>
+</section>
+<section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="p-6">
+<h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">bed</span>
+                            Room Types
+                        </h3>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-slate-50 dark:bg-slate-800">
+<tr>
+<th class="px-4 py-3 text-sm font-bold text-slate-700 dark:text-slate-300">Room Type</th>
+<th class="px-4 py-3 text-sm font-bold text-slate-700 dark:text-slate-300">Occupancy</th>
+<th class="px-4 py-3 text-sm font-bold text-slate-700 dark:text-slate-300">Monthly Rent</th>
+<th class="px-4 py-3 text-sm font-bold text-slate-700 dark:text-slate-300">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr>
+<td class="px-4 py-4 text-sm font-medium">Standard Single</td>
+<td class="px-4 py-4 text-sm text-slate-600 dark:text-slate-400">1 Person</td>
+<td class="px-4 py-4 text-sm font-bold text-primary">₹18,500</td>
+<td class="px-4 py-4 text-sm"><span class="text-orange-500 font-bold">1 Left</span></td>
+</tr>
+<tr>
+<td class="px-4 py-4 text-sm font-medium">Premium Double</td>
+<td class="px-4 py-4 text-sm text-slate-600 dark:text-slate-400">2 Persons</td>
+<td class="px-4 py-4 text-sm font-bold text-primary">₹15,000</td>
+<td class="px-4 py-4 text-sm"><span class="text-green-500 font-bold">4 Left</span></td>
+</tr>
+<tr>
+<td class="px-4 py-4 text-sm font-medium">Executive Triple</td>
+<td class="px-4 py-4 text-sm text-slate-600 dark:text-slate-400">3 Persons</td>
+<td class="px-4 py-4 text-sm font-bold text-primary">₹12,500</td>
+<td class="px-4 py-4 text-sm"><span class="text-slate-400 italic">Waitlist</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">map</span>
+                            Location
+                        </h3>
+<div class="w-full h-48 bg-slate-200 dark:bg-slate-800 rounded-lg overflow-hidden relative" data-location="Noida, India" style="">
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-slate-400">location_on</span>
+</div>
+<div class="absolute bottom-2 right-2 bg-white dark:bg-slate-900 px-2 py-1 rounded shadow text-[10px] font-bold">Open in Maps</div>
+</div>
+<p class="mt-4 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                            Located just 5 minutes from City Center Metro Station. Close to Jaypee Institute and major IT hubs like HCL and Tech Mahindra.
+                        </p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+                            Vendor Info
+                        </h3>
+<div class="flex items-center gap-4 mb-4">
+<div class="size-14 rounded-xl bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl text-primary">corporate_fare</span>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white">Stanza Living</h4>
+<p class="text-xs text-slate-500">Member since 2019 • 45 Managed Properties</p>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-2 text-sm">
+<span class="material-symbols-outlined text-slate-400 text-lg">check_circle</span>
+<span>Verified Managed Property</span>
+</div>
+<div class="flex items-center gap-2 text-sm">
+<span class="material-symbols-outlined text-slate-400 text-lg">support_agent</span>
+<span>24/7 Relationship Manager</span>
+</div>
+<button class="w-full py-2 mt-2 border border-primary text-primary hover:bg-primary/5 transition-colors rounded-lg text-sm font-bold">View Company Profile</button>
+</div>
+</div>
+</section>
+<section class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<h3 class="text-xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">grade</span>
+                            Reviews &amp; Ratings
+                        </h3>
+<div class="flex items-center gap-2">
+<span class="text-2xl font-black">4.8</span>
+<div class="flex text-yellow-400">
+<span class="material-symbols-outlined filled-icon">star</span>
+<span class="material-symbols-outlined filled-icon">star</span>
+<span class="material-symbols-outlined filled-icon">star</span>
+<span class="material-symbols-outlined filled-icon">star</span>
+<span class="material-symbols-outlined">star_half</span>
+</div>
+<span class="text-slate-400 text-sm">(124 reviews)</span>
+</div>
+</div>
+<div class="space-y-8">
+<div class="flex gap-4">
+<img class="size-12 rounded-full object-cover shrink-0" data-alt="User profile picture - smiling young man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjNtN0vsp17aWz-lnTPMDGPOPgTBJa1eNwL5_SCXR1SPn6CkNT0IVzE4l0Dhy_jH1X4uu21DKevFJcjntn5aVLHAZ85IQkc05MVH2TnDGF6EoH_l6X9HMgix66wvDAwbiEAiA0p_TPtxz04H6r1A30R6bBywp2RswuR9XxSKQOvRN3s79CpGDUe0gN6Os8N94wo2kmqttb-hSL2sFzYeeHEMgmrCTyeQO7vU2k5RiABq-rJXLwiVi9NqkHCHnpfYt6dJ0OtXvXrUWk"/>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-bold">Rahul Sharma</h4>
+<span class="text-xs text-slate-400">2 weeks ago</span>
+</div>
+<div class="flex text-yellow-400 scale-75 origin-left -ml-1">
+<span class="material-symbols-outlined filled-icon">star</span>
+<span class="material-symbols-outlined filled-icon">star</span>
+<span class="material-symbols-outlined filled-icon">star</span>
+<span class="material-symbols-outlined filled-icon">star</span>
+<span class="material-symbols-outlined filled-icon">star</span>
+</div>
+<p class="text-slate-600 dark:text-slate-400 text-sm mt-1">Excellent facilities and really good food. The cleaning staff is very polite and professional. Highly recommend for students!</p>
+</div>
+</div>
+<div class="flex gap-4">
+<img class="size-12 rounded-full object-cover shrink-0" data-alt="User profile picture - young professional woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBj4iAXVe9j1sGMm6cj-qKH9x5ZexNhWbh2JDLynJlMJ5ZHzkPjC8Q_P5ZYkXxey6X00qB-f5ILDpDPwtkuQM4jDEa5PNnRcApQh62p13nJgks_6_0Wyd8rdx2KDOmQyIC4jjXuHH5wzjsRWnbYq_kT0W6_uD_xag97Harrybsmy5IzCW4R36SyNtEomgdO743nztKCIEBjRun3Nu9PM3gA6QHGSaXp1_F81N9hqNJGejUPzFuk3ZXpqReHLG4-_XaNZA81oTnf5tUx"/>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-bold">Anjali Gupta</h4>
+<span class="text-xs text-slate-400">1 month ago</span>
+</div>
+<div class="flex text-yellow-400 scale-75 origin-left -ml-1">
+<span class="material-symbols-outlined filled-icon">star</span>
+<span class="material-symbols-outlined filled-icon">star</span>
+<span class="material-symbols-outlined filled-icon">star</span>
+<span class="material-symbols-outlined filled-icon">star</span>
+<span class="material-symbols-outlined">star</span>
+</div>
+<p class="text-slate-600 dark:text-slate-400 text-sm mt-1">The common area is great for work. Wi-fi is stable most of the time. Security is top-notch which makes it feel very safe.</p>
+<div class="flex gap-2 mt-3">
+<img class="h-16 w-24 rounded-lg object-cover" data-alt="Photo of the community workspace" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbfpRTbyPrYATEGaVxcWVc4l3Po8hy45FqKMLsH2CRpMznejH0RYZWCqn8BHWyXxLjgsqisYMwcL5BVU22RHmnCvhYsVaDDaz3Z7dPhcF73K__za99dUZZ9r9p79wnsgO5zI0IzMbmXm86HYE9Tr0QLS5l_BqmRY7ymDyRx5_r3hpmN6M9ufdPY3_z1S7n0BsQwvmAA0Dp3rJRm9AkYSJNsAO8HXv8YL2KgQSM0WapZ7xvcYbL13aiAAPsAGOQoY0RvhnYsFID4ABa"/>
+<img class="h-16 w-24 rounded-lg object-cover" data-alt="Photo of the evening view from balcony" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDd1Eg3ITLHg7ZGbUhv0sP_3Io7phnmMeDI9kkTduBtF5RERjhqsRR27gm3EUf02hfp6jPzJR5YGd9GvRgl8fz5gq8uul3947POsS4Hu-dUa_v8PAtFDTscBi5fHy8JTr9J5UPrnMbA43XDSH8et0i4XFL_2ij9iYlQEH1bwYHNynoaFIIqUCekP-05fG0OlMcxs_dcKE1-XrrMHGCpriYnBb9Fai-X7Adyzn3p4mcNhchRH8i6SOLN71jN3dNYK1KdEUYcF7X863fK"/>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full mt-8 py-3 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg font-bold text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Read All Reviews</button>
+</section>
+</div>
+<aside class="lg:col-span-4 flex flex-col gap-6">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-xl sticky top-24">
+<h3 class="text-xl font-bold mb-6">Interested in this PG?</h3>
+<form class="space-y-4 mb-6">
+<div>
+<label class="block text-xs font-bold uppercase text-slate-400 mb-1">Full Name</label>
+<input class="w-full bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg text-sm" placeholder="e.g. John Doe" type="text"/>
+</div>
+<div>
+<label class="block text-xs font-bold uppercase text-slate-400 mb-1">Phone Number</label>
+<input class="w-full bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg text-sm" placeholder="+91 98765 43210" type="tel"/>
+</div>
+<div>
+<label class="block text-xs font-bold uppercase text-slate-400 mb-1">Moving Date</label>
+<input class="w-full bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg text-sm" type="date"/>
+</div>
+<button class="w-full py-4 bg-primary text-slate-900 font-black rounded-xl hover:brightness-110 transition-all shadow-lg shadow-primary/20" type="submit">
+                            Send Enquiry
+                        </button>
+</form>
+<div class="border-t border-slate-100 dark:border-slate-800 pt-6">
+<p class="text-xs font-bold uppercase text-slate-400 mb-4 text-center">Quick Actions</p>
+<div class="grid grid-cols-2 gap-3">
+<button class="flex items-center justify-center gap-2 py-3 bg-slate-100 dark:bg-slate-800 rounded-lg font-bold text-sm hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined text-primary filled-icon">heart_plus</span>
+                                Save
+                            </button>
+<button class="flex items-center justify-center gap-2 py-3 bg-slate-100 dark:bg-slate-800 rounded-lg font-bold text-sm hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined text-primary">compare_arrows</span>
+                                Compare
+                            </button>
+</div>
+<div class="flex flex-col gap-3 mt-3">
+<button class="flex items-center justify-center gap-3 py-3 border-2 border-primary text-primary rounded-xl font-black text-sm hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined">call</span>
+                                Call Owner
+                            </button>
+<button class="flex items-center justify-center gap-3 py-3 bg-[#25D366]/10 text-[#25D366] rounded-xl font-black text-sm hover:bg-[#25D366]/20 transition-colors border border-[#25D366]/30">
+<svg class="size-5 fill-current" viewbox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.539 2.016 2.041-.54c1.01.621 1.99.982 3.247.981l.001.001c3.182 0 5.767-2.587 5.768-5.766 0-3.18-2.586-5.745-5.77-5.745zm3.111 8.239c-.116.326-.67.587-.927.621-.258.033-.507.037-.813-.046-.21-.057-.498-.124-1.058-.354-2.396-1.013-3.666-3.178-3.784-3.34-.117-.162-.97-1.328-.97-2.536 0-1.208.627-1.802.85-2.048.223-.246.481-.307.641-.307.159 0 .319.002.459.008.147.006.345-.056.541.436.2.502.684 1.7.744 1.825.059.124.099.27.017.436-.08.167-.121.272-.241.415-.119.143-.25.32-.357.429-.118.12-.242.251-.104.496.137.245.612 1.037 1.312 1.684.898.828 1.657 1.085 1.897 1.205.241.12.383.102.524-.063.14-.166.603-.72.763-.966.16-.245.319-.208.539-.124.22.084 1.401.68 1.64 1.144.24.464.08.665-.036.99z"></path></svg>
+                                WhatsApp Enquiry
+                            </button>
+</div>
+</div>
+<div class="mt-8 flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">timer</span>
+<span class="text-xs font-semibold text-slate-500">Average response time: 2 hours</span>
+</div>
+<div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg flex gap-3">
+<span class="material-symbols-outlined text-blue-500 shrink-0">info</span>
+<p class="text-[11px] text-blue-700 dark:text-blue-300">
+                                This property requires a government ID for verification during check-in.
+                            </p>
+</div>
+</div>
+</div>
+</aside>
+</main>
+<footer class="bg-white dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 mt-20 py-12 px-4">
+<div class="max-w-[1200px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+<div class="col-span-2 md:col-span-1">
+<div class="flex items-center gap-2 text-primary mb-6">
+<span class="material-symbols-outlined text-3xl font-bold">home_pin</span>
+<h2 class="text-slate-900 dark:text-white text-xl font-black">StayNest</h2>
+</div>
+<p class="text-sm text-slate-500 leading-relaxed">Finding the perfect home away from home, made simple and reliable for students and professionals.</p>
+</div>
+<div>
+<h4 class="font-bold mb-4">Quick Links</h4>
+<ul class="space-y-2 text-sm text-slate-500">
+<li><a class="hover:text-primary" href="#">Search PGs</a></li>
+<li><a class="hover:text-primary" href="#">Partner with Us</a></li>
+<li><a class="hover:text-primary" href="#">Safety Measures</a></li>
+<li><a class="hover:text-primary" href="#">Corporate Booking</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4">Support</h4>
+<ul class="space-y-2 text-sm text-slate-500">
+<li><a class="hover:text-primary" href="#">Help Center</a></li>
+<li><a class="hover:text-primary" href="#">Terms of Service</a></li>
+<li><a class="hover:text-primary" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary" href="#">Refund Policy</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4">Newsletter</h4>
+<div class="flex gap-2">
+<input class="bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg text-xs w-full" placeholder="Email" type="email"/>
+<button class="bg-primary px-3 rounded-lg"><span class="material-symbols-outlined text-sm">send</span></button>
+</div>
+</div>
+</div>
+<div class="max-w-[1200px] mx-auto mt-12 pt-8 border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-xs text-slate-400">© 2024 StayNest. All rights reserved.</p>
+<div class="flex gap-6 text-slate-400">
+<span class="material-symbols-outlined hover:text-primary cursor-pointer">public</span>
+<span class="material-symbols-outlined hover:text-primary cursor-pointer">chat</span>
+<span class="material-symbols-outlined hover:text-primary cursor-pointer">video_call</span>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

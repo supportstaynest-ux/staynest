@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StayNest - Premium Vendor Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#2ab4c0",
+                "background-light": "#f6f8f8",
+                "background-dark": "#121e20",
+              },
+              fontFamily: {
+                "display": ["Work Sans"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Work Sans', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="flex min-h-screen">
+<!-- Sidebar Navigation -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col fixed h-full z-20">
+<div class="p-6 flex items-center gap-3">
+<div class="size-10 bg-primary rounded-xl flex items-center justify-center text-white">
+<span class="material-symbols-outlined font-bold">home_work</span>
+</div>
+<div>
+<h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">StayNest</h1>
+<p class="text-xs text-slate-500 font-medium">Vendor Console</p>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1 overflow-y-auto no-scrollbar">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-semibold" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">list_alt</span>
+<span class="text-sm">My Listings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm">Leads</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="text-sm">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">workspace_premium</span>
+<span class="text-sm">Subscriptions</span>
+</a>
+<div class="pt-4 pb-2">
+<p class="px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400">Settings</p>
+</div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="text-sm">Support</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-2.5 rounded-lg flex items-center justify-center gap-2 transition-all shadow-sm">
+<span class="material-symbols-outlined text-sm">add</span>
+<span>New Listing</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 min-h-screen">
+<!-- Header -->
+<header class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md sticky top-0 z-10 px-8 flex items-center justify-between">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/50" placeholder="Search analytics, leads, or listings..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-slate-200 dark:border-slate-800">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-bold">Alex Rivera</p>
+<p class="text-[10px] text-primary font-medium">PRO VENDOR</p>
+</div>
+<div class="size-10 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User profile avatar of Alex Rivera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrST1_ccw6cRcy_vnA0aiHbZN_Of4jLtQwMpz4KCHE-hSox2QSlhGd2tSs4TMnj3Oki8nIUpyYirftpOjuh7O0LSdEwnA7AD02QjmWLUvq9jUS8OKexxb5bA2CMbdlY14otlH9rCp0Z1gl_OYGJ1c_-IOM3YES5Ie7fj9V8fjaLdVEHKkMWdlSpwVE0GL_pXLbWRA6UtZhLcY9LsTfGzWm3s1y_M7LQZIw7cbaS3iBS4S9FFiYaSd04k17F9UY7AH_vAZnaalTDVPA"/>
+</div>
+</div>
+</div>
+</header>
+<div class="p-8 space-y-8">
+<!-- Welcome Section -->
+<div class="flex items-center justify-between">
+<div>
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Dashboard Overview</h2>
+<p class="text-slate-500 text-sm">Performance summary for the last 30 days.</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-1">
+<button class="px-3 py-1.5 text-xs font-medium bg-slate-100 dark:bg-slate-800 rounded-md">Last 30 Days</button>
+<button class="px-3 py-1.5 text-xs font-medium text-slate-500 hover:text-slate-700">Last Year</button>
+</div>
+<button class="flex items-center gap-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-base">file_download</span>
+                            Export Report
+                        </button>
+</div>
+</div>
+<!-- 1. Top Overview Stats -->
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">Total Listings</p>
+<div class="flex items-end justify-between">
+<h3 class="text-3xl font-bold">12</h3>
+<span class="text-emerald-500 text-xs font-bold flex items-center gap-1 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-xs">trending_up</span> +2%
+                            </span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">Total Views</p>
+<div class="flex items-end justify-between">
+<h3 class="text-3xl font-bold">4.2k</h3>
+<span class="text-emerald-500 text-xs font-bold flex items-center gap-1 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-xs">trending_up</span> +15%
+                            </span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">Contact Clicks</p>
+<div class="flex items-end justify-between">
+<h3 class="text-3xl font-bold">128</h3>
+<span class="text-rose-500 text-xs font-bold flex items-center gap-1 bg-rose-50 dark:bg-rose-500/10 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-xs">trending_down</span> -5%
+                            </span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">Total Leads</p>
+<div class="flex items-end justify-between">
+<h3 class="text-3xl font-bold">42</h3>
+<span class="text-emerald-500 text-xs font-bold flex items-center gap-1 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-xs">trending_up</span> +8%
+                            </span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">Conv. Rate</p>
+<div class="flex items-end justify-between">
+<h3 class="text-3xl font-bold">3.2%</h3>
+<span class="text-emerald-500 text-xs font-bold flex items-center gap-1 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-xs">trending_up</span> +1.2%
+                            </span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- 2. Advanced Analytics Section -->
+<div class="lg:col-span-2 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden flex flex-col">
+<div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+<h3 class="text-lg font-bold">Performance Analytics</h3>
+<div class="flex gap-2">
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 text-xs font-medium">
+<span class="size-2 rounded-full bg-primary"></span> Views
+                                </div>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 text-xs font-medium">
+<span class="size-2 rounded-full bg-slate-300"></span> Leads
+                                </div>
+</div>
+</div>
+<div class="flex-1 p-6 relative min-h-[300px] flex items-end gap-2">
+<!-- Visual Chart Mockup using Tailwind -->
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary/20 rounded-t-lg relative" style="height: 40%">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg" style="height: 60%"></div>
+</div>
+<span class="text-[10px] text-slate-400 font-bold">Mon</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary/20 rounded-t-lg relative" style="height: 65%">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg" style="height: 40%"></div>
+</div>
+<span class="text-[10px] text-slate-400 font-bold">Tue</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary/20 rounded-t-lg relative" style="height: 50%">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg" style="height: 80%"></div>
+</div>
+<span class="text-[10px] text-slate-400 font-bold">Wed</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary/20 rounded-t-lg relative" style="height: 85%">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg" style="height: 50%"></div>
+</div>
+<span class="text-[10px] text-slate-400 font-bold">Thu</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary/20 rounded-t-lg relative" style="height: 70%">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg" style="height: 90%"></div>
+</div>
+<span class="text-[10px] text-slate-400 font-bold">Fri</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary/20 rounded-t-lg relative" style="height: 40%">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg" style="height: 40%"></div>
+</div>
+<span class="text-[10px] text-slate-400 font-bold">Sat</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary/20 rounded-t-lg relative" style="height: 55%">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg" style="height: 30%"></div>
+</div>
+<span class="text-[10px] text-slate-400 font-bold">Sun</span>
+</div>
+</div>
+</div>
+<!-- 3. Top Performing Listing -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden flex flex-col">
+<div class="p-6 border-b border-slate-200 dark:border-slate-800">
+<h3 class="text-lg font-bold">Top Performing</h3>
+</div>
+<div class="p-4 space-y-4">
+<div class="aspect-video w-full rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-800">
+<img class="w-full h-full object-cover" data-alt="Modern minimalist PG room with teal accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBad6JWsNOSi2RxIuVqSBtA9SJlQ-E9D1fTojSLIz0DYv295a3HerHnWs7GL8h21j5TJ_rHLmQo2MLW1RnrrL5fmRjQ-p9oaCN1aoZ1_GKC8vA1irUFmS6Z0OMV3YirEemmoXGR9cKt31UUNpgE4M2KggErfsWEO6DBLA8xsnZGrncltG-jUHxw-rfc88LHIcyN5G1je_dE_zaD0fe0HU0_9-KK1XzbCO798j3840AAJNx-J68A1cd_H59GFAzM58pNu7iKOLAoSX2F"/>
+</div>
+<div>
+<div class="flex items-center justify-between mb-1">
+<h4 class="font-bold text-slate-900 dark:text-white">Skyline Premium PG</h4>
+<span class="text-primary text-xs font-bold px-2 py-0.5 bg-primary/10 rounded">FEATURED</span>
+</div>
+<p class="text-xs text-slate-500 mb-4">Indiranagar, Bangalore</p>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-lg text-center">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Views</p>
+<p class="text-xl font-bold">1,842</p>
+</div>
+<div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-lg text-center">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Leads</p>
+<p class="text-xl font-bold">28</p>
+</div>
+</div>
+</div>
+<button class="w-full border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 py-2.5 rounded-lg text-sm font-bold transition-colors">
+                                View Full Analytics
+                            </button>
+</div>
+</div>
+</div>
+<!-- 4. Listings Performance Table -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+<h3 class="text-lg font-bold">Listing Performance</h3>
+<button class="text-primary text-sm font-bold hover:underline">View All Listings</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-slate-50 dark:bg-slate-800/50">
+<tr class="text-[10px] font-bold uppercase tracking-widest text-slate-400 border-b border-slate-200 dark:border-slate-800">
+<th class="px-6 py-4">PG Name</th>
+<th class="px-6 py-4">Views</th>
+<th class="px-6 py-4">Contact Clicks</th>
+<th class="px-6 py-4">Saved Count</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-slate-100 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Compact modern bedroom preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7aZcIqib5cUcaHdz5JywGuPp9bSYXZ2oAGSNc_6hEpOGGhRscGVfiOJ7IOFcLtJssWuYOv-BRx5cQlGY4hFModbmk2CXwX5wESrr5Qx4Y5eTFS4lEO__szq0JJjDOmrCFpnVc3snCK-RbPcfQv-2CNGnvh1_ApWbI2li4_uLaRwZgWilCvx8JTmgfQ6iJwi7xGfZr9NN3PfRAWwwCIBQEqdQe4X2QrfYxRK0tEOIDi8P-Fc2Qo0LgUN3wYfgihUonolCrphGPyPT_"/>
+</div>
+<div>
+<p class="font-bold text-sm">Skyline Premium PG</p>
+<p class="text-xs text-slate-500">Bangalore, Indiranagar</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium">1,842</td>
+<td class="px-6 py-4 text-sm font-medium">124</td>
+<td class="px-6 py-4 text-sm font-medium">56</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full text-[10px] font-bold bg-primary/10 text-primary">
+<span class="size-1.5 rounded-full bg-primary"></span> Featured
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-slate-100 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Traditional luxury room preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzPSkaYFxZ5siS6JUbZepjQUfvjcDVHkcuq21_rznsUgeMQa5wxfEt-ICi_uPYdzWNQA3sV4EOclFrmMN7jlefi5n3Mp08SdAINLh1yVZuIPKS10e6K1eNzfrkLFtYILnjzHk47jKdu_MqzqU-L9selEdxEK2eUfYcRPoPKJ5mD6fQC83aK7nIm3uhK99MdRkUfxI7UVvltG_WqVW9LelNoriAuTkalWgrWEemSGvaTaJssIKBt_OHEQkDvgSpBczYgMrbRl223vV0"/>
+</div>
+<div>
+<p class="font-bold text-sm">Green Garden PG</p>
+<p class="text-xs text-slate-500">HSR Layout, Bangalore</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium">920</td>
+<td class="px-6 py-4 text-sm font-medium">45</td>
+<td class="px-6 py-4 text-sm font-medium">12</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-500">
+<span class="size-1.5 rounded-full bg-emerald-500"></span> Active
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- 5. Lead Management Section -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col">
+<div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+<h3 class="text-lg font-bold">Recent Leads</h3>
+<button class="text-primary text-sm font-bold">View Inbox</button>
+</div>
+<div class="flex-1 p-2 space-y-1">
+<div class="flex items-center gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg cursor-pointer transition-colors group">
+<div class="size-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-600 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Avatar of Rahul Sharma" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQe04T3K7r1ZIHq4xplVnrRFPxN8TDwqHZYiet_S7iCWBeSdzdwi5Qjpk7KveqEo9XAm3AFMD17pTQWt1Rc8jLd9Qb0enl891kp8XcnKPAFumATLVka1wvKcHDGNrhsyJ85FSI6YNHhLUVKg3MIRC6ZGG5xED-O1rDYrQ9Stp-bGvt5ru1pMgEaLU0DrnRrQBYa8GFP5IZwLonxigZa8CfW9StCaQJGziPu7ZA7Xupzi75p2nOU8VbSVj04oF8k5afJPBJNlpJjNwa"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold text-slate-900 dark:text-white">Rahul Sharma</p>
+<p class="text-xs text-slate-500 truncate italic">"Interested in Skyline Premium PG (Single Room)"</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] font-bold text-slate-400 mb-1">2h ago</p>
+<span class="size-2 bg-primary rounded-full inline-block group-hover:animate-pulse"></span>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg cursor-pointer transition-colors group">
+<div class="size-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-600 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Avatar of Priya Das" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCG3IW2ix62SroE_-VlZXIPfeTTD4kSlva08CD_xpJ3_zXN32odxa9B3THgf-uOFZ5Bjw8Opx5Ou7hBJO2WOf_52SNbkEVPpijuaWISmxtJW2DJHTNSyXPEEh6xfqqkNE_9slfAFE9NqIGJJmUFYZpa4h25SLDZ2cNj2x9U39Kq5jZDdP0eJpHYbncCPHMJgLkb3PUnt5-FWKPxS3ZWcwr9p2xJ4l79NqlS2Vmq4dioRZ4yZEHvds0vCG6rGvqg0MU2UcZBT28iCH5Q"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold text-slate-900 dark:text-white">Priya Das</p>
+<p class="text-xs text-slate-500 truncate italic">"When can I schedule a physical visit?"</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] font-bold text-slate-400 mb-1">5h ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg cursor-pointer transition-colors group opacity-60">
+<div class="size-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-600 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Avatar of Ankit K." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaQiKcN-McLubQk3lHCiLezdp_-UK708Mzp2mGxCf26Rd9PrCba54Eg1pdPM27rZOop67kYhFnVTjdVuf7j_94gt6Zv_nVjsuKf4KcoHi8YzqhNbkDwt7bBN4WCPiMuKNFW2mfwPV8HEsOPu3wbPHIVKYg8cQbdAi8aMd1fbHmDl9nRPRqF1eB67jfh30IIkczvAoXneqenWnkzLgw6cMJDhUqMi1pJaxw1GJG5eAtbM7vY21IhN4vtJLXWXq-UcVOKEPuhHQcDZPS"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold text-slate-900 dark:text-white">Ankit K.</p>
+<p class="text-xs text-slate-500 truncate italic">"Is there a deposit refund policy?"</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] font-bold text-slate-400 mb-1">Yesterday</p>
+</div>
+</div>
+</div>
+</div>
+<!-- 6. Performance Insights -->
+<div class="flex flex-col gap-6">
+<div class="bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20 p-6">
+<div class="flex items-start gap-4">
+<div class="size-10 rounded-full bg-primary flex items-center justify-center text-white shrink-0">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-1">Performance Insight</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Listings with more than 8 photos get 45% more contact clicks on average. You currently have 3 listings with few photos.</p>
+<button class="text-primary text-sm font-bold hover:underline">Update Photos Now</button>
+</div>
+</div>
+</div>
+<!-- 7. Subscription Upgrade Prompt -->
+<div class="relative rounded-xl overflow-hidden bg-slate-900 p-8 flex items-center justify-between text-white">
+<div class="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-primary/30 to-transparent pointer-events-none"></div>
+<div class="relative z-10">
+<div class="bg-primary px-2 py-1 rounded text-[10px] font-bold inline-block mb-3">UPGRADE AVAILABLE</div>
+<h3 class="text-xl font-bold mb-2">Unlock Advanced Analytics</h3>
+<p class="text-slate-400 text-sm max-w-xs mb-6">Get heatmaps, competitor pricing data, and featured spots for your best listings.</p>
+<button class="bg-primary hover:bg-primary/90 text-white font-bold px-6 py-2.5 rounded-lg text-sm shadow-lg shadow-primary/20">Go Pro Today</button>
+</div>
+<div class="hidden sm:block relative z-10 opacity-40">
+<span class="material-symbols-outlined text-[100px]">auto_graph</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="p-8 border-t border-slate-200 dark:border-slate-800 text-center">
+<p class="text-xs text-slate-400 font-medium">© 2024 StayNest Inc. All vendor data is protected. Built for growth.</p>
+</footer>
+</main>
+</div>
+</body></html>

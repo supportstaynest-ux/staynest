@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StayNest Vendor Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Main Container -->
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden pb-20">
+<!-- Top Header -->
+<div class="flex items-center bg-white dark:bg-slate-900 p-4 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10">
+<div class="text-primary flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight flex-1 ml-4">Vendor Management</h2>
+<div class="flex items-center gap-2">
+<button class="flex size-10 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="flex size-10 items-center justify-center rounded-lg bg-primary text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">person_add</span>
+</button>
+</div>
+</div>
+<!-- Performance Stats -->
+<div class="flex gap-4 p-4 overflow-x-auto no-scrollbar">
+<div class="flex min-w-[160px] flex-1 flex-col gap-2 rounded-xl p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">Total Vendors</p>
+<span class="material-symbols-outlined text-primary text-xl">groups</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-slate-900 dark:text-white text-2xl font-extrabold">124</p>
+<p class="text-emerald-500 text-xs font-bold leading-normal flex items-center">
+<span class="material-symbols-outlined text-xs">trending_up</span> 12%
+                    </p>
+</div>
+</div>
+<div class="flex min-w-[160px] flex-1 flex-col gap-2 rounded-xl p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">Avg Rating</p>
+<span class="material-symbols-outlined text-amber-500 text-xl">star</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-slate-900 dark:text-white text-2xl font-extrabold">4.8</p>
+<p class="text-emerald-500 text-xs font-bold leading-normal flex items-center">
+<span class="material-symbols-outlined text-xs">arrow_drop_up</span> 0.2
+                    </p>
+</div>
+</div>
+</div>
+<!-- Filter Tabs -->
+<div class="px-4 pt-2">
+<div class="flex border-b border-slate-200 dark:border-slate-800 gap-6 overflow-x-auto no-scrollbar">
+<a class="flex flex-col items-center justify-center border-b-2 border-primary text-primary pb-3 pt-2 whitespace-nowrap" href="#">
+<p class="text-sm font-bold leading-normal tracking-tight">All Vendors</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent text-slate-500 dark:text-slate-400 pb-3 pt-2 whitespace-nowrap" href="#">
+<p class="text-sm font-bold leading-normal tracking-tight">Pending Approval</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent text-slate-500 dark:text-slate-400 pb-3 pt-2 whitespace-nowrap" href="#">
+<p class="text-sm font-bold leading-normal tracking-tight">Verified</p>
+</a>
+</div>
+</div>
+<!-- Vendor List Section -->
+<div class="p-4 space-y-4">
+<!-- Vendor Card 1 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+<div class="p-4">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="size-12 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden border border-slate-100 dark:border-slate-800">
+<img class="w-full h-full object-cover" data-alt="Profile photo of vendor Alex Johnson" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5k8TcjLePXm1pxynLwFjHW5ZtQH0lVA_0z52iiAQAUSMba8GCxI_UC3NJOTFeQQF-C7avvCftI1IzYeQDdzFi6M9beU4bxMVc0Usilk-s40jKV8JHnf7erDl7MNnLA8fcH1mopWYHALEHUxGP_F3rKS5diWX828OhHPEHE_yUuLkqIAgbsI33RHjwtEIBeFo8T93DB0BU1HOZ2rr6JTUhWsVyTy2ZLtIuRr1rNh93QyXfYYYhpqNQrjeoU5SICvyPgtpI6WVCqQw"/>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white">Alex Johnson</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">Joined Oct 2023</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 px-2 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
+<span class="material-symbols-outlined text-[14px]">verified</span> Verified
+                        </span>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-4">
+<div class="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg">
+<p class="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500">Listings</p>
+<p class="text-lg font-bold text-slate-900 dark:text-white">24 Properties</p>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg">
+<p class="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500">Earnings</p>
+<p class="text-lg font-bold text-slate-900 dark:text-white">$12,450</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex-1 bg-primary/10 text-primary py-2.5 rounded-lg text-sm font-bold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">visibility</span> View Listings
+                        </button>
+<button class="size-10 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Vendor Card 2 - Pending -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+<div class="p-4">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="size-12 rounded-full bg-amber-100 flex items-center justify-center overflow-hidden border border-slate-100 dark:border-slate-800">
+<img class="w-full h-full object-cover" data-alt="Profile photo of vendor Sarah Miller" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbGD6jdN6tBcvHnXc16nRyN_aJ0DaKyJUXa3Ue0tYcF_NBxOJ-AXTfykOdo02qu6mz7HO1dBZ-B6sh37U0-XzSk1GYGnuwvxido0RnqzbKwhJ-AzOq-D_l46Rtu7TtHSdzKhKcIg1vtcltIvcaydCTvzN1r1DIRXvlm56G8zLf0bJlRs3dxe_mqbk3yNnmwZHjujupC84lbVmtl6Rc9anHGirGRjO3nl8rHO-sEeXSxKq7j9VOT577F6TrikZSHcq2kRyQMIdQTdQ"/>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white">Sarah Miller</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">Joined Jan 2024</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 rounded-full bg-amber-100 dark:bg-amber-900/30 px-2 py-1 text-xs font-bold text-amber-600 dark:text-amber-400">
+<span class="material-symbols-outlined text-[14px]">history</span> Pending
+                        </span>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-4">
+<div class="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg">
+<p class="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500">Listings</p>
+<p class="text-lg font-bold text-slate-900 dark:text-white">3 Properties</p>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg">
+<p class="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500">Documents</p>
+<p class="text-lg font-bold text-slate-900 dark:text-white">Reviewing</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex-1 bg-primary text-white py-2.5 rounded-lg text-sm font-bold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">check_circle</span> Approve
+                        </button>
+<button class="flex-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 py-2.5 rounded-lg text-sm font-bold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">block</span> Suspend
+                        </button>
+</div>
+</div>
+</div>
+<!-- Vendor Card 3 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+<div class="p-4">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="size-12 rounded-full bg-slate-100 flex items-center justify-center overflow-hidden border border-slate-100 dark:border-slate-800">
+<img class="w-full h-full object-cover" data-alt="Profile photo of vendor David Chen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdGsD-l3dCOj2Bt-fjbZzvIZBKWoTm2PISdfFASzaRG9HgyC5I-eFmfSkAclE57K4XPdp_Lzgpf_5b7Q-mfvIwi3UWPbbw0AbTGULeIPw2cLa-G6L8WA-o9VyFoMzFU_BQKb-ibkhlH-S1Oi9j4XHhhWh-ub5wUcEXZ79gVRXrDt5Wl1eb1m9w7j6Z4CEKrd8jBfTixj6LhGSd1brhCjFc_x4xVaBb-BFTwYI4qhLQ_sAv76Jtb6-P5ZTFVT6u8IbtLsBXKyCPHrA"/>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white">David Chen</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">Joined Dec 2023</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 px-2 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
+<span class="material-symbols-outlined text-[14px]">verified</span> Verified
+                        </span>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-4">
+<div class="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg">
+<p class="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500">Listings</p>
+<p class="text-lg font-bold text-slate-900 dark:text-white">12 Properties</p>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg">
+<p class="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500">Rating</p>
+<p class="text-lg font-bold text-slate-900 dark:text-white">4.9/5.0</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex-1 bg-primary/10 text-primary py-2.5 rounded-lg text-sm font-bold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">visibility</span> View Listings
+                        </button>
+<button class="size-10 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation Bar -->
+<div class="fixed bottom-0 left-0 right-0 z-20 flex gap-2 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pb-4 pt-2 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 dark:text-slate-400" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="text-[10px] font-bold uppercase tracking-wider">Dashboard</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+<p class="text-[10px] font-bold uppercase tracking-wider">Vendors</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 dark:text-slate-400" href="#">
+<span class="material-symbols-outlined">apartment</span>
+<p class="text-[10px] font-bold uppercase tracking-wider">Listings</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 dark:text-slate-400" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<p class="text-[10px] font-bold uppercase tracking-wider">Profile</p>
+</a>
+</div>
+</div>
+</body></html>

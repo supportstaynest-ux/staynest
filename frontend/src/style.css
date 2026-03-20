@@ -1,0 +1,284 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Global scroll & touch behavior ── */
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+html, body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: auto;
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  /* Safe Area Support */
+  :root {
+    --nav-height: 64px;
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  @media (max-width: 767px) {
+    main, #app > div {
+      padding-bottom: calc(var(--nav-height) + var(--safe-bottom) + 16px);
+    }
+  }
+
+  .icon-filled {
+    font-variation-settings: 'FILL' 1 !important;
+  }
+
+  /* Keep toast container logic as we render it dynamically that way */
+  #toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .toast {
+    padding: 14px 24px;
+    border-radius: 0.5rem;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    min-width: 280px;
+  }
+
+  .toast-success {
+    background-color: #10b981;
+  }
+
+  /* emerald-500 */
+  .toast-error {
+    background-color: #ef4444;
+  }
+
+  /* red-500 */
+  .toast-info {
+    background-color: #2BB3C0;
+  }
+
+  /* primary */
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeOut {
+    to {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }
+
+  /* Loading Overlay */
+  .loading-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(16, 29, 34, 0.8);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top-color: #2BB3C0;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 40px auto;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Lazy image loading transitions */
+  .lazy-img,
+  .lazy-bg {
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
+  }
+
+  .lazy-loaded {
+    opacity: 1 !important;
+  }
+
+  /* GPU-accelerated page transitions */
+  #app {
+    will-change: opacity;
+    min-height: 100dvh;
+    /* Ensure #app itself doesn't have transform during idle to keep fixed children fixed */
+    transform: none !important;
+  }
+
+  /* ── 📱 GLOBAL MOBILE RESPONSIVENESS OVERRIDES (Max 768px) ── */
+  @media (max-width: 768px) {
+    /* 1. Prevent Horizontal Scrolling, allow vertical */
+    html, body {
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
+      width: 100% !important;
+      max-width: 100vw !important;
+      height: auto !important;
+      position: relative; /* Prevent absolute children from expanding body */
+      
+      /* Mobile Scroll Optimizations */
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Force all major containers to stay inside viewport */
+    #app, main, section, .max-w-7xl, .container {
+      max-width: 100vw !important;
+      overflow-x: hidden !important;
+      overflow-y: visible !important;
+      box-sizing: border-box !important;
+    }
+
+    /* 2. Responsive Images (Never overflow) */
+    img, video, canvas {
+      max-width: 100% !important;
+      height: auto !important;
+      object-fit: contain; /* Or cover depending on parent */
+    }
+
+    /* 3. Layout Stack & Spacing Optimizations */
+    /* Reduce excessive padding on mobile */
+    .p-6, .p-8, .p-10, .p-12 {
+      padding: 1rem !important;
+    }
+    .py-12, .py-16, .py-20 {
+      padding-top: 1.5rem !important;
+      padding-bottom: 1.5rem !important;
+    }
+
+    /* 4. Touch-Friendly Buttons & Inputs (Min 44px tall per Apple/Google guidelines) */
+    button, .btn, input:not([type="checkbox"]):not([type="radio"]), select, textarea {
+      min-height: 44px !important;
+    }
+    
+    /* Ensure buttons don't touch screen edges */
+    button.w-full, .btn.w-full {
+      width: calc(100% - 1rem) !important;
+      margin-left: 0.5rem !important;
+      margin-right: 0.5rem !important;
+    }
+
+    /* 8. Admin & Vendor Dashboard Tables -> Scrollable instead of overflowing */
+    table {
+      display: block !important;
+      width: 100% !important;
+      overflow-x: auto !important;
+      white-space: nowrap !important;
+      -webkit-overflow-scrolling: touch !important; /* Smooth scroll on iOS */
+    }
+
+    /* Wrap charts in responsive max height on mobile */
+    .chart-container {
+      height: 250px !important;
+      width: 100% !important;
+      overflow: hidden;
+    }
+
+    /* 9. Chat System Optimizations */
+    .chat-bubble {
+      max-width: 85% !important;
+      word-break: break-word !important;
+      word-wrap: break-word !important;
+      white-space: pre-wrap !important;
+    }
+
+    /* Uses dynamic viewport height so it doesn't break when mobile keyboard opens */
+    .chat-layout {
+      height: calc(100dvh - 140px) !important;
+      max-height: calc(100dvh - 140px) !important;
+      display: flex !important;
+      flex-direction: column !important;
+      overflow-y: auto !important;
+    }
+    .chat-input-area {
+      padding-bottom: env(safe-area-inset-bottom) !important;
+    }
+  }
+}
+
+/* ── 📱 PWA STANDALONE MODE (App Installed Experience) ── */
+@media (display-mode: standalone) {
+  /* Hide the "Install App" banners if they somehow appear */
+  .pwa-install-btn {
+    display: none !important;
+  }
+
+  /* Force Mobile Padding/Safe Areas */
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    /* Allow normal scrolling in standalone mode */
+    overscroll-behavior-y: contain;
+    overflow-y: auto !important;
+    height: auto !important;
+    
+    /* Native App feel */
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    user-select: none;
+  }
+
+  /* Allow text selection in inputs/chat */
+  input, textarea, .chat-bubble {
+    user-select: auto;
+  }
+
+  /* Force Mobile Constraints even if app is opened on a larger tablet window natively */
+  #app, main, section, .container {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+  }
+
+  html, body {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+}

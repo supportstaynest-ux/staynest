@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13b6ec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#101d22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #dbe3e6;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 md:px-10 py-3">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-3xl">home_pin</span>
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight tracking-tight">StayNest</h2>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-slate-900 dark:text-slate-100 text-sm font-medium hover:text-primary transition-colors" href="#">Home</a>
+<a class="text-primary text-sm font-bold" href="#">PGs</a>
+<a class="text-slate-900 dark:text-slate-100 text-sm font-medium hover:text-primary transition-colors" href="#">Bookings</a>
+<a class="text-slate-900 dark:text-slate-100 text-sm font-medium hover:text-primary transition-colors" href="#">Profile</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center bg-slate-100 dark:bg-slate-800 rounded-lg px-3 py-1.5 border border-transparent focus-within:border-primary">
+<span class="material-symbols-outlined text-slate-500 text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 lg:w-64 placeholder:text-slate-500" placeholder="Search locations..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-10 w-10 rounded-full overflow-hidden border-2 border-primary/20">
+<img class="h-full w-full object-cover" data-alt="User profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5txGtOwJEKLch4K8wa_NHyjJ-498IY3FadQAEvHkx3JS51ArXXiE65m6Kp_Fs-aNGM3Z0n8XITX5gss1jEhRi8jeeSSCv89XrwnCWffPiNyglGhQ9H8zGuoO1eJW8-vSehGdAfnUgZFYyG8vE1TEgtWe9mxw-sFdyE17wEVh3XrR_SvL442-d70kdnqa9oo9SOI_Qg0lT0_FI9R1OrMYeDSiT09lZHyuwzVcm62Hlb84Z-h1ZUKbMeQXA9siyJlZuQQT6O5S6YvuP"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex flex-1 flex-col lg:flex-row max-w-[1440px] mx-auto w-full px-4 py-6 gap-6">
+<!-- Sidebar Filters -->
+<aside class="w-full lg:w-72 shrink-0 space-y-6 lg:sticky lg:top-24 h-fit max-h-[calc(100vh-120px)] overflow-y-auto custom-scrollbar pr-2">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-bold">Filters</h3>
+<button class="text-sm text-primary font-medium hover:underline">Clear all</button>
+</div>
+<!-- Budget Range -->
+<div class="space-y-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500">payments</span>
+<p class="font-semibold text-sm">Budget Range (Monthly)</p>
+</div>
+<div class="px-2">
+<div class="relative h-1 w-full bg-slate-200 dark:bg-slate-700 rounded-full">
+<div class="absolute h-full w-2/3 left-[15%] bg-primary rounded-full"></div>
+<div class="absolute -top-1.5 left-[15%] size-4 rounded-full bg-primary border-2 border-white shadow-sm cursor-pointer"></div>
+<div class="absolute -top-1.5 left-[80%] size-4 rounded-full bg-primary border-2 border-white shadow-sm cursor-pointer"></div>
+</div>
+<div class="flex justify-between mt-4 text-xs font-medium text-slate-600 dark:text-slate-400">
+<span>₹5,000</span>
+<span>₹25,000+</span>
+</div>
+</div>
+</div>
+<!-- Room Type -->
+<div class="space-y-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500">bed</span>
+<p class="font-semibold text-sm">Room Occupancy</p>
+</div>
+<div class="space-y-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="text-sm group-hover:text-primary transition-colors">Single Sharing</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="text-sm group-hover:text-primary transition-colors">Double Sharing</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="text-sm group-hover:text-primary transition-colors">Triple Sharing</span>
+</label>
+</div>
+</div>
+<!-- Gender -->
+<div class="space-y-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500">group</span>
+<p class="font-semibold text-sm">Gender</p>
+</div>
+<div class="flex p-1 bg-slate-100 dark:bg-slate-800 rounded-lg">
+<button class="flex-1 py-1.5 text-xs font-bold rounded-md bg-white dark:bg-slate-700 shadow-sm text-slate-900 dark:text-slate-100">Any</button>
+<button class="flex-1 py-1.5 text-xs font-medium text-slate-500">Boys</button>
+<button class="flex-1 py-1.5 text-xs font-medium text-slate-500">Girls</button>
+</div>
+</div>
+<!-- Amenities Toggles -->
+<div class="space-y-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500">settings</span>
+<p class="font-semibold text-sm">Must-have Amenities</p>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<span class="text-sm">Air Conditioning</span>
+<div class="w-10 h-5 bg-primary rounded-full relative cursor-pointer">
+<div class="absolute right-0.5 top-0.5 size-4 bg-white rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm">Food Included</span>
+<div class="w-10 h-5 bg-slate-300 dark:bg-slate-600 rounded-full relative cursor-pointer">
+<div class="absolute left-0.5 top-0.5 size-4 bg-white rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm">Attached Bathroom</span>
+<div class="w-10 h-5 bg-primary rounded-full relative cursor-pointer">
+<div class="absolute right-0.5 top-0.5 size-4 bg-white rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm">Fully Furnished</span>
+<div class="w-10 h-5 bg-slate-300 dark:bg-slate-600 rounded-full relative cursor-pointer">
+<div class="absolute left-0.5 top-0.5 size-4 bg-white rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Distance Filter -->
+<div class="space-y-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500">map</span>
+<p class="font-semibold text-sm">Distance (within km)</p>
+</div>
+<select class="w-full text-sm bg-slate-100 dark:bg-slate-800 border-none rounded-lg focus:ring-primary">
+<option>Within 2 km</option>
+<option selected="">Within 5 km</option>
+<option>Within 10 km</option>
+<option>Any distance</option>
+</select>
+</div>
+<button class="w-full py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
+                    Apply Filters
+                </button>
+</aside>
+<!-- Main Results Area -->
+<div class="flex-1 space-y-6">
+<!-- Header Actions -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+<div>
+<h1 class="text-2xl font-bold">PGs in Bangalore South</h1>
+<p class="text-slate-500 text-sm">Showing 148 matching properties</p>
+</div>
+<div class="flex items-center gap-3 w-full sm:w-auto">
+<div class="flex items-center gap-2 text-sm font-medium border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-2 bg-white dark:bg-slate-900 cursor-pointer hover:bg-slate-50">
+<span class="material-symbols-outlined text-primary text-lg">sort</span>
+<span>Sort: Price Low-High</span>
+</div>
+<button class="flex items-center gap-2 text-sm font-medium bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-lg px-3 py-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-lg">map</span>
+<span>Map View</span>
+</button>
+</div>
+</div>
+<!-- PG Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow group">
+<div class="relative h-56 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Modern PG room with large window" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLKCVPjYn2TSPDpKJ0bn9JmpaEOhbnQaDkOGMqh2-p-XA0-LUFKvmjBLUHZLJMOx2Tl0rJnaR9D-nj3Y9qrO1m4vPOewUjQNQehBJVt4rL2erL94qjzIIi2N_qoUROxEyYGUB3GpkLSnL501GOGai1lNdpBsAbahtRy8MNRVTyDShND1cnFD4lm2ioQhw9glDGcVC1ABa_WzSPqtP2ldPR6diBPuCYbKSIiYgtyztvCizNvTdyMngaMidD0bNMaSNaFT8lRTa4pB8Z"/>
+<div class="absolute top-3 left-3 bg-slate-900/80 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded">
+                                Highly Rated
+                            </div>
+<button class="absolute top-3 right-3 h-8 w-8 rounded-full bg-white/90 flex items-center justify-center text-slate-900 shadow-sm hover:text-primary">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</button>
+<div class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-yellow-500 text-sm">star</span>
+<span class="text-xs font-bold text-slate-900">4.8</span>
+</div>
+</div>
+<div class="p-4 space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-primary text-[10px] font-bold uppercase tracking-widest">Koramangala, Bangalore</span>
+<span class="flex items-center gap-1 text-slate-500 text-xs">
+<span class="material-symbols-outlined text-xs">man</span>
+<span>Boys Only</span>
+</span>
+</div>
+<h3 class="font-bold text-lg line-clamp-1">Stanza Living - Tokyo House</h3>
+<div class="flex gap-3 py-1">
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+<span class="material-symbols-outlined text-slate-500 text-lg">ac_unit</span>
+</div>
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+<span class="material-symbols-outlined text-slate-500 text-lg">restaurant</span>
+</div>
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+<span class="material-symbols-outlined text-slate-500 text-lg">wifi</span>
+</div>
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+<span class="material-symbols-outlined text-slate-500 text-lg">local_laundry_service</span>
+</div>
+</div>
+<div class="pt-2 flex items-center justify-between border-t border-slate-100 dark:border-slate-800">
+<div>
+<p class="text-xs text-slate-500">Starts from</p>
+<p class="text-lg font-bold text-slate-900 dark:text-slate-100">₹12,500 <span class="text-xs font-normal">/mo</span></p>
+</div>
+<button class="bg-primary/10 text-primary px-4 py-2 rounded-lg font-bold text-sm hover:bg-primary hover:text-white transition-colors">
+                                    Details
+                                </button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow group">
+<div class="relative h-56 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Bright shared bedroom with minimal decor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzmHc7Sieyn61OkBHiwd15HO6PfuxejL9VW59LyilQdYU5JuCgU0vhkKUkpPmts3x5CwVe_9vLi8CP-1NFLNBmaz4eJiVcXIOW2A6KFc_lYOBI-vwOP0AuPTi8mgm_ACYyI4w8HE9BYgnOjenjDnt9jlZS-LDfVJFTsLF8FnVdL1QYy-uVCZ2s9vVCXvZEaACMIxINio5bJ65LixrD-RhqTExtVpS73GQYbeRtJrFnS9JLeC_IfHeigN_MH4OiN3ycrOQqI77ZMQOf"/>
+<button class="absolute top-3 right-3 h-8 w-8 rounded-full bg-white/90 flex items-center justify-center text-slate-900 shadow-sm hover:text-primary">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</button>
+<div class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-yellow-500 text-sm">star</span>
+<span class="text-xs font-bold text-slate-900">4.5</span>
+</div>
+</div>
+<div class="p-4 space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-primary text-[10px] font-bold uppercase tracking-widest">HSR Layout, Bangalore</span>
+<span class="flex items-center gap-1 text-slate-500 text-xs">
+<span class="material-symbols-outlined text-xs">woman</span>
+<span>Girls Only</span>
+</span>
+</div>
+<h3 class="font-bold text-lg line-clamp-1">Zolo Scholars - Lavender</h3>
+<div class="flex gap-3 py-1">
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+<span class="material-symbols-outlined text-slate-500 text-lg">restaurant</span>
+</div>
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+<span class="material-symbols-outlined text-slate-500 text-lg">wifi</span>
+</div>
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+<span class="material-symbols-outlined text-slate-500 text-lg">shield_moon</span>
+</div>
+</div>
+<div class="pt-2 flex items-center justify-between border-t border-slate-100 dark:border-slate-800">
+<div>
+<p class="text-xs text-slate-500">Starts from</p>
+<p class="text-lg font-bold text-slate-900 dark:text-slate-100">₹8,500 <span class="text-xs font-normal">/mo</span></p>
+</div>
+<button class="bg-primary/10 text-primary px-4 py-2 rounded-lg font-bold text-sm hover:bg-primary hover:text-white transition-colors">
+                                    Details
+                                </button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow group">
+<div class="relative h-56 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Cozy double sharing room with desk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBASLRryp_EqIVh8EEBzRlk4cxhwcbLkCRVpeAeH7N2qYipoSaecWw-5CTA5Kie-jy5mf5fGX3T1Z_PTliLb2s7avC2Hr7ugGI4DECP1DTqmwXnVpQBQWfVh59VNCvxn3uqdDhoIbf6-vMVcXUQUQuay3EUSplLgWIklBryiCrpgWgTH9Y-6YvB2DbI8lZmkD2k471FqxO3eF9xyvSHiTBEDfrm-evcYbYTG_-0FbXpXeQ6J_jrUobP0J1Uh0736Q_HLM5TezJGm7f-"/>
+<div class="absolute top-3 left-3 bg-primary text-white text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded">
+                                Popular
+                            </div>
+<button class="absolute top-3 right-3 h-8 w-8 rounded-full bg-white/90 flex items-center justify-center text-slate-900 shadow-sm hover:text-primary">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</button>
+<div class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-yellow-500 text-sm">star</span>
+<span class="text-xs font-bold text-slate-900">4.2</span>
+</div>
+</div>
+<div class="p-4 space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-primary text-[10px] font-bold uppercase tracking-widest">BTM Layout, Bangalore</span>
+<span class="flex items-center gap-1 text-slate-500 text-xs">
+<span class="material-symbols-outlined text-xs">wc</span>
+<span>Co-ed</span>
+</span>
+</div>
+<h3 class="font-bold text-lg line-clamp-1">Colive - 411 Liberty</h3>
+<div class="flex gap-3 py-1">
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+<span class="material-symbols-outlined text-slate-500 text-lg">sports_esports</span>
+</div>
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+<span class="material-symbols-outlined text-slate-500 text-lg">restaurant</span>
+</div>
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+<span class="material-symbols-outlined text-slate-500 text-lg">wifi</span>
+</div>
+</div>
+<div class="pt-2 flex items-center justify-between border-t border-slate-100 dark:border-slate-800">
+<div>
+<p class="text-xs text-slate-500">Starts from</p>
+<p class="text-lg font-bold text-slate-900 dark:text-slate-100">₹10,000 <span class="text-xs font-normal">/mo</span></p>
+</div>
+<button class="bg-primary/10 text-primary px-4 py-2 rounded-lg font-bold text-sm hover:bg-primary hover:text-white transition-colors">
+                                    Details
+                                </button>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow group">
+<div class="relative h-56 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Minimalist studio room for single occupancy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoiWye7HngYfdCEh9yMCx9Wfsswo91sLNE7n4uHNindky5Cm45RJubt0uvfHnSKv7cevj8bf6jUC308x49Y2oeZkoPmsW9Ad0T8B4QkfSDBjn1wFOA4-CBHTjOcVxC_-mgQqeRRXpSeMpCNehDuIybdblj2-uPR8BZI_0nFMm7l7PXto6Xj5UqSvsb_r4_aqpwYcs2voIUhOEzZr0iCV6wUgjqhB7xJRANGe1fY9V_P_wu_nyaZynJX8WvX6razkJQ6Hu6eYXEOUOu"/>
+<button class="absolute top-3 right-3 h-8 w-8 rounded-full bg-white/90 flex items-center justify-center text-slate-900 shadow-sm hover:text-primary">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</button>
+<div class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-yellow-500 text-sm">star</span>
+<span class="text-xs font-bold text-slate-900">4.9</span>
+</div>
+</div>
+<div class="p-4 space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-primary text-[10px] font-bold uppercase tracking-widest">Indiranagar, Bangalore</span>
+<span class="flex items-center gap-1 text-slate-500 text-xs">
+<span class="material-symbols-outlined text-xs">man</span>
+<span>Boys Only</span>
+</span>
+</div>
+<h3 class="font-bold text-lg line-clamp-1">Luxury Suites - Executive</h3>
+<div class="flex gap-3 py-1">
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+<span class="material-symbols-outlined text-slate-500 text-lg">ac_unit</span>
+</div>
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+<span class="material-symbols-outlined text-slate-500 text-lg">tv</span>
+</div>
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+<span class="material-symbols-outlined text-slate-500 text-lg">fitness_center</span>
+</div>
+</div>
+<div class="pt-2 flex items-center justify-between border-t border-slate-100 dark:border-slate-800">
+<div>
+<p class="text-xs text-slate-500">Starts from</p>
+<p class="text-lg font-bold text-slate-900 dark:text-slate-100">₹18,000 <span class="text-xs font-normal">/mo</span></p>
+</div>
+<button class="bg-primary/10 text-primary px-4 py-2 rounded-lg font-bold text-sm hover:bg-primary hover:text-white transition-colors">
+                                    Details
+                                </button>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow group">
+<div class="relative h-56 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Budget friendly clean PG room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAw1uGI3gYXXal3nqJ0XZTjcZFQk58ACgghqayXRquzUDBbDaid_VM3Q_oCAtOnU3PLfbYVihNKJOnMPj5DOujgNeL3QxyEtFQO6Txu_grMr-8_2UchjxWDwdqCNOHWtFO1CW96UTQmZY3cwW4qg71LON4ZxMffJJ2DSzKBLfQiMc2VszPJpXzfl4cAREAMw31knv_iYDKDrQko4XvzGwgyx9btVTiU5yKHOS7gN_IRoCmcocXY56cjaz0rHyJn_quohbn1Gm4g_3sS"/>
+<button class="absolute top-3 right-3 h-8 w-8 rounded-full bg-white/90 flex items-center justify-center text-slate-900 shadow-sm hover:text-primary">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</button>
+<div class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-yellow-500 text-sm">star</span>
+<span class="text-xs font-bold text-slate-900">3.9</span>
+</div>
+</div>
+<div class="p-4 space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-primary text-[10px] font-bold uppercase tracking-widest">Electronic City, Bangalore</span>
+<span class="flex items-center gap-1 text-slate-500 text-xs">
+<span class="material-symbols-outlined text-xs">woman</span>
+<span>Girls Only</span>
+</span>
+</div>
+<h3 class="font-bold text-lg line-clamp-1">Comfort Stays - Phase 1</h3>
+<div class="flex gap-3 py-1">
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+<span class="material-symbols-outlined text-slate-500 text-lg">wifi</span>
+</div>
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+<span class="material-symbols-outlined text-slate-500 text-lg">local_laundry_service</span>
+</div>
+</div>
+<div class="pt-2 flex items-center justify-between border-t border-slate-100 dark:border-slate-800">
+<div>
+<p class="text-xs text-slate-500">Starts from</p>
+<p class="text-lg font-bold text-slate-900 dark:text-slate-100">₹6,500 <span class="text-xs font-normal">/mo</span></p>
+</div>
+<button class="bg-primary/10 text-primary px-4 py-2 rounded-lg font-bold text-sm hover:bg-primary hover:text-white transition-colors">
+                                    Details
+                                </button>
+</div>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow group">
+<div class="relative h-56 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Spacious room with study corner" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxvHnIKw8x6icw0UIYJ7U57LjGGZ_PhtYjbU06kD_NpFF-7ho7KSnkrXSlLAJAEnU9lU0vRc1lTyWBjYbbWko4xaw3nQvaMCQcR8R32WzwASwU_q4d9sBFPRXGsh923_NI42KMI8NMgZujwji8WnNIXasjrqpa3-VPjIsRqa037HAfvHmC2Z4ev55Qmaara3JdyIAAdcFB4nt7NzClYswSa2shY1YUcAz5_9FmGP6qWZtpf0_rPo9_nT-sJrspGCFXDM-QzKrehFMV"/>
+<button class="absolute top-3 right-3 h-8 w-8 rounded-full bg-white/90 flex items-center justify-center text-slate-900 shadow-sm hover:text-primary">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</button>
+<div class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-yellow-500 text-sm">star</span>
+<span class="text-xs font-bold text-slate-900">4.4</span>
+</div>
+</div>
+<div class="p-4 space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-primary text-[10px] font-bold uppercase tracking-widest">Bellandur, Bangalore</span>
+<span class="flex items-center gap-1 text-slate-500 text-xs">
+<span class="material-symbols-outlined text-xs">man</span>
+<span>Boys Only</span>
+</span>
+</div>
+<h3 class="font-bold text-lg line-clamp-1">Youth Hostels - Prime</h3>
+<div class="flex gap-3 py-1">
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+<span class="material-symbols-outlined text-slate-500 text-lg">restaurant</span>
+</div>
+<div class="flex flex-col items-center p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+<span class="material-symbols-outlined text-slate-500 text-lg">directions_bike</span>
+</div>
+</div>
+<div class="pt-2 flex items-center justify-between border-t border-slate-100 dark:border-slate-800">
+<div>
+<p class="text-xs text-slate-500">Starts from</p>
+<p class="text-lg font-bold text-slate-900 dark:text-slate-100">₹9,000 <span class="text-xs font-normal">/mo</span></p>
+</div>
+<button class="bg-primary/10 text-primary px-4 py-2 rounded-lg font-bold text-sm hover:bg-primary hover:text-white transition-colors">
+                                    Details
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-center pt-8 pb-12 gap-2">
+<button class="h-10 w-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="h-10 w-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold">1</button>
+<button class="h-10 w-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors font-medium">2</button>
+<button class="h-10 w-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors font-medium">3</button>
+<span class="px-2 text-slate-400">...</span>
+<button class="h-10 w-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors font-medium">12</button>
+<button class="h-10 w-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Map Panel (Hidden on Desktop by default, but toggleable) -->
+<div class="hidden 2xl:block w-96 shrink-0 lg:sticky lg:top-24 h-[calc(100vh-120px)] rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 relative shadow-lg">
+<div class="absolute inset-0 bg-slate-200 dark:bg-slate-800">
+<div class="h-full w-full bg-[url('https://placeholder.pics/svg/400')] bg-center bg-cover flex items-center justify-center" data-location="Bangalore" style="">
+<span class="bg-white/90 dark:bg-slate-900/90 p-4 rounded-xl shadow-xl flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">map</span>
+<span class="font-bold">Interactive Map View</span>
+</span>
+</div>
+</div>
+<div class="absolute bottom-4 left-4 right-4 bg-white dark:bg-slate-900 p-3 rounded-lg shadow-lg flex items-center gap-3 border border-slate-200 dark:border-slate-800">
+<img class="size-12 rounded-md object-cover" data-alt="Miniature of PG room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqIYLebWlyJnlR0lzZ_eD2OG_1SzV1tx43iet7ZSbNVLxzCQY7d6x6MCvqXM-ulf_nW7qKLc4_eLKW878qC5D5iq0zNjYaJr0NZFfuGZi6Ta6okjS61u8Kf_Uhd4REWgjZmMy9BGvG1a0_bxFhiCrmvxRHkqSy5VAEKa8RoUou4_kOYwkWCKwG1Ddi3OEPES5cUh18bcrdacYDac19uEQIfW0IY6YsAJEbPCeV2vRWhsMaHkzCBWSDwDo3bl8_opDG9LusrY3_hFgn"/>
+<div>
+<p class="text-xs font-bold truncate max-w-[180px]">Stanza Living - Tokyo House</p>
+<p class="text-[10px] text-slate-500">₹12,500/mo • Bangalore South</p>
+</div>
+<button class="ml-auto text-primary">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Bottom Mobile Filter Bar -->
+<div class="fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 px-4 py-3 flex lg:hidden gap-3 z-50">
+<button class="flex-1 flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 py-3 rounded-lg font-bold text-sm">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+                Filters
+            </button>
+<button class="flex-1 flex items-center justify-center gap-2 bg-primary text-white py-3 rounded-lg font-bold text-sm shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-lg">sort</span>
+                Sort
+            </button>
+</div>
+</div>
+</body></html>

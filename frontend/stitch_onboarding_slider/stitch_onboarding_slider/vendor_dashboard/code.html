@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StayNest Vendor Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13b6ec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#101d22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="flex min-h-screen">
+<!-- Sidebar -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col fixed h-full overflow-y-auto">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary rounded-lg p-2 text-white">
+<span class="material-symbols-outlined text-2xl">home_work</span>
+</div>
+<div>
+<h1 class="font-bold text-lg leading-none">StayNest</h1>
+<p class="text-xs text-slate-500 dark:text-slate-400">Vendor Portal</p>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary text-white font-medium" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">list_alt</span>
+<span>My Listings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">add_circle</span>
+<span>Add New PG</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">chat</span>
+<span>Enquiries</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">star</span>
+<span>Reviews</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span>Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Profile Settings</span>
+</a>
+</nav>
+<div class="p-4 mt-auto border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 p-2">
+<div class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center" data-alt="Vendor profile picture smiling man" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC_fWmq18kyraQ-NZs0GjG5Ztyr0OxBoY2VqT8KBqUMtl6dJHLT_fBGYhF5asY73ZFR2_lNfau12yjwjq0RDcdWmKSxmlwt_AoVNKonsEHaGG_lDTP7sMMCEWg5mbyuk1LeGleDm7PSbOWfa-PydZCve9ktoc4Tbv2bQl-bilAcctsZsgkTm-fpS7vErOI4AfVUOABbpXeKXKqcUx3stV2hhNWYuqCaKtDEtqdP0LiGWoVZ7RgFA1T5wRbxpDep-NGPeuMKTXj0jiWo')"></div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold truncate">Alex Rivera</p>
+<p class="text-xs text-slate-500 truncate">Premium Vendor</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64">
+<!-- Header -->
+<header class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur sticky top-0 z-10 px-8 flex items-center justify-between">
+<h2 class="text-xl font-bold">Overview</h2>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+</div>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-lg">logout</span>
+<span class="text-sm font-medium">Logout</span>
+</button>
+</div>
+</header>
+<div class="p-8 space-y-8">
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="p-6 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">business</span>
+<span class="text-xs font-semibold text-green-500">+2 new</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Total Listings</p>
+<h3 class="text-2xl font-bold mt-1">12</h3>
+</div>
+<div class="p-6 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">visibility</span>
+<span class="text-xs font-semibold text-green-500">+15%</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Total Views</p>
+<h3 class="text-2xl font-bold mt-1">4.2k</h3>
+</div>
+<div class="p-6 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">forum</span>
+<span class="text-xs font-semibold text-green-500">24 new</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Total Enquiries</p>
+<h3 class="text-2xl font-bold mt-1">86</h3>
+</div>
+<div class="p-6 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">verified</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Active Listings</p>
+<h3 class="text-2xl font-bold mt-1">8</h3>
+</div>
+</div>
+<!-- Quick Actions -->
+<section class="bg-primary/5 border border-primary/20 rounded-xl p-6 flex flex-col md:flex-row items-center justify-between gap-4">
+<div>
+<h4 class="text-lg font-bold">Grow your portfolio</h4>
+<p class="text-slate-600 dark:text-slate-400">Ready to list a new property? Our simplified process takes less than 5 minutes.</p>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-lg shadow-lg shadow-primary/20 flex items-center gap-2 transition-all transform hover:scale-105">
+<span class="material-symbols-outlined">add_circle</span>
+                        Add New PG
+                    </button>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Performance Overview -->
+<div class="lg:col-span-2 space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-bold">Performance Overview</h3>
+<select class="bg-transparent border-slate-200 dark:border-slate-800 rounded-lg text-sm">
+<option>Last 30 Days</option>
+<option>Last 6 Months</option>
+</select>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-8 h-64 flex flex-col justify-between">
+<div class="flex items-end gap-1 h-full w-full">
+<div class="flex-1 bg-primary/10 hover:bg-primary/30 transition-colors rounded-t h-1/4"></div>
+<div class="flex-1 bg-primary/10 hover:bg-primary/30 transition-colors rounded-t h-2/4"></div>
+<div class="flex-1 bg-primary/10 hover:bg-primary/30 transition-colors rounded-t h-3/4"></div>
+<div class="flex-1 bg-primary/10 hover:bg-primary/30 transition-colors rounded-t h-2/4"></div>
+<div class="flex-1 bg-primary/10 hover:bg-primary/30 transition-colors rounded-t h-4/5"></div>
+<div class="flex-1 bg-primary/10 hover:bg-primary/30 transition-colors rounded-t h-1/2"></div>
+<div class="flex-1 bg-primary hover:bg-primary/90 transition-colors rounded-t h-full"></div>
+<div class="flex-1 bg-primary/10 hover:bg-primary/30 transition-colors rounded-t h-2/3"></div>
+<div class="flex-1 bg-primary/10 hover:bg-primary/30 transition-colors rounded-t h-3/4"></div>
+<div class="flex-1 bg-primary/10 hover:bg-primary/30 transition-colors rounded-t h-1/3"></div>
+<div class="flex-1 bg-primary/10 hover:bg-primary/30 transition-colors rounded-t h-2/5"></div>
+<div class="flex-1 bg-primary/10 hover:bg-primary/30 transition-colors rounded-t h-1/2"></div>
+</div>
+<div class="flex justify-between mt-4 text-xs text-slate-500">
+<span>1 May</span>
+<span>10 May</span>
+<span>20 May</span>
+<span>30 May</span>
+</div>
+</div>
+</div>
+<!-- Recent Enquiries -->
+<div class="space-y-4">
+<h3 class="text-lg font-bold">Recent Enquiries</h3>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
+<div class="divide-y divide-slate-100 dark:divide-slate-800">
+<div class="p-4 flex items-center gap-3 hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer transition-colors">
+<div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-primary font-bold">JD</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold truncate">John Doe</p>
+<p class="text-xs text-slate-500 truncate">Skyline PG - Single Room</p>
+</div>
+<p class="text-[10px] text-slate-400 whitespace-nowrap">2 hrs ago</p>
+</div>
+<div class="p-4 flex items-center gap-3 hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer transition-colors">
+<div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-primary font-bold">SR</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold truncate">Sarah Rain</p>
+<p class="text-xs text-slate-500 truncate">The Nest - Double Sharing</p>
+</div>
+<p class="text-[10px] text-slate-400 whitespace-nowrap">5 hrs ago</p>
+</div>
+<div class="p-4 flex items-center gap-3 hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer transition-colors">
+<div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-primary font-bold">MK</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold truncate">Mike Ross</p>
+<p class="text-xs text-slate-500 truncate">Luxury Suits PG</p>
+</div>
+<p class="text-[10px] text-slate-400 whitespace-nowrap">Yesterday</p>
+</div>
+</div>
+<button class="w-full p-3 text-sm text-primary font-medium border-t border-slate-100 dark:divide-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">View All Enquiries</button>
+</div>
+</div>
+</div>
+<!-- Active Listings Grid -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-bold">Active Listings</h3>
+<a class="text-primary text-sm font-semibold hover:underline" href="#">View all</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- PG Card 1 -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm group">
+<div class="relative h-48 bg-slate-100 dark:bg-slate-800">
+<img class="w-full h-full object-cover" data-alt="Modern minimalist studio apartment room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0hbqS8mV5NCEnS5hRbDOb2KfjyXHCLAlBzosqS36mg4E3CCgucTYdcASX3Ur7GszD-vZFkBN8SsyqsUnwa4vz8pUwWCPWvdkttRu1nv8PihcvsN6WMLf7yt4i_XMMKxmfNQflReXce70ydq0ZobzTStTa5Tj8xfAlksIQYe1qh7vfZ0R2b8Vj2DWJ5ATqvs4Vm-VNMui87qKBYLNnBr-l_cJ0j9bPw6eUYpT2kE2yDRq25HRycSab6dHsb7h5fKpi7RWG7lRr5Z3B"/>
+<div class="absolute top-3 right-3 bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Active</div>
+</div>
+<div class="p-5">
+<h4 class="font-bold text-lg">Skyline Premium PG</h4>
+<p class="text-sm text-slate-500 mb-4">Indiranagar, Bangalore</p>
+<div class="flex items-center gap-2 mb-6 text-xs font-medium">
+<span class="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Single Room</span>
+<span class="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Wi-Fi</span>
+<span class="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Laundry</span>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<button class="flex items-center justify-center py-2 bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white rounded transition-colors" title="Edit">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="flex items-center justify-center py-2 bg-slate-100 dark:bg-slate-800 hover:bg-red-500 hover:text-white rounded transition-colors" title="Delete">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+<button class="flex items-center justify-center py-2 bg-slate-100 dark:bg-slate-800 hover:bg-amber-500 hover:text-white rounded transition-colors text-[10px] font-bold" title="Mark as Full">
+                                        FULL
+                                    </button>
+</div>
+</div>
+</div>
+<!-- PG Card 2 -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+<div class="relative h-48 bg-slate-100 dark:bg-slate-800">
+<img class="w-full h-full object-cover" data-alt="Cozy well lit PG sharing room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIBkwOFUWAQrsaUMDretZAv7g5QIvB8gjoDqX9QvVpSR2BwVMyajZBqqgEWcBJDlPPUGio9QCe1-D4qCgwPVMF1t4bGH_eoLE9l8C-warn1uwPp8O4f0Mln3mjAu7mk6f73MaLqSq0zC0VbIhatzWZhBn6GnMLV5MkSHFbbj64UA6AZ2ZhiBAbMhRzmb7t8WwKoRb0oUQFEb_khyBVu1lZwo7Bj7gDO-efnNTmk6a2Bi98OVAVSRwy-MGDns-XaAJ37GkiCXpQCEjr"/>
+<div class="absolute top-3 right-3 bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Active</div>
+</div>
+<div class="p-5">
+<h4 class="font-bold text-lg">The Nest PG</h4>
+<p class="text-sm text-slate-500 mb-4">Koramangala, Bangalore</p>
+<div class="flex items-center gap-2 mb-6 text-xs font-medium">
+<span class="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Double Sharing</span>
+<span class="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">AC</span>
+<span class="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Meals</span>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<button class="flex items-center justify-center py-2 bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white rounded transition-colors" title="Edit">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="flex items-center justify-center py-2 bg-slate-100 dark:bg-slate-800 hover:bg-red-500 hover:text-white rounded transition-colors" title="Delete">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+<button class="flex items-center justify-center py-2 bg-slate-100 dark:bg-slate-800 hover:bg-amber-500 hover:text-white rounded transition-colors text-[10px] font-bold" title="Mark as Full">
+                                        FULL
+                                    </button>
+</div>
+</div>
+</div>
+<!-- PG Card 3 -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+<div class="relative h-48 bg-slate-100 dark:bg-slate-800">
+<img class="w-full h-full object-cover" data-alt="Luxury serviced hostel room with desk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-s2YDMSUHEEXnN1bc_y8JAhUDb-LbJYpGPPUQ0RVn4ZIOa5f9jqC5vWZdXN6_eYX1-pGQCJLpO5DnPNw79jjdTLVGdAj9kYo9K50OAoodLiaqxabNrn74zeAiQh2k8xocp5v93Bi0oRHatJs5seziGbW_M-r40daManFFLGSAQv7C0K4bvX2-D20VtZTXT9y0g0_-PZgauTqqgJIAaCt28bwMtb02rLjx9ck2vclmipa-FwMsLDNYAZQZms1px89YqEySUPnfQf6_"/>
+<div class="absolute top-3 right-3 bg-amber-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Waitlist</div>
+</div>
+<div class="p-5">
+<h4 class="font-bold text-lg">Harmony Executive Stay</h4>
+<p class="text-sm text-slate-500 mb-4">HSR Layout, Bangalore</p>
+<div class="flex items-center gap-2 mb-6 text-xs font-medium">
+<span class="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Premium</span>
+<span class="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Gym</span>
+<span class="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Power Backup</span>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<button class="flex items-center justify-center py-2 bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white rounded transition-colors" title="Edit">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="flex items-center justify-center py-2 bg-slate-100 dark:bg-slate-800 hover:bg-red-500 hover:text-white rounded transition-colors" title="Delete">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+<button class="flex items-center justify-center py-2 bg-slate-100 dark:bg-slate-800 hover:bg-amber-500 hover:text-white rounded transition-colors text-[10px] font-bold" title="Mark as Full">
+                                        FULL
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+</body></html>

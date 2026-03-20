@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StayNest Support Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen flex flex-col">
+<!-- Header -->
+<header class="sticky top-0 z-10 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
+<span class="material-symbols-outlined block">menu</span>
+</button>
+<h1 class="text-xl font-bold tracking-tight">Support Tickets</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg relative">
+<span class="material-symbols-outlined block">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden border border-primary/20">
+<img alt="Admin Profile" class="w-full h-full object-cover" data-alt="Close up of a professional male face profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKq2E465KCJ7dn7Wzhps-e1iyv7LYx6R5fdd7WyBm7WPHZuE2ON7kBl4EYkLXl3qlRskUygdRHLcbhOPpDvv9PAFCGerlmU1cC-0Yd4sTnx6V6zkQXEmxtz8ajIzjD_tHRPex_tOe0wr9SYbrVgmuVTlsZu4oO0ThXg2SJAW0-_N0aaya7g8aDdo_xpgGEVcs5aW2ZYsrN0Mt62pA6DWpfhRYjzYN3Fbt_ZQNk6NWnVSdeOWFN1fQK02GBFOm-FEMwSNOET_ZigOI"/>
+</div>
+</div>
+</div>
+<!-- Search & Quick Filters -->
+<div class="px-4 pb-4 space-y-3">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-xl focus:ring-2 focus:ring-primary text-sm" placeholder="Search tickets, users, or issues..." type="text"/>
+</div>
+<div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+<button class="flex items-center gap-1.5 px-3 py-1.5 bg-primary text-white rounded-lg text-sm font-medium shrink-0">
+<span>All</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-lg text-sm font-medium shrink-0">
+<span>Open</span>
+<span class="bg-slate-200 dark:bg-slate-700 px-1.5 rounded text-[10px]">12</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-lg text-sm font-medium shrink-0">
+<span>Resolved</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-lg text-sm font-medium shrink-0">
+<span class="material-symbols-outlined text-sm">tune</span>
+<span>Filters</span>
+</button>
+</div>
+</div>
+<!-- Tabs -->
+<div class="flex border-b border-slate-200 dark:border-slate-800 px-4">
+<button class="flex-1 py-3 text-sm font-bold border-b-2 border-primary text-primary">All Tickets</button>
+<button class="flex-1 py-3 text-sm font-bold border-b-2 border-transparent text-slate-500">Unassigned</button>
+<button class="flex-1 py-3 text-sm font-bold border-b-2 border-transparent text-slate-500">My Tickets</button>
+</div>
+</header>
+<!-- Content Area -->
+<main class="flex-1 overflow-y-auto pb-24">
+<!-- Ticket List -->
+<div class="divide-y divide-slate-100 dark:divide-slate-800">
+<!-- Ticket Item 1 -->
+<div class="p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="flex justify-between items-start mb-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-xs font-bold text-primary uppercase tracking-wider">New</span>
+</div>
+<span class="text-[11px] text-slate-400 font-medium">12 mins ago</span>
+</div>
+<div class="flex gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-200 shrink-0 overflow-hidden">
+<img alt="Sender" class="w-full h-full object-cover" data-alt="Portrait of a smiling young woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdG8p2DbaU_RMwnYvrkEtJjusN1OigWMpKAaWRCyd0ojp06Kc1XAgi0u2-sdg5RnDctrCegFqVJLTYIphHjOWZ4Yf_cp9M-5PI4iXbKRSZfIapIOWxiYzwhLVSi0gXckpA2MV2cTnOJE73GWYVtiCFFgRwPobXroF7UaVcu4bpopbIEsZsW8CNyqq5qoVZ7kDVNHSTGzBoI_RrHXbY8eh0lAYthVhjkfjIA4RfSCSPTnz94yquNnYaYi7RxnmMiRdsrvBF0fbIWl4"/>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="text-sm font-bold truncate">Sarah Jenkins (Vendor)</h3>
+<p class="text-sm font-medium text-slate-800 dark:text-slate-200 mb-1">Payment Issue: Payout delayed</p>
+<p class="text-xs text-slate-500 line-clamp-1">Hi, I haven't received my payout for the last three bookings at 'Sunset Villa'...</p>
+</div>
+</div>
+<div class="flex gap-2 mt-4">
+<button class="flex-1 py-2 bg-primary text-white rounded-lg text-xs font-bold">Reply</button>
+<button class="flex-1 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-bold">View Ticket</button>
+</div>
+</div>
+<!-- Ticket Item 2 -->
+<div class="p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="flex justify-between items-start mb-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+<span class="text-xs font-bold text-amber-500 uppercase tracking-wider">In Progress</span>
+</div>
+<span class="text-[11px] text-slate-400 font-medium">2 hours ago</span>
+</div>
+<div class="flex gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-200 shrink-0 overflow-hidden">
+<img alt="Sender" class="w-full h-full object-cover" data-alt="Portrait of a man with a beard" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgad_zcWjIeCjNQPsuN6M4QvFLzHaNv3RSnAgNIR6GnG0zVqCAU7ioygr5hCgC1ItYHUYkt-wZADuz1ntHqNAKargWJxlWlFGtGIPpKwvkdvoGvnOmf6CvJzTjZuuPM2lgCYj1X4FDInXCRLc2m-GdLCBAj2u-KdA8EIWg8nqoFTdPQ9QZ-IV0NM3gil2uPfLZH_Chu0AepNLLSZPD8XWedNjYsPwTAOaGZR59l1SSd4GPT5DXzk-yPvXkjwcoYBpOJm2l2G4bmA8"/>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="text-sm font-bold truncate">Marc Dupont (User)</h3>
+<p class="text-sm font-medium text-slate-800 dark:text-slate-200 mb-1">Listing Bug: Photos not uploading</p>
+<p class="text-xs text-slate-500 line-clamp-1">I've been trying to update my listing but the upload button seems broken on mobile...</p>
+</div>
+</div>
+<div class="flex gap-2 mt-4">
+<button class="flex-1 py-2 bg-primary text-white rounded-lg text-xs font-bold">Reply</button>
+<button class="flex-1 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-bold">View Ticket</button>
+</div>
+</div>
+<!-- Ticket Item 3 -->
+<div class="p-4 bg-slate-50/50 dark:bg-slate-800/20 opacity-75">
+<div class="flex justify-between items-start mb-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="text-xs font-bold text-emerald-500 uppercase tracking-wider">Resolved</span>
+</div>
+<span class="text-[11px] text-slate-400 font-medium">5 hours ago</span>
+</div>
+<div class="flex gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-200 shrink-0 overflow-hidden">
+<img alt="Sender" class="w-full h-full object-cover" data-alt="Portrait of a smiling professional woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlJewwSG8ZCbbj74z8SSTvPKiyfVLLTKq8duGXRqkDpJfeuszqAApJ5tTUvu2mpUDlHXDSILkOgJWl2UcsKSYeN6hyElP1D2VX7m-pGvl4pgVvT2CZtuHOHQkf98PC4DpZ-0L1LvSnLQ8Ui1vfZJNyHHiGO_Ij92oN04RTppZDKVnEES_-G09sbVva6_Qhi2WKW30tuzAOdcB7bbvkmp_lLFiBerNiEHnzZY1hcHdUBkBtSfK-e6D_7TkKtbvkayIl06FDDbSaIRI"/>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="text-sm font-bold truncate">Elena Rossi (Vendor)</h3>
+<p class="text-sm font-medium text-slate-800 dark:text-slate-200 mb-1">Account Support: Change email address</p>
+<p class="text-xs text-slate-500 line-clamp-1">Thank you for the help! The email has been successfully updated in my profile settings.</p>
+</div>
+</div>
+<div class="flex gap-2 mt-4">
+<button class="w-full py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-bold">Re-open Ticket</button>
+</div>
+</div>
+<!-- Ticket Item 4 -->
+<div class="p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="flex justify-between items-start mb-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-xs font-bold text-primary uppercase tracking-wider">New</span>
+</div>
+<span class="text-[11px] text-slate-400 font-medium">Yesterday</span>
+</div>
+<div class="flex gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-200 shrink-0 overflow-hidden">
+<img alt="Sender" class="w-full h-full object-cover" data-alt="Portrait of a young man smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZLLelRPm4OWVppZIpDNMkJNN3AOHilZGzRPKRJDb4M33uTE-VoosiQ2gEfxjdtFLhyk2C5CtIe8Kzp4gaSdi19IvaWT2aUt9UBVKrlvWpXS1EfxOrFszlPKBSutB6nYHTVfuOpprLbZnWI7lakbXmhb0NwrbKbFa4aND-cWYyPel9Rg28YKZ8obbmcLiTnPupMshR67n2Z6ndSnRtmSrI9p45cx0PZ645inz6YDJgpwl6_sJZK3z4gO7Oxr-nSPo1T5oeckXf0-g"/>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="text-sm font-bold truncate">James Wilson (User)</h3>
+<p class="text-sm font-medium text-slate-800 dark:text-slate-200 mb-1">Payment Issue: Double charge on booking</p>
+<p class="text-xs text-slate-500 line-clamp-1">I noticed two charges for the same booking ID #4421 on my credit card statement...</p>
+</div>
+</div>
+<div class="flex gap-2 mt-4">
+<button class="flex-1 py-2 bg-primary text-white rounded-lg text-xs font-bold">Reply</button>
+<button class="flex-1 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-bold">View Ticket</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 pb-safe">
+<div class="flex justify-around items-center px-2 py-2">
+<a class="flex flex-col items-center gap-1 p-2 text-primary" href="#">
+<span class="material-symbols-outlined fill-1">confirmation_number</span>
+<span class="text-[10px] font-bold">Tickets</span>
+</a>
+<a class="flex flex-col items-center gap-1 p-2 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] font-medium">Stats</span>
+</a>
+<a class="flex flex-col items-center gap-1 p-2 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px] font-medium">Users</span>
+</a>
+<a class="flex flex-col items-center gap-1 p-2 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-medium">Settings</span>
+</a>
+</div>
+</nav>
+<!-- Floating Action Button -->
+<button class="fixed right-4 bottom-20 w-14 h-14 bg-primary text-white rounded-full shadow-lg shadow-primary/30 flex items-center justify-center z-20">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</body></html>

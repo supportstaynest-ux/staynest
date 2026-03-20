@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StayNest - Payout History</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2ab4c0",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#121e20",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Work Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="flex min-h-screen">
+<!-- Sidebar Navigation -->
+<aside class="w-64 border-r border-primary/10 bg-white dark:bg-background-dark/50 flex flex-col fixed h-full">
+<div class="p-6 flex items-center gap-3">
+<div class="size-10 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined">home_work</span>
+</div>
+<div>
+<h1 class="text-xl font-bold text-slate-900 dark:text-white leading-none">StayNest</h1>
+<p class="text-xs text-primary font-medium uppercase tracking-wider">Host Panel</p>
+</div>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">location_city</span>
+<span class="text-sm font-medium">My Listings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">Leads</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-sm font-medium">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">card_membership</span>
+<span class="text-sm font-medium">Subscription</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-primary/10">
+<div class="flex items-center gap-3 p-2 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
+<div class="size-8 rounded-full bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">person</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-semibold truncate">Alex Johnson</p>
+<p class="text-[10px] text-slate-500 truncate">Premium Host</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-sm">logout</span>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 flex-1 p-8">
+<!-- Header -->
+<header class="flex justify-between items-center mb-8">
+<div>
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white">Payout History</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Manage and track your earnings and bank transfers.</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="pl-10 pr-4 py-2 rounded-xl border-none bg-white dark:bg-slate-800 shadow-sm text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Search transactions..." type="text"/>
+</div>
+<button class="size-10 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 shadow-sm border-none relative">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-300">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-800"></span>
+</button>
+<button class="border border-primary text-primary px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2 hover:bg-primary/5 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-sm">file_download</span> Download Annual Report
+</button><button class="bg-primary text-white px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-sm">download</span> Export CSV
+                    </button>
+</div>
+</header>
+<!-- Earnings Overview -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-primary/5">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2">Current Balance</p>
+<div class="flex items-end gap-2">
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white">$1,250.00</h3>
+<span class="text-emerald-500 text-xs font-bold mb-1 flex items-center"><span class="material-symbols-outlined text-sm">trending_up</span> 12%</span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-primary/5">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2">Total Payouts to Date</p>
+<div class="flex items-end gap-2">
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white">$15,420.00</h3>
+<span class="text-emerald-500 text-xs font-bold mb-1 flex items-center"><span class="material-symbols-outlined text-sm">trending_up</span> 5%</span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-primary/5">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2">Next Scheduled Payout</p>
+<div class="flex items-end gap-2">
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white">Oct 15, 2023</h3>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-primary/5">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2">Pending Earnings</p>
+<div class="flex items-end gap-2">
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white">$450.00</h3>
+<span class="text-slate-400 text-xs font-medium mb-1">Processing</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-8 mb-8">
+<!-- Earnings Trend Chart -->
+<div class="col-span-2 bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-primary/5">
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-bold text-slate-900 dark:text-white">Earnings Trend</h4>
+<select class="bg-slate-50 dark:bg-slate-700 border-none rounded-lg text-xs font-semibold px-3 py-1.5 focus:ring-1 focus:ring-primary">
+<option>Monthly</option>
+<option>Weekly</option>
+</select>
+</div>
+<div class="h-[220px] w-full relative">
+<!-- Abstract Chart Representation -->
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 500 200">
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#2ab4c0" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#2ab4c0" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,180 C50,160 100,170 150,120 C200,70 250,90 300,50 C350,10 400,40 450,20 L500,60 L500,200 L0,200 Z" fill="url(#chartGradient)"></path>
+<path d="M0,180 C50,160 100,170 150,120 C200,70 250,90 300,50 C350,10 400,40 450,20 L500,60" fill="none" stroke="#2ab4c0" stroke-linecap="round" stroke-width="3"></path>
+<!-- Data points -->
+<circle cx="150" cy="120" fill="#2ab4c0" r="4"></circle>
+<circle cx="300" cy="50" fill="#2ab4c0" r="4"></circle>
+<circle cx="450" cy="20" fill="#2ab4c0" r="4"></circle>
+</svg>
+<div class="flex justify-between mt-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">
+<span>May</span>
+<span>Jun</span>
+<span>Jul</span>
+<span>Aug</span>
+<span>Sep</span>
+<span>Oct</span>
+</div>
+</div>
+</div>
+<!-- Payout Settings Card -->
+<div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-primary/5 flex flex-col justify-between">
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-4">Payout Method</h4>
+<div class="p-4 rounded-xl border border-primary/20 bg-primary/5 flex items-start gap-4 mb-4">
+<div class="size-10 bg-white dark:bg-slate-700 rounded-lg flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary">account_balance</span>
+</div>
+<div>
+<p class="text-sm font-bold text-slate-900 dark:text-white">HDFC Bank Ltd</p>
+<p class="text-xs text-slate-500">**** 8842</p>
+<span class="inline-block mt-2 px-2 py-0.5 bg-primary/20 text-primary text-[10px] font-bold rounded uppercase">Primary</span>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between text-xs">
+<span class="text-slate-500">Processing Time</span>
+<span class="font-semibold">2-3 Business Days</span>
+</div>
+<div class="flex justify-between text-xs">
+<span class="text-slate-500">Min. Threshold</span>
+<span class="font-semibold">$50.00</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-2 border border-primary text-primary rounded-xl text-xs font-bold hover:bg-primary/5 transition-colors">
+                        Manage Payout Methods
+                    </button>
+</div>
+</div>
+<!-- Table Section -->
+<div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-primary/5 overflow-hidden">
+<!-- Filters Header -->
+<div class="p-6 border-b border-slate-100 dark:border-slate-700 flex flex-wrap items-center justify-between gap-4">
+<h4 class="font-bold text-slate-900 dark:text-white">Payout Transactions</h4>
+<div class="flex items-center gap-3">
+<div class="flex items-center bg-slate-50 dark:bg-slate-700 rounded-lg p-1">
+<button class="px-3 py-1.5 text-xs font-semibold bg-white dark:bg-slate-600 rounded shadow-sm">All Time</button>
+<button class="px-3 py-1.5 text-xs font-semibold text-slate-500 hover:text-slate-700">Last 3 Months</button>
+<button class="px-3 py-1.5 text-xs font-semibold text-slate-500 hover:text-slate-700">This Month</button>
+</div>
+<div class="h-6 w-px bg-slate-200 dark:bg-slate-600"></div>
+<button class="flex items-center gap-2 px-3 py-1.5 border border-slate-200 dark:border-slate-600 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-sm">filter_list</span> Status
+                        </button>
+<button class="flex items-center gap-2 px-3 py-1.5 border border-slate-200 dark:border-slate-600 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-sm">payments</span> Method
+                        </button>
+</div>
+</div>
+<!-- Table Content -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-700">
+<th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest">Payout ID</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest">Date</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest">Amount</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest">Status</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest">Method</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest text-right">Invoice</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-700">
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+<td class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">#PAY-99210</td>
+<td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">Oct 01, 2023</td>
+<td class="px-6 py-4 text-sm font-bold text-slate-900 dark:text-white">$420.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
+<span class="size-1.5 rounded-full bg-emerald-500"></span> Completed
+                                    </span>
+</td>
+<td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">Bank Transfer</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:text-primary/80">
+<span class="material-symbols-outlined">description</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+<td class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">#PAY-99185</td>
+<td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">Sep 15, 2023</td>
+<td class="px-6 py-4 text-sm font-bold text-slate-900 dark:text-white">$830.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
+<span class="size-1.5 rounded-full bg-emerald-500"></span> Completed
+                                    </span>
+</td>
+<td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">Bank Transfer</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:text-primary/80">
+<span class="material-symbols-outlined">description</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+<td class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">#PAY-99042</td>
+<td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">Sep 01, 2023</td>
+<td class="px-6 py-4 text-sm font-bold text-slate-900 dark:text-white">$1,150.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
+<span class="size-1.5 rounded-full bg-amber-500"></span> Pending
+                                    </span>
+</td>
+<td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">UPI (ID: alex@okaxis)</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-300 cursor-not-allowed">
+<span class="material-symbols-outlined">description</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+<td class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">#PAY-98751</td>
+<td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">Aug 15, 2023</td>
+<td class="px-6 py-4 text-sm font-bold text-slate-900 dark:text-white">$310.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400">
+<span class="size-1.5 rounded-full bg-red-500"></span> Failed
+                                    </span>
+</td>
+<td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">Bank Transfer</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:text-primary/80">
+<span class="material-symbols-outlined">description</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 border-t border-slate-100 dark:border-slate-700 flex items-center justify-between">
+<p class="text-xs text-slate-500">Showing 1 to 4 of 24 transactions</p>
+<div class="flex items-center gap-2">
+<button class="size-8 flex items-center justify-center rounded border border-slate-200 dark:border-slate-600 text-slate-400">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="size-8 flex items-center justify-center rounded bg-primary text-white text-xs font-bold">1</button>
+<button class="size-8 flex items-center justify-center rounded border border-slate-200 dark:border-slate-600 text-slate-500 text-xs font-bold">2</button>
+<button class="size-8 flex items-center justify-center rounded border border-slate-200 dark:border-slate-600 text-slate-500 text-xs font-bold">3</button>
+<button class="size-8 flex items-center justify-center rounded border border-slate-200 dark:border-slate-600 text-slate-400">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

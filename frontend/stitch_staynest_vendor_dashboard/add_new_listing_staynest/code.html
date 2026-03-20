@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2ab4c0",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#121e20",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Work Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-row overflow-x-hidden">
+<!-- Sidebar Navigation -->
+<aside class="hidden lg:flex flex-col w-72 border-r border-primary/10 bg-white dark:bg-background-dark p-6 sticky top-0 h-screen justify-between">
+<div class="flex flex-col gap-8">
+<div class="flex items-center gap-3">
+<div class="bg-primary size-10 rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">home_work</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-none">StayNest</h1>
+<p class="text-primary text-xs font-medium">Partner Dashboard</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<div class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">info</span>
+<p class="text-sm font-semibold">Basic Info</p>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-primary/5 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">location_on</span>
+<p class="text-sm font-medium">Location</p>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-primary/5 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">lists</span>
+<p class="text-sm font-medium">Facilities</p>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-primary/5 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">photo_camera</span>
+<p class="text-sm font-medium">Photos</p>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-primary/5 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">verified</span>
+<p class="text-sm font-medium">Review</p>
+</div>
+</nav>
+</div>
+<div class="flex flex-col gap-4">
+<div class="p-4 bg-primary/5 rounded-xl border border-primary/10">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs font-bold text-slate-500 uppercase">Progress</span>
+<span class="text-xs font-bold text-primary">20%</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-1/5"></div>
+</div>
+</div>
+<button class="flex w-full items-center justify-center rounded-lg h-12 bg-primary text-white text-sm font-bold shadow-sm hover:bg-primary/90 transition-colors">
+                    Save Draft
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0">
+<!-- Mobile Header (Visible on small screens) -->
+<header class="lg:hidden flex items-center justify-between p-4 bg-white dark:bg-background-dark border-b border-primary/10">
+<div class="flex items-center gap-2">
+<div class="bg-primary size-8 rounded flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm">home_work</span>
+</div>
+<span class="font-bold text-sm">StayNest</span>
+</div>
+<span class="material-symbols-outlined text-slate-600">menu</span>
+</header>
+<div class="max-w-4xl w-full mx-auto px-6 py-10 lg:py-16">
+<div class="mb-10">
+<h2 class="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-slate-100 mb-2">Tell us about your PG</h2>
+<p class="text-slate-500 dark:text-slate-400">Step 1 of 5: Provide the basic details to help students find your listing.</p>
+</div>
+<div class="space-y-8">
+<!-- Form Section: Listing Title -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Listing Title</label>
+<input class="w-full rounded-xl border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 focus:border-primary focus:ring-primary focus:ring-1 text-base" placeholder="e.g. Premium Single Room near Oxford University" type="text"/>
+</div>
+<!-- Form Section: Room Type & Pricing -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Room Type</label>
+<select class="w-full rounded-xl border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 focus:border-primary focus:ring-primary focus:ring-1 text-base">
+<option>Single Room</option>
+<option>Double Sharing</option>
+<option>Triple Sharing</option>
+<option>Entire Studio</option>
+</select>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Price per Month (USD)</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-medium">$</span>
+<input class="w-full rounded-xl border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 pl-8 pr-4 py-4 focus:border-primary focus:ring-primary focus:ring-1 text-base" placeholder="850" type="number"/>
+</div>
+</div>
+</div>
+<!-- Form Section: Description -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Description</label>
+<textarea class="w-full rounded-xl border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 focus:border-primary focus:ring-primary focus:ring-1 text-base" placeholder="Describe the room, atmosphere, and house rules..." rows="5"></textarea>
+</div>
+<!-- Form Section: Amenities (Quick Preview) -->
+<div class="pt-4">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300 block mb-4">Common Highlights</label>
+<div class="flex flex-wrap gap-3">
+<button class="px-4 py-2 rounded-full border border-primary bg-primary/10 text-primary text-sm font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">wifi</span> WiFi Included
+                            </button>
+<button class="px-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 text-sm font-medium flex items-center gap-2 hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-sm">restaurant</span> Food Available
+                            </button>
+<button class="px-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 text-sm font-medium flex items-center gap-2 hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-sm">ac_unit</span> Air Conditioning
+                            </button>
+<button class="px-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 text-sm font-medium flex items-center gap-2 hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-sm">local_laundry_service</span> Laundry
+                            </button>
+</div>
+</div>
+</div>
+<!-- Navigation Buttons -->
+<div class="mt-16 flex items-center justify-between border-t border-primary/10 pt-8">
+<button class="flex items-center gap-2 px-6 py-3 rounded-lg border border-slate-200 dark:border-slate-800 font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+                        Back
+                    </button>
+<button class="flex items-center gap-2 px-10 py-3 rounded-lg bg-primary text-white font-bold shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
+                        Save &amp; Next
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Footer for Desktop/App Context -->
+<footer class="mt-auto py-6 border-t border-primary/10 px-6 flex justify-between items-center text-xs text-slate-400">
+<p>© 2024 StayNest Inc. All rights reserved.</p>
+<div class="flex gap-4">
+<a class="hover:text-primary" href="#">Help Center</a>
+<a class="hover:text-primary" href="#">Privacy Policy</a>
+</div>
+</footer>
+</main>
+<!-- Right Preview/Info Panel (Optional/Contextual) -->
+<aside class="hidden xl:flex flex-col w-80 border-l border-primary/10 bg-white dark:bg-background-dark p-6 sticky top-0 h-screen overflow-y-auto">
+<h3 class="text-sm font-bold text-slate-900 dark:text-slate-100 mb-4">Listing Preview</h3>
+<div class="rounded-xl overflow-hidden border border-slate-100 dark:border-slate-800 shadow-sm bg-slate-50 dark:bg-slate-900/50">
+<div class="aspect-video bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-400 relative">
+<img class="w-full h-full object-cover" data-alt="Modern minimalist bedroom interior design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUhoM9Bc7r0oQpz-0q2O1Hus5S9IcqNJekKcQylNhSuAVAMt5rFIpI6x5u54XG4DsarOF04bTrtt-EoZl8d1SFZbYVjZX7xm3u4gUDPfyCZ5mHBkNyise7SPw8GaTXsuXgKKa9dz5QgJ9sfUInj2jKyeMZ7fGmkwfNT3OOlj5lcDVhzG6IczRW99zekhZWjO6x0xzn1GQaYozX64Ke2Dr_JP-moR5Z02O4qw9X-rRn2i-B2tUr6Iea6kVsRDnejt7RixyAMx_Sclzw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+<div class="absolute bottom-3 left-3 text-white">
+<p class="text-[10px] font-bold uppercase tracking-wider">Starting at</p>
+<p class="text-sm font-bold">$850/mo</p>
+</div>
+</div>
+<div class="p-4">
+<div class="h-4 bg-slate-200 dark:bg-slate-700 rounded w-3/4 mb-2"></div>
+<div class="h-3 bg-slate-200 dark:bg-slate-700 rounded w-full mb-1"></div>
+<div class="h-3 bg-slate-200 dark:bg-slate-700 rounded w-1/2 mb-4"></div>
+<div class="flex gap-2">
+<div class="h-6 w-12 bg-primary/20 rounded-full"></div>
+<div class="h-6 w-12 bg-primary/20 rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 space-y-4">
+<h4 class="text-xs font-bold uppercase text-slate-500">Pro Tips</h4>
+<div class="flex gap-3 items-start">
+<span class="material-symbols-outlined text-primary">lightbulb</span>
+<p class="text-xs text-slate-500 leading-relaxed">Listings with clear titles and detailed descriptions get 40% more inquiries from students.</p>
+</div>
+</div>
+</aside>
+</div>
+</body></html>

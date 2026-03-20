@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#13b6ec",
+              "background-light": "#f6f8f8",
+              "background-dark": "#101d22",
+            },
+            fontFamily: {
+              "display": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<title>StayNest - Find Your Perfect PG</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex min-h-screen w-full flex-col">
+<!-- Header / Navigation -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex h-16 items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">home_pin</span>
+<h2 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">StayNest</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Home</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Explore PGs</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">List Your PG</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Safety Tips</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">FAQ</a>
+<button class="bg-primary text-white px-5 py-2 rounded-lg text-sm font-bold hover:bg-primary/90 transition-all">Login/Signup</button>
+</nav>
+</div>
+</div>
+</header>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="relative h-[500px] flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-b from-black/60 to-black/30 z-10"></div>
+<img class="w-full h-full object-cover" data-alt="Modern minimal student hostel room interior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAat67ZzCwIhZOYoAkm0LvXDScsAMgfpwmtrWI2Kd-bMP5_BOhitrb0yWJPlPat7DnbHIOoO9Wrg3wTBaYbJou7iHapLfM3vjh1lWySe_npW_TCBLjczbRrTk1AoAN-tYH0DqkYszyyNAiMrd8WFlQne-7SKTVkQeCZdUWzOdWrAYl1dxj7KwJ3t468Hgvt3gRRxprLVQuDBbKqbB2m5p20RE8vnOWCPj_UcWzHdZtqSbiNQEibhCvZ4BGS5r5mfLmdZfTeadslZ-MG"/>
+</div>
+<div class="relative z-20 w-full max-w-4xl px-4 text-center">
+<h1 class="text-4xl md:text-6xl font-black text-white mb-6 drop-shadow-lg">Find Your Perfect PG Stay</h1>
+<p class="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto">Premium living spaces for students and working professionals across India.</p>
+<div class="relative max-w-2xl mx-auto">
+<div class="flex items-center bg-white dark:bg-slate-900 rounded-xl p-2 shadow-2xl">
+<span class="material-symbols-outlined text-slate-400 px-3">search</span>
+<input class="w-full border-none focus:ring-0 bg-transparent text-slate-900 dark:text-white py-3" placeholder="Search city, area, college, or office" type="text"/>
+<button class="bg-primary text-white px-8 py-3 rounded-lg font-bold hover:brightness-110 transition-all">Search</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Filters Section -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-30">
+<div class="bg-white dark:bg-slate-900 shadow-lg rounded-xl p-4 flex flex-wrap gap-3 items-center border border-slate-200 dark:border-slate-800">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest mr-2">Quick Filters:</span>
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm font-medium hover:bg-primary/10 hover:text-primary transition-all">
+                        Budget <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm font-medium hover:bg-primary/10 hover:text-primary transition-all">
+                        Single Room
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm font-medium hover:bg-primary/10 hover:text-primary transition-all">
+                        Double Sharing
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm font-medium hover:bg-primary/10 hover:text-primary transition-all">
+                        AC
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm font-medium hover:bg-primary/10 hover:text-primary transition-all">
+                        Food Included
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm font-medium hover:bg-primary/10 hover:text-primary transition-all">
+                        Near College
+                    </button>
+</div>
+</div>
+<!-- Popular Cities -->
+<section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-end justify-between mb-8">
+<div>
+<h2 class="text-3xl font-bold">Popular Cities</h2>
+<p class="text-slate-500 dark:text-slate-400 mt-2">Find stays in top educational and tech hubs.</p>
+</div>
+<a class="text-primary font-semibold hover:underline flex items-center gap-1" href="#">View All <span class="material-symbols-outlined">arrow_forward</span></a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Lucknow -->
+<div class="group relative overflow-hidden rounded-xl h-64 shadow-md">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Bara Imambara architecture Lucknow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcSX5MjXeveAs0UjYQC7hqFWujJ8QXHrbh9BYKzU4JT8eg6oo4uvKbSwG9AJzkfWcFCkB5wnue9bHkO0Ev2L8vaD-r5E_PF6-98Sugtlr9bBSneh5dR-xidXJg93wAjfVMV0JCKtp4qS_I1v2qTvl61sGyQDSVeFZZDDccS99T4I_-LQBfbRYqQl4XLY32mdhv8JYBrgOzxq2OpLnIFoeRsdwzbtctSDJymyaIAB_9AZ4F4L69S9CPmSV8rhSkBl3YVOSzT8upETpz"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6">
+<h3 class="text-white text-2xl font-bold">Lucknow</h3>
+<div class="flex justify-between items-center mt-2">
+<span class="text-white/80 text-sm">240+ PGs available</span>
+<button class="bg-primary/20 backdrop-blur-md text-white border border-white/30 px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-primary transition-colors">Explore</button>
+</div>
+</div>
+</div>
+<!-- Delhi -->
+<div class="group relative overflow-hidden rounded-xl h-64 shadow-md">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="India Gate monument Delhi" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRrMVCCY1LCrTPfgW-ijfM5S2y5TIPIzG97Bj3MWYTIKghv53M3B68Hn3xIGT4tQeMw0YzJ72wpNbICh9B4Sldeb14g7J7jJ7o97n1LYfldeeD7wS7I3kTeVnPyDXGLo29XcrGAf_CkjB2vzBtHkFWnKerGXVlBcIVp7BNdtGUyWTChkjXcyVoK07qd6WteC6Wpq8Dmv07sEQgV-0SjRoWa0gtjXok7HEbryh-F6KMuErm2xVK14kl5fA3oUhOqyfVR4wUFM4rNiLt"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6">
+<h3 class="text-white text-2xl font-bold">Delhi</h3>
+<div class="flex justify-between items-center mt-2">
+<span class="text-white/80 text-sm">850+ PGs available</span>
+<button class="bg-primary/20 backdrop-blur-md text-white border border-white/30 px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-primary transition-colors">Explore</button>
+</div>
+</div>
+</div>
+<!-- Prayagraj -->
+<div class="group relative overflow-hidden rounded-xl h-64 shadow-md">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Ganges river sunset Prayagraj" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcvr4N3dnDgFYyMMCwtmOT70Ur3XSxGbmQI-l34YSkVrQEVWnjl1JqwWrD9HqNSBkkXHpQdhZScz-u0ikJtT2uhCxJgpR2mgsMvuHqd3D-kCbYQLWTQQ68enIvEKFI9gjFWj0kHWBdnuWvyiakNLdbMXTcDixT6bDLfXU8ruO5aMSeIXxqeDn_fMQ371N-jdKaThYU8yFr6j5E0cjeMpsJUsenUvzoJtPwxWfzRBdE35NcB2kEQldhFwMsfJisDwTSjCjJHfz2o0QM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6">
+<h3 class="text-white text-2xl font-bold">Prayagraj</h3>
+<div class="flex justify-between items-center mt-2">
+<span class="text-white/80 text-sm">120+ PGs available</span>
+<button class="bg-primary/20 backdrop-blur-md text-white border border-white/30 px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-primary transition-colors">Explore</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured PG Listings -->
+<section class="py-16 bg-slate-50 dark:bg-slate-900/50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<h2 class="text-3xl font-bold mb-8">Featured PG Listings</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Listing Card 1 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-200 dark:border-slate-800 flex flex-col">
+<div class="relative h-56 overflow-hidden group">
+<img class="w-full h-full object-cover" data-alt="Spacious twin sharing room with balcony" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4H1AGKpxCOsGVMyS79GU2Pb3H1Yqz4jrAWBlWweaXIEHB_Vy9OlKE8bR3HPpEqhjmNKoadESiPbTMOEcX0VXqOmIh-RZ9iO8fDdr8Mi66Gje2TgWyhr23_Svwfc-0kBKTU4I5v-nCFA3W73h1j2BQu2L9qNwQeD-k4HYKkntn7H5ZgeA0dNrTR2VCbERD3ZgHRYEuXpKWHsd8yBRc_UijiYxOe1cjjsaXWJvDAcmSf0G-y4qQpbreHhhbF282-x_LznhD4F9KoWgB"/>
+<button class="absolute top-4 right-4 bg-white/90 p-2 rounded-full text-slate-400 hover:text-red-500 shadow-md">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<div class="absolute bottom-4 left-4 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">TOP RATED</div>
+</div>
+<div class="p-5 flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold">Skyline Luxury PG</h3>
+<div class="flex items-center gap-1 text-yellow-500">
+<span class="material-symbols-outlined text-sm fill-current">star</span>
+<span class="text-sm font-bold text-slate-700 dark:text-slate-300">4.8</span>
+</div>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-sm">location_on</span> Hitech City, Lucknow
+                                </p>
+<div class="flex gap-3 mb-4">
+<div class="flex flex-col items-center p-2 bg-slate-50 dark:bg-slate-800 rounded-lg flex-1">
+<span class="material-symbols-outlined text-primary text-sm">wifi</span>
+<span class="text-[10px] uppercase font-bold text-slate-400">WiFi</span>
+</div>
+<div class="flex flex-col items-center p-2 bg-slate-50 dark:bg-slate-800 rounded-lg flex-1">
+<span class="material-symbols-outlined text-primary text-sm">ac_unit</span>
+<span class="text-[10px] uppercase font-bold text-slate-400">AC</span>
+</div>
+<div class="flex flex-col items-center p-2 bg-slate-50 dark:bg-slate-800 rounded-lg flex-1">
+<span class="material-symbols-outlined text-primary text-sm">restaurant</span>
+<span class="text-[10px] uppercase font-bold text-slate-400">Food</span>
+</div>
+<div class="flex flex-col items-center p-2 bg-slate-50 dark:bg-slate-800 rounded-lg flex-1">
+<span class="material-symbols-outlined text-primary text-sm">local_parking</span>
+<span class="text-[10px] uppercase font-bold text-slate-400">Park</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+<div>
+<p class="text-slate-400 text-xs font-medium">Starting at</p>
+<p class="text-xl font-black text-slate-900 dark:text-white">₹8,500<span class="text-sm font-normal text-slate-500">/mo</span></p>
+</div>
+<div class="flex items-center gap-3">
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="text-xs text-slate-500">Compare</span>
+</label>
+<button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold shadow-sm">Details</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Listing Card 2 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-200 dark:border-slate-800 flex flex-col">
+<div class="relative h-56 overflow-hidden group">
+<img class="w-full h-full object-cover" data-alt="Cozy single bedroom with desk and window" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9i4IyVfd7k8ov0A7Ab5iVXzg1C-CLRMjkQlAms-3JKG6c3tDCmZrMukTHoO7nTARCvJWhL_yfZ00Awf_tnenjlCQ99ITJzApL3cGDLO-1lzpvJGrnvmy8mBB3i1B8Tg2EZz869QCEXv2786q7Lr7GrDlM1ER0DjDBtX_Cs2qh0unM_SafLZ-hASJebELk33nadKSVdJMazXVEz-A8Ujyk3zWYKuZh7JHY-_YXr3ibh8UanhBPc_K82LVmzcQQo7NGB-dq-GDtepPk"/>
+<button class="absolute top-4 right-4 bg-white/90 p-2 rounded-full text-slate-400 hover:text-red-500 shadow-md">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+<div class="p-5 flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold">The Green Villa</h3>
+<div class="flex items-center gap-1 text-yellow-500">
+<span class="material-symbols-outlined text-sm fill-current">star</span>
+<span class="text-sm font-bold text-slate-700 dark:text-slate-300">4.5</span>
+</div>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-sm">location_on</span> Malviya Nagar, Delhi
+                                </p>
+<div class="flex gap-3 mb-4">
+<div class="flex flex-col items-center p-2 bg-slate-50 dark:bg-slate-800 rounded-lg flex-1">
+<span class="material-symbols-outlined text-primary text-sm">wifi</span>
+<span class="text-[10px] uppercase font-bold text-slate-400">WiFi</span>
+</div>
+<div class="flex flex-col items-center p-2 bg-slate-50 dark:bg-slate-800 rounded-lg flex-1">
+<span class="material-symbols-outlined text-primary text-sm">restaurant</span>
+<span class="text-[10px] uppercase font-bold text-slate-400">Food</span>
+</div>
+<div class="flex flex-col items-center p-2 bg-slate-50 dark:bg-slate-800 rounded-lg flex-1">
+<span class="material-symbols-outlined text-primary text-sm">local_laundry_service</span>
+<span class="text-[10px] uppercase font-bold text-slate-400">Wash</span>
+</div>
+<div class="flex flex-col items-center p-2 bg-slate-50 dark:bg-slate-800 rounded-lg flex-1">
+<span class="material-symbols-outlined text-primary text-sm">security</span>
+<span class="text-[10px] uppercase font-bold text-slate-400">Safe</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+<div>
+<p class="text-slate-400 text-xs font-medium">Starting at</p>
+<p class="text-xl font-black text-slate-900 dark:text-white">₹12,000<span class="text-sm font-normal text-slate-500">/mo</span></p>
+</div>
+<div class="flex items-center gap-3">
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="text-xs text-slate-500">Compare</span>
+</label>
+<button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold shadow-sm">Details</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Listing Card 3 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-200 dark:border-slate-800 flex flex-col">
+<div class="relative h-56 overflow-hidden group">
+<img class="w-full h-full object-cover" data-alt="Modern minimalist studio room setup" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVu8nDU7s9jE26YdXaV43La-OifJaQvRBEcIQMi0CTfKlwKPb76gdzbEMsEAjl7LsRgH4xFkvoj9XjVQPdpKLLM9vINpa3dPQnEhH0T_gLOyhdfP5lm1auJJ8RdxNblCCPViGTmuJD2fNOuHx2nMu3akrOS7_Dk4okb7Ks1sjOWm-r-833PrWVY1ZbQ8gx8IxigeB7190vJ6k3ETXYEhdqxU71tfGndVZXNqufAO1h8hTmkB2u8TtU_LdkYRYM3KAKEfDEKjI2dgoQ"/>
+<button class="absolute top-4 right-4 bg-white/90 p-2 rounded-full text-slate-400 hover:text-red-500 shadow-md">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<div class="absolute top-4 left-4 bg-green-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">NEW PROPERTY</div>
+</div>
+<div class="p-5 flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold">Riverview Residency</h3>
+<div class="flex items-center gap-1 text-yellow-500">
+<span class="material-symbols-outlined text-sm fill-current">star</span>
+<span class="text-sm font-bold text-slate-700 dark:text-slate-300">4.2</span>
+</div>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-sm">location_on</span> Civil Lines, Prayagraj
+                                </p>
+<div class="flex gap-3 mb-4">
+<div class="flex flex-col items-center p-2 bg-slate-50 dark:bg-slate-800 rounded-lg flex-1">
+<span class="material-symbols-outlined text-primary text-sm">wifi</span>
+<span class="text-[10px] uppercase font-bold text-slate-400">WiFi</span>
+</div>
+<div class="flex flex-col items-center p-2 bg-slate-50 dark:bg-slate-800 rounded-lg flex-1">
+<span class="material-symbols-outlined text-primary text-sm">ac_unit</span>
+<span class="text-[10px] uppercase font-bold text-slate-400">AC</span>
+</div>
+<div class="flex flex-col items-center p-2 bg-slate-50 dark:bg-slate-800 rounded-lg flex-1">
+<span class="material-symbols-outlined text-primary text-sm">tv</span>
+<span class="text-[10px] uppercase font-bold text-slate-400">TV</span>
+</div>
+<div class="flex flex-col items-center p-2 bg-slate-50 dark:bg-slate-800 rounded-lg flex-1">
+<span class="material-symbols-outlined text-primary text-sm">cleaning_services</span>
+<span class="text-[10px] uppercase font-bold text-slate-400">Clean</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+<div>
+<p class="text-slate-400 text-xs font-medium">Starting at</p>
+<p class="text-xl font-black text-slate-900 dark:text-white">₹6,000<span class="text-sm font-normal text-slate-500">/mo</span></p>
+</div>
+<div class="flex items-center gap-3">
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="text-xs text-slate-500">Compare</span>
+</label>
+<button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold shadow-sm">Details</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Why StayNest Section -->
+<section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-black">Why Choose StayNest?</h2>
+<p class="text-slate-500 dark:text-slate-400 mt-4 max-w-2xl mx-auto">We redefine the way students and professionals find and book their living spaces.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="flex flex-col items-center text-center group">
+<div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-3xl text-primary group-hover:text-white transition-colors">verified_user</span>
+</div>
+<h3 class="text-xl font-bold mb-3">Verified Listings</h3>
+<p class="text-slate-500 dark:text-slate-400">Every property on StayNest is personally visited and verified by our field officers to ensure 100% authenticity.</p>
+</div>
+<div class="flex flex-col items-center text-center group">
+<div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-3xl text-primary group-hover:text-white transition-colors">search_check</span>
+</div>
+<h3 class="text-xl font-bold mb-3">Easy Search</h3>
+<p class="text-slate-500 dark:text-slate-400">Advanced filters help you find rooms based on your budget, preferred area, and necessary amenities in seconds.</p>
+</div>
+<div class="flex flex-col items-center text-center group">
+<div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-3xl text-primary group-hover:text-white transition-colors">contact_support</span>
+</div>
+<h3 class="text-xl font-bold mb-3">Secure Contact</h3>
+<p class="text-slate-500 dark:text-slate-400">Communicate directly with PG owners through our secure messaging platform without sharing personal details early.</p>
+</div>
+</div>
+</section>
+<!-- Call to Action Banner -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+<div class="bg-primary rounded-3xl p-8 md:p-16 flex flex-col md:flex-row items-center justify-between relative overflow-hidden">
+<div class="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
+<div class="relative z-10 max-w-xl text-center md:text-left mb-8 md:mb-0">
+<h2 class="text-3xl md:text-5xl font-black text-white mb-4">Are you a PG Owner?</h2>
+<p class="text-white/80 text-lg">List your property with us and reach thousands of potential tenants daily. No middlemen, no hassle.</p>
+</div>
+<button class="relative z-10 bg-white text-primary px-10 py-5 rounded-2xl text-xl font-black hover:bg-slate-50 transition-all shadow-xl">List Your PG</button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-900 text-slate-400 py-16">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12 border-b border-slate-800 pb-12">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 text-white mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">home_pin</span>
+<h2 class="text-xl font-bold tracking-tight">StayNest</h2>
+</div>
+<p class="text-sm leading-relaxed mb-6">Simplifying accommodation for thousands of students and professionals. Find your second home with ease.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#"><span class="material-symbols-outlined text-lg">language</span></a>
+<a class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#"><span class="material-symbols-outlined text-lg">public</span></a>
+<a class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#"><span class="material-symbols-outlined text-lg">alternate_email</span></a>
+</div>
+</div>
+<div>
+<h4 class="text-white font-bold mb-6">Company</h4>
+<ul class="space-y-4 text-sm">
+<li><a class="hover:text-primary transition-colors" href="#">About Us</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Career</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Blog</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-bold mb-6">Support</h4>
+<ul class="space-y-4 text-sm">
+<li><a class="hover:text-primary transition-colors" href="#">Help Center</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Safety Tips</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-bold mb-6">Contact Us</h4>
+<ul class="space-y-4 text-sm">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">mail</span>
+<span>support@staynest.com</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">phone</span>
+<span>+91 (800) 123-4567</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<span>123 Tech Park, Hitech City,<br/>Lucknow, UP 226010</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-xs">© 2024 StayNest Accommodation Services Pvt Ltd. All rights reserved.</p>
+<div class="flex gap-6 text-xs">
+<a class="hover:text-white" href="#">Privacy</a>
+<a class="hover:text-white" href="#">Terms</a>
+<a class="hover:text-white" href="#">Cookies</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

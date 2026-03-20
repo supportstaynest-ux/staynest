@@ -1,0 +1,20 @@
+/* Mobile UI Styles for StayNest */
+
+/* Safe area insets for notch devices */
+.safe-top { padding-top: env(safe-area-inset-top); }
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+
+/* Hide scrollbar but keep functionality */
+.hidden-scrollbar::-webkit-scrollbar { display: none; }
+.hidden-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Smooth touch scrolling */
+.touch-scroll { -webkit-overflow-scrolling: touch; }
+
+/* Prevent text selection on tap */
+.no-select { -webkit-user-select: none; user-select: none; }
+
+/* Bottom nav safe area */
+.bottom-nav-safe { padding-bottom: calc(env(safe-area-inset-bottom) + 0.5rem); }

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StayNest - User Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13b6ec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#101d22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-72 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col">
+<div class="p-6 flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">home_pin</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">StayNest</h1>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-semibold" href="#">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">explore</span>
+<span>Explore PGs</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">favorite</span>
+<span>Saved PGs</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">compare_arrows</span>
+<span>Compare PGs</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">history</span>
+<span>Recently Viewed</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">question_answer</span>
+<span>My Enquiries</span>
+</a>
+<div class="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span>Profile Settings</span>
+</a>
+</div>
+</nav>
+<div class="p-4 border-t border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-3 p-2">
+<div class="size-10 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden bg-cover bg-center" data-alt="User profile avatar close up" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAJ703PILCvK7XZPOkgm-YpITkfvA84NzY5-RhMxzKlp2vopKP91XQR8UHe3v6bbLsQm77JT1sq3ZUZCo9qPev0fO4x9Zu4UHVRUaycTNlByGjobV7PNo1N4R3eixQewHI_3n7ifkqZuTENMGX2lNIWAoEtm4viAvaVfotcnt7AIiLObNaDy8o9QmRUdBT8t1yu7Yr4MNnY3OoBybPQEMcIpjp7GGNJ2IHRASpUBYpjEpPN1RUz0Cb-9o4M2yYdWrgHzOlqM9Kg9uzE')"></div>
+<div class="flex-1 overflow-hidden">
+<p class="text-sm font-semibold truncate">Alex Johnson</p>
+<p class="text-xs text-slate-500 truncate">alex.j@example.com</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+<!-- Header -->
+<header class="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-8 flex items-center justify-between z-10">
+<div class="flex items-center flex-1">
+<h2 class="text-lg font-semibold hidden md:block">Welcome back, Alex!</h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-lg bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full ring-2 ring-white dark:ring-slate-900"></span>
+</button>
+<button class="p-2 rounded-lg bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-primary transition-colors flex items-center gap-2 px-3">
+<span class="material-symbols-outlined text-[24px]">bookmark</span>
+<span class="text-sm font-semibold hidden lg:inline">Saved PGs</span>
+</button>
+<div class="h-8 w-px bg-slate-200 dark:bg-slate-800 mx-1"></div>
+<button class="p-2 rounded-lg bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-[24px]">logout</span>
+</button>
+</div>
+</header>
+<!-- Scrollable Content Area -->
+<main class="flex-1 overflow-y-auto p-8 space-y-8">
+<!-- Quick Search -->
+<section class="max-w-4xl mx-auto w-full">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full pl-12 pr-4 py-4 rounded-xl border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-primary focus:border-primary transition-all shadow-sm" placeholder="Search for PGs by locality, city or building name..." type="text"/>
+</div>
+</section>
+<!-- Recommended PGs -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold text-slate-900 dark:text-white">Recommended for You</h3>
+<a class="text-primary text-sm font-semibold hover:underline" href="#">View All</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="group bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-md transition-all">
+<div class="h-48 bg-slate-200 overflow-hidden relative">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="Modern PG room with white furniture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD2zGfqVsvmuKtQvxgF0NJ-_fh9H9n33Hii2FRz8YIjJ2ZxXetEaRMEyicidFW8DQf4fIvF5bcU0pKCAzxnzoxv1bGVewoInroB-tH4jiT7pzAhBBNXSqfAAHflWDRWajdIh_XH_nAkA5nGy-vqAFmF_8bPCDg37P86xMW9Cl-yyCtkhFpXg3nS70n3QptRMH0tyNr8j4jZY6vaSlDpddXkOEy2aPy5hqxQT1oOcGaGeZYG0-7RJZGoFIZ9N7VWUqkfScjPG-SmZYgK')"></div>
+<div class="absolute top-3 right-3">
+<button class="size-8 rounded-full bg-white/90 flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+<div class="absolute bottom-3 left-3 px-2 py-1 bg-primary text-white text-[10px] font-bold uppercase tracking-wider rounded">Best Value</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-bold text-lg leading-tight">Green View Residency</h4>
+<span class="text-primary font-bold">₹12k<span class="text-xs text-slate-400 font-normal">/mo</span></span>
+</div>
+<p class="text-slate-500 text-sm flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-sm">location_on</span> Sector 62, Noida
+                                </p>
+<div class="flex items-center gap-3 text-xs text-slate-600 dark:text-slate-400">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-primary">wifi</span> Wifi</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-primary">restaurant</span> Food</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-primary">ac_unit</span> AC</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-md transition-all">
+<div class="h-48 bg-slate-200 overflow-hidden relative">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="Premium PG living room area" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA83UFAiobMzyYDo8DbjHk2TuFFnLOx47AFeY6qBaQ3g9hXBgl21zFnxIa_9RcQ4x77o8Z7wmy7Ut5mbXhJl-YykaAE58xebo01EX2kHz0t_s421uk27v1GtSu1fQZcbVlekBSI1S1jfrkatWD6_xHwtfCK1x_gGc7G39XXaaJ-USHS8p1di-MFY5GbpQqjihkN2ZdAU_XGeI6A8hutdnrUwUGkrtUAhSULQO9Pf_fLJx0JNKdQ8qsF5SZ-fViKXwK02ogHHKZSiJ1Z')"></div>
+<div class="absolute top-3 right-3">
+<button class="size-8 rounded-full bg-white/90 flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-bold text-lg leading-tight">Urban Living PG</h4>
+<span class="text-primary font-bold">₹15.5k<span class="text-xs text-slate-400 font-normal">/mo</span></span>
+</div>
+<p class="text-slate-500 text-sm flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-sm">location_on</span> Indiranagar, Bangalore
+                                </p>
+<div class="flex items-center gap-3 text-xs text-slate-600 dark:text-slate-400">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-primary">wifi</span> Wifi</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-primary">local_laundry_service</span> Laundry</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-primary">fitness_center</span> Gym</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-md transition-all">
+<div class="h-48 bg-slate-200 overflow-hidden relative">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="Standard PG twin sharing room" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCMRWZKiayOSPtfe0tnLKncJE01MSmI6LhJgkLSvDihVjt5Mqa1UgWsPiXFls4ii70dG0BPeWPBoqn1BjA_Fp3pkdUsHWqexWQ8tJ0o9JATzAaQ-epgxk2PwPAXXCq6b5B1fp6sLkvwglk2Qwa3Rd2ebVQOSeDrMkerRt-ZkkLwQavHmaDa6vTQ9dMlzwZSXIOzkQ20Y7DJCvSgAcnZ2FFk3qGEaLuZ0GB-WN4nfxqvgtd1nMf4_y35mWNi5ylbyh0Dju95S_Do-Ekj')"></div>
+<div class="absolute top-3 right-3">
+<button class="size-8 rounded-full bg-white/90 flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-bold text-lg leading-tight">Skyline Boys Hostel</h4>
+<span class="text-primary font-bold">₹10k<span class="text-xs text-slate-400 font-normal">/mo</span></span>
+</div>
+<p class="text-slate-500 text-sm flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-sm">location_on</span> Malviya Nagar, Jaipur
+                                </p>
+<div class="flex items-center gap-3 text-xs text-slate-600 dark:text-slate-400">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-primary">wifi</span> Wifi</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-primary">restaurant</span> Food</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-primary">security</span> 24/7 Security</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Recently Viewed -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold text-slate-900 dark:text-white">Recently Viewed</h3>
+<div class="flex gap-2">
+<button class="p-1 rounded bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-1 rounded bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
+<!-- Horizontal Card 1 -->
+<div class="flex-none w-72 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 p-3 flex gap-4 hover:border-primary/50 transition-colors cursor-pointer">
+<div class="size-20 rounded bg-slate-200 bg-cover bg-center shrink-0" data-alt="Small thumbnail of a cozy room" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBwSB3F7YCYxkWrZmTqCZB5wjnBOHZC2FtkBcZ4-TL6gRpMdVdJm0IfGSIKWCJGtLBU3G0-egIIWflMYkaAjl75y_IoPSZRGmz9a3EJWpJ7NEwaSAJ2xjFZB4MKaBwi0c5MrzoQ4KwGBCMO-M1R_dfzSolt_j-FQBDL1UIh2EuOUQW_BPhGDuDYFmjcPBOBFBx8oJaLefmh_4XOHJV36jMhSjn0RyOPxwm9gS5wBS89ceIHpBlK8175_8qxxHcntkse5KCYSh9jl_J1')"></div>
+<div class="flex flex-col justify-center min-w-0">
+<h5 class="font-semibold text-sm truncate">Blue Sky Suites</h5>
+<p class="text-xs text-slate-500 mb-1">Gurgaon, Sector 44</p>
+<p class="text-primary font-bold text-sm">₹14,000</p>
+</div>
+</div>
+<!-- Horizontal Card 2 -->
+<div class="flex-none w-72 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 p-3 flex gap-4 hover:border-primary/50 transition-colors cursor-pointer">
+<div class="size-20 rounded bg-slate-200 bg-cover bg-center shrink-0" data-alt="Thumbnail showing a clean hostel bed" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA8wZjBx4iy-lGyet-alr7l5mhpSbCCGdu7YnBuRnVaFJS9qauypaAW7TaOkDOASsuPFZDXqg-DKgcxc4LCuG3bOQ31VvI5mq1H-4mMw7eZqg3d7eSELdJjlCgv5x3vHIh8sk6NUnorVIhu-WVXvRCptHPVQ_k-Ld7da8d_bMWcjX2gWU7mQt6jBVNBfgmF1JpptkrQQdpGXsNAdrIrt6SMH5Wp7HmOcy8pZAhq5rN7VIYH8QXEyz7H-3uC6h6adSY2tK5o_orlsorK')"></div>
+<div class="flex flex-col justify-center min-w-0">
+<h5 class="font-semibold text-sm truncate">Elite PG for Girls</h5>
+<p class="text-xs text-slate-500 mb-1">Koramangala, BLR</p>
+<p class="text-primary font-bold text-sm">₹16,500</p>
+</div>
+</div>
+<!-- Horizontal Card 3 -->
+<div class="flex-none w-72 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 p-3 flex gap-4 hover:border-primary/50 transition-colors cursor-pointer">
+<div class="size-20 rounded bg-slate-200 bg-cover bg-center shrink-0" data-alt="Abstract interior of a PG common area" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCpln0Ym-bZMe544eIWEbJys7wcREz2pH-JzIDHvkNTIlqohIAjIDEH2By9MiMYjqbK0-wpPAxK8SwSiaiG70nTK4EkwIMIx-luygU2qc1pyRkwmn8KD1GSkt6w-_61td-3PXGyAEyXUe79ErERwVmZDQ1wrJOXSfrOGcpn3Vd14fLjZofppAotqWJBzxYG8RpbL4ldtipB0t2IrXhR5WKnMfDDzqa_-yPCpHhh8EuUkbmXwwxDz0ZCrfAVyUveEjtPoAovZlBIEwEu')"></div>
+<div class="flex flex-col justify-center min-w-0">
+<h5 class="font-semibold text-sm truncate">Heritage Stay</h5>
+<p class="text-xs text-slate-500 mb-1">Whitefield, BLR</p>
+<p class="text-primary font-bold text-sm">₹11,000</p>
+</div>
+</div>
+<!-- Horizontal Card 4 -->
+<div class="flex-none w-72 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 p-3 flex gap-4 hover:border-primary/50 transition-colors cursor-pointer">
+<div class="size-20 rounded bg-slate-200 bg-cover bg-center shrink-0" data-alt="Abstract architectural lines in a hallway" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBUudCtGOhcm0THy2gGtiNDlYsNPIcQs-g3f-kQNUPDPW0EMvNscuno8NHU_Psrl0paaYksyOfDbMusHYSJgtFdDTHcJ7_e9wkLkAA8bIGDJpRdjKgB0SHUnHgNSzhyzMQ32I9BkFROgt6Y19Muj6dUzlIHZXG3AYQ1QlV9RGN6EiaWuoqpe08YKUGnVrVaByl77qkIAlK-dW4Ef8vznVj59wKherehhmg0mZY4xB9OMMKcESuPPbKtzuE3FQCeCMyMFpSGwZ9h-yu5')"></div>
+<div class="flex flex-col justify-center min-w-0">
+<h5 class="font-semibold text-sm truncate">The Oasis PG</h5>
+<p class="text-xs text-slate-500 mb-1">Amanora Park, Pune</p>
+<p class="text-primary font-bold text-sm">₹9,500</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+</div>
+</body></html>
