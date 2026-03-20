@@ -91,7 +91,6 @@ import { renderHome } from './js/pages/home.js';
 route('/', () => { if (!hasOnboarded()) renderOnboarding(); else navigate('/home'); });
 route('/onboarding', unAuthGuard(renderOnboarding));
 route('/auth', unAuthGuard(renderAuth));
-route('/verify-email', renderAuth);
 route('/verify-pending', userGuard(lazy(() => import('./js/pages/auth.js'), 'renderVerifyPending')));
 route('/reset-password', renderAuth);
 route('/home', publicGuard(renderHome));
@@ -104,22 +103,28 @@ route('/complete-profile', userGuard(lazy(() => import('./js/pages/complete-prof
 route('/dashboard', userGuard(lazy(() => import('./js/pages/dashboard.js'), 'renderDashboard')));
 route('/explore', publicGuard(lazy(() => import('./js/pages/explore.js'), 'renderExplore')));
 route('/pg/:id', lazy(() => import('./js/pages/pg-details.js'), 'renderPGDetails'));
-route('/verify', async () => {
-  const hash = window.location.hash || '';
-  const searchPart = hash.includes('?') ? hash.split('?')[1] : '';
-  const params = new URLSearchParams(searchPart);
-  const token = params.get('token');
+route('/verify-email', async () => {
+  const token = new URLSearchParams(window.location.search).get("token");
   const app = document.getElementById('app');
   
-  console.log('Verification route hit. Token:', token ? 'Found' : 'Not found');
+  console.log("Token:", token);
 
   if (!token) {
-    console.warn('Redirecting to home: no token');
-    navigate('/home');
+    app.innerHTML = `
+      <div class="min-h-screen flex flex-col items-center justify-center bg-background-light dark:bg-background-dark p-4">
+        <div class="bg-white dark:bg-slate-900 p-8 rounded-3xl shadow-xl max-w-md w-full text-center border border-slate-100 dark:border-slate-800">
+          <span class="material-symbols-outlined text-6xl text-red-500 mb-4">error</span>
+          <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-2">Invalid Link ❌</h2>
+          <p class="text-slate-500 mb-6">No verification token provided in the URL.</p>
+          <button onclick="window.location.hash='/home'" class="bg-primary hover:brightness-110 text-white font-bold py-3 px-8 rounded-xl transition-all flex items-center justify-center gap-2 mx-auto">
+            Return Home
+          </button>
+        </div>
+      </div>
+    `;
     return;
   }
 
-  // Use a timeout to ensure the "Verifying..." UI is painted before the heavy import/await
   app.innerHTML = `
     <div class="min-h-screen flex flex-col items-center justify-center bg-background-light dark:bg-background-dark p-4">
       <div class="bg-white dark:bg-slate-900 p-8 rounded-3xl shadow-xl max-w-md w-full text-center border border-slate-100 dark:border-slate-800">
@@ -133,20 +138,28 @@ route('/verify', async () => {
   `;
 
   try {
-    console.log('Importing supabase for verification...');
-    const { verifyEmail } = await import('./js/supabase.js');
-    console.log('Calling verifyEmail API...');
-    await verifyEmail(token);
-    console.log('Verification success!');
+    const res = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/verify-email?token=${token}`);
     
-    const statusEl = document.getElementById('verify-status');
-    if (statusEl) {
-      statusEl.innerHTML = `
-        <span class="material-symbols-outlined text-6xl text-emerald-500 mb-4">check_circle</span>
-        <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-2">Email Verified!</h2>
-        <p class="text-slate-500 mb-6">Your account has been successfully verified. You can now log in.</p>
-        <a href="#/auth" class="inline-block bg-primary text-white font-bold py-3 px-8 rounded-xl shadow-lg hover:brightness-110 transition-all">Log In Now</a>
-      `;
+    // Do NOT parse non-JSON response (prevents "Cannot coerce the result to a single JSON object")
+    const contentType = res.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      throw new Error("Invalid server response. Expected JSON but received HTML/Text.");
+    }
+
+    const data = await res.json();
+
+    if (res.ok && data.success) {
+      const statusEl = document.getElementById('verify-status');
+      if (statusEl) {
+        statusEl.innerHTML = `
+          <span class="material-symbols-outlined text-6xl text-emerald-500 mb-4">check_circle</span>
+          <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-2">Email Verified Successfully ✅</h2>
+          <p class="text-slate-500 mb-6">Your account has been successfully verified. You can now log in.</p>
+          <a href="#/auth" class="inline-block bg-primary text-white font-bold py-3 px-8 rounded-xl shadow-lg hover:brightness-110 transition-all">Log In Now</a>
+        `;
+      }
+    } else {
+      throw new Error(data.error || "Verification Failed");
     }
   } catch (err) {
     console.error('Verification error:', err);
@@ -154,7 +167,7 @@ route('/verify', async () => {
     if (statusEl) {
       statusEl.innerHTML = `
         <span class="material-symbols-outlined text-6xl text-red-500 mb-4">error</span>
-        <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-2">Verification Failed</h2>
+        <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-2">Verification Failed ❌</h2>
         <p class="text-slate-500 mb-6">${err.message || 'Something went wrong.'}</p>
         <a href="#/auth" class="inline-block bg-primary text-white font-bold py-3 px-8 rounded-xl shadow-lg hover:brightness-110 transition-all">Back to Login</a>
       `;
