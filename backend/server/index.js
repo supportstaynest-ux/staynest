@@ -29,19 +29,15 @@ const app = express();
 app.use(helmet({ contentSecurityPolicy: false })); // CSP off for API server
 
 // CORS – Restrict to known frontend origins
-const allowedOrigins = (process.env.ALLOWED_ORIGINS || "")
-  .split(",")
-  .map(o => o.trim());
+const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim());
 
 const corsOptions = {
-  origin: (origin, callback) => {
-    if (!origin) return callback(null, true);
-
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
     }
-
-    return callback(new Error("Not allowed by CORS"));
   },
   credentials: true,
 };
@@ -50,13 +46,11 @@ app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", process.env.ALLOWED_ORIGINS);
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
   next();
 });
-
-app.options("*", (req, res) => res.sendStatus(200));
 
 app.use(express.json({ limit: '10kb' })); // Limit body size to prevent payload attacks
 
