@@ -104,10 +104,12 @@ route('/dashboard', userGuard(lazy(() => import('./js/pages/dashboard.js'), 'ren
 route('/explore', publicGuard(lazy(() => import('./js/pages/explore.js'), 'renderExplore')));
 route('/pg/:id', lazy(() => import('./js/pages/pg-details.js'), 'renderPGDetails'));
 route('/verify-email', async () => {
-  const token = new URLSearchParams(window.location.search).get("token");
+  // Using URLSearchParams safely across standard query strings and hash-based query strings
+  const queryString = window.location.search || window.location.hash.split('?')[1] || window.location.href.split('?')[1] || '';
+  const token = new URLSearchParams(queryString).get("token");
   const app = document.getElementById('app');
   
-  console.log("Token:", token);
+  console.log("Token extracted:", token);
 
   if (!token) {
     app.innerHTML = `
