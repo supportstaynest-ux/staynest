@@ -283,9 +283,28 @@ app.post('/api/cleanup-alerts', verifyToken, authorizeRoles('admin'), async (req
 // ══════════════════════════════════════════════════════════════════
 app.post('/api/send-verification-email', authLimiter, validateVerificationEmail, async (req, res) => {
     try {
-        const { email, token, origin } = req.body;
+        const { email, origin } = req.body;
 
-        const verifyLink = `${origin || 'https://staynest.vercel.app'}/#/verify-email?token=${token}`;
+        // 1. Generate a secure backend token
+        const crypto = require('crypto');
+        const newToken = crypto.randomUUID();
+        const expiry = new Date(Date.now() + 10 * 60 * 1000).toISOString(); // 10 minutes expiry
+
+        // 2. Save the token to the database profile corresponding to this email
+        const { error: updateError } = await supabase
+            .from('profiles')
+            .update({
+                verification_token: newToken,
+                verification_token_expires_at: expiry,
+            })
+            .eq('email', email);
+
+        if (updateError) {
+            console.error('Error saving verification token:', updateError.message);
+            return res.status(500).json({ error: 'Failed to generate secure verification.' });
+        }
+
+        const verifyLink = `${origin || 'https://staynest.vercel.app'}/#/verify-email?token=${newToken}`;
 
         console.log(`📧 Sending verification email to: ${email}`);
 
