@@ -309,7 +309,7 @@ app.post('/api/send-verification-email', authLimiter, validateVerificationEmail,
         console.log(`📧 Sending verification email to: ${email}`);
 
         const { data, error } = await resend.emails.send({
-            from: 'StayNest <onboarding@resend.dev>',
+            from: 'StayNest <auth@staynest.in>',
             to: email,
             subject: 'Verify your StayNest account',
             html: `
@@ -414,7 +414,7 @@ app.get('/test-email', verifyToken, authorizeRoles('admin'), async (req, res) =>
         console.log(`🧪 Sending test email to: ${testEmail}`);
         
         const { data, error } = await resend.emails.send({
-            from: 'StayNest <onboarding@resend.dev>',
+            from: 'StayNest <auth@staynest.in>',
             to: testEmail,
             subject: 'StayNest Test Email',
             html: '<p>If you are reading this, <strong>Resend is working correctly!</strong> 🚀</p>'
