@@ -290,7 +290,7 @@ export async function getUser() {
 export async function getProfile(userId) {
     const cached = profileCache.get(userId);
     if (cached) return cached;
-    const { data, error } = await supabase.from('profiles').select('id, full_name, role, email, avatar_url, is_verified, subscription_plan, created_at, vendor_approved, phone').eq('id', userId).single();
+    const { data, error } = await supabase.from('profiles').select('id, full_name, role, email, avatar_url, is_verified, subscription_plan, created_at, phone').eq('id', userId).single();
     if (error) throw error;
     if (data) profileCache.set(userId, data);
     return data;
