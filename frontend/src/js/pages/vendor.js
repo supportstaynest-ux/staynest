@@ -4218,3 +4218,67 @@ export async function renderVendorMfa() {
         }, 1500);
     });
 }
+
+export async function renderVendorSupport() {
+    if (!isLoggedIn()) { navigate('/auth'); return; }
+    if (!isVendor() && !isAdmin()) { showToast('You need vendor access to view this page', 'error'); navigate('/dashboard'); return; }
+
+    const content = `
+    <div class="max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500 pb-24 md:pb-8 p-4 md:p-8">
+        <header class="mb-8">
+            <h2 class="text-3xl font-black text-slate-900 dark:text-white flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary text-4xl">support_agent</span> Vendor Support
+            </h2>
+            <p class="text-slate-500 mt-2 text-sm max-w-2xl leading-relaxed">Need help with your listings, payouts, or account? Contact StayNest support or browse our help resources below.</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="col-span-1 md:col-span-2 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 flex flex-col items-center justify-center text-center min-h-[300px]">
+                <div class="size-20 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6">
+                    <span class="material-symbols-outlined text-4xl">headphones</span>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Live Chat Support</h3>
+                <p class="text-slate-500 text-sm max-w-sm mx-auto mb-8">Connect with our support team instantly for urgent queries regarding your properties or payouts.</p>
+                <button class="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-xl transition-all shadow-md flex items-center gap-2" onclick="showToast('Live support chat is currently offline. Please send us an email.', 'info')">
+                    <span class="material-symbols-outlined">chat</span> Start Conversation
+                </button>
+            </div>
+            
+            <div class="col-span-1 space-y-6">
+                <a href="mailto:support@staynest.in" class="block bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:border-primary/30 transition-colors group">
+                    <div class="size-10 bg-slate-50 dark:bg-slate-800 rounded-lg flex items-center justify-center text-slate-600 dark:text-slate-300 mb-4 group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined">mail</span>
+                    </div>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-1">Email Us</h4>
+                    <p class="text-xs text-slate-500 mb-3">Expected reply: 24 hours</p>
+                    <span class="text-sm font-bold text-primary">support@staynest.in</span>
+                </a>
+                
+                <a href="tel:+919876543210" class="block bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:border-primary/30 transition-colors group">
+                    <div class="size-10 bg-slate-50 dark:bg-slate-800 rounded-lg flex items-center justify-center text-slate-600 dark:text-slate-300 mb-4 group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined">call</span>
+                    </div>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-1">Call Us</h4>
+                    <p class="text-xs text-slate-500 mb-3">Mon-Fri, 9am - 6pm</p>
+                    <span class="text-sm font-bold text-primary">+91 98765 43210</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="bg-slate-50 dark:bg-slate-800/50 rounded-3xl p-6 md:p-8 border border-slate-200 dark:border-slate-700">
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2"><span class="material-symbols-outlined text-primary">menu_book</span> Help Resources</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                ${['Listing Guidelines', 'Payout Setup', 'Managing Reviews', 'Reporting Issues'].map(topic => \`
+                    <button class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-700 text-left hover:shadow-md transition-shadow flex items-center justify-between group" onclick="showToast('Help center article coming soon', 'info')">
+                        <span class="font-medium text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors">\${topic}</span>
+                        <span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">chevron_right</span>
+                    </button>
+                \`).join('')}
+            </div>
+        </div>
+    </div>
+    \`;
+
+    document.getElementById('app').innerHTML = vendorLayout(content, 'support', 'Vendor Support');
+    initVendorEvents();
+}

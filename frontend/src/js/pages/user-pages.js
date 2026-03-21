@@ -108,7 +108,7 @@ export async function renderMyEnquiries() {
                         <div class="p-5 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer" onclick="window.location.hash='/pg/${listing.id || eq.listing_id}'">
                             <div class="flex items-start gap-4">
                                 <div class="size-14 rounded-xl bg-slate-100 dark:bg-slate-800 shrink-0 overflow-hidden border border-slate-200 dark:border-slate-700">
-                                    ${listing.images?.[0] ? `<img src="${listing.images[0]}" class="w-full h-full object-cover">` : '<div class="w-full h-full flex items-center justify-center"><span class="material-symbols-outlined text-slate-300">home</span></div>'}
+                                    ${listing.images?.[0] ? `<img src="${listing.images[0]}" loading="lazy" decoding="async" class="w-full h-full object-cover">` : '<div class="w-full h-full flex items-center justify-center"><span class="material-symbols-outlined text-slate-300">home</span></div>'}
                                 </div>
                                 <div class="flex-1 min-w-0">
                                     <div class="flex items-center gap-2 mb-1">
@@ -190,7 +190,7 @@ export async function renderMyVisits() {
                         <div class="p-5 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
                             <div class="flex items-start gap-4">
                                 <div class="size-14 rounded-xl bg-slate-100 dark:bg-slate-800 shrink-0 overflow-hidden border border-slate-200 dark:border-slate-700 cursor-pointer" onclick="window.location.hash='/pg/${listing.id || visit.listing_id}'">
-                                    ${listing.images?.[0] ? `<img src="${listing.images[0]}" class="w-full h-full object-cover">` : '<div class="w-full h-full flex items-center justify-center"><span class="material-symbols-outlined text-slate-300">home</span></div>'}
+                                    ${listing.images?.[0] ? `<img src="${listing.images[0]}" loading="lazy" decoding="async" class="w-full h-full object-cover">` : '<div class="w-full h-full flex items-center justify-center"><span class="material-symbols-outlined text-slate-300">home</span></div>'}
                                 </div>
                                 <div class="flex-1 min-w-0">
                                     <div class="flex items-center gap-2 mb-1">
@@ -262,7 +262,7 @@ export function renderComparePGs() {
         <div class="overflow-x-auto pb-6 outline-none"><div class="min-w-[800px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-md"><!-- Headers Row -->
                 <div class="flex border-b-2 border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50"><div class="w-48 p-4 shrink-0 flex items-center text-slate-500 font-semibold uppercase tracking-wider text-xs">Features</div>
                     ${list.map(pg => `
-                        <div class="flex-1 p-4 border-l border-slate-200 dark:border-slate-700 text-center min-w-[200px] bg-white dark:bg-slate-900"><div class="h-24 bg-slate-100 dark:bg-slate-800 rounded-lg mb-3 overflow-hidden relative border border-slate-200 dark:border-slate-700">${pg.images?.[0] ? `<img src="${pg.images[0]}" class="w-full h-full object-cover">` : `<span class="material-symbols-outlined text-3xl text-slate-300 absolute inset-0 m-auto">image</span>`}
+                        <div class="flex-1 p-4 border-l border-slate-200 dark:border-slate-700 text-center min-w-[200px] bg-white dark:bg-slate-900"><div class="h-24 bg-slate-100 dark:bg-slate-800 rounded-lg mb-3 overflow-hidden relative border border-slate-200 dark:border-slate-700">${pg.images?.[0] ? `<img src="${pg.images[0]}" loading="lazy" decoding="async" class="w-full h-full object-cover">` : `<span class="material-symbols-outlined text-3xl text-slate-300 absolute inset-0 m-auto">image</span>`}
                             </div>
                             <a href="#/pg/${pg.id}" class="block font-bold text-slate-900 dark:text-white hover:text-primary transition-colors truncate mb-2" title="${pg.name}">${pg.name}</a>
                             <button onclick="window._removeCompare('${pg.id}')" class="text-xs font-semibold text-slate-500 hover:text-red-500 transition-colors flex items-center justify-center gap-1 mx-auto px-3 py-1 rounded bg-slate-100 dark:bg-slate-800 hover:bg-red-50 dark:hover:bg-red-900/20"><span class="material-symbols-outlined text-[14px]">close</span> Remove

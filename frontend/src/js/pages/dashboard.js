@@ -56,7 +56,7 @@ export function renderDashboardLayout(content, activeItem = 'dashboard', title =
                 <a href="#/profile" class="flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group">
                     <div class="flex items-center gap-3">
                         <div class="size-10 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden flex items-center justify-center border border-slate-200 dark:border-slate-700">
-                            ${p.avatar_url ? `<img src="${p.avatar_url}" class="w-full h-full object-cover">` : `<span class="material-symbols-outlined text-slate-400">person</span>`}
+                            ${p.avatar_url ? `<img src="${p.avatar_url}" loading="lazy" decoding="async" class="w-full h-full object-cover">` : `<span class="material-symbols-outlined text-slate-400">person</span>`}
                         </div>
                         <div class="flex-1 overflow-hidden">
                             <p class="text-sm font-semibold truncate capitalize group-hover:text-primary transition-colors text-slate-900 dark:text-white">${p.full_name || 'User'}</p>
@@ -187,7 +187,7 @@ export function renderHorizontalCard(pg) {
     return `
     <div onclick="window.location.hash='/pg/${pg.id}'" class="flex-none w-72 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md p-3 flex gap-4 hover:border-primary/50 transition-all cursor-pointer group">
         <div class="size-20 rounded bg-slate-100 dark:bg-slate-800 shrink-0 border border-slate-200 dark:border-slate-700 overflow-hidden relative">
-            ${img ? `<img src="${img}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">` : `<div class="w-full h-full flex items-center justify-center text-slate-300"><span class="material-symbols-outlined">image</span></div>`}
+            ${img ? `<img src="${img}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">` : `<div class="w-full h-full flex items-center justify-center text-slate-300"><span class="material-symbols-outlined">image</span></div>`}
         </div>
         <div class="flex flex-col justify-center min-w-0">
             <h5 class="font-semibold text-sm truncate text-slate-900 dark:text-white" title="${pg.name}">${pg.name}</h5>

@@ -11,6 +11,20 @@ export async function getAccessToken() {
     return session?.access_token || null;
 }
 
+// ── Generic Memory Cache ──
+class MemoryCache {
+    constructor(ttlMs = 60000) { this.cache = new Map(); this.ttl = ttlMs; }
+    get(key) {
+        const item = this.cache.get(key);
+        if (item && (Date.now() - item.ts < this.ttl)) return item.data;
+        return null;
+    }
+    set(key, data) { this.cache.set(key, { data, ts: Date.now() }); }
+    clear() { this.cache.clear(); }
+    delete(key) { this.cache.delete(key); }
+}
+export const profileCache = new MemoryCache(5 * 60000); // 5 min TTL
+
 // ── Performance: In-memory listings cache with TTL ──
 const _listingsCache = new Map();
 const CACHE_TTL = 60000; // 60 seconds
@@ -274,8 +288,11 @@ export async function getUser() {
 
 
 export async function getProfile(userId) {
-    const { data, error } = await supabase.from('profiles').select('*').eq('id', userId).single();
+    const cached = profileCache.get(userId);
+    if (cached) return cached;
+    const { data, error } = await supabase.from('profiles').select('id, full_name, role, email, avatar_url, is_verified, subscription_plan, created_at, vendor_approved, phone').eq('id', userId).single();
     if (error) throw error;
+    if (data) profileCache.set(userId, data);
     return data;
 }
 
@@ -285,6 +302,7 @@ export async function updateProfile(userId, updates) {
     if (!data || data.length === 0) {
         throw new Error("Action blocked by database permission (RLS). Please run the Admin SQL fix first.");
     }
+    profileCache.set(userId, data[0]);
     return data[0];
 }
 
@@ -737,6 +755,13 @@ export async function getUserBroadcasts(userId) {
 
     let result = data || [];
     if (userId && result.length > 0) {
+        const { data: profile } = await supabase.from('profiles').select('created_at').eq('id', userId).single();
+        const userCreatedAt = profile ? new Date(profile.created_at).getTime() : 0;
+
+        if (userCreatedAt > 0) {
+            result = result.filter(m => new Date(m.created_at).getTime() >= userCreatedAt);
+        }
+
         const { data: dismissed } = await supabase
             .from('dismissed_messages')
             .select('message_id')
@@ -763,6 +788,13 @@ export async function getVendorBroadcasts(userId) {
 
     let result = data || [];
     if (userId && result.length > 0) {
+        const { data: profile } = await supabase.from('profiles').select('created_at').eq('id', userId).single();
+        const userCreatedAt = profile ? new Date(profile.created_at).getTime() : 0;
+
+        if (userCreatedAt > 0) {
+            result = result.filter(m => new Date(m.created_at).getTime() >= userCreatedAt);
+        }
+
         const { data: dismissed } = await supabase
             .from('dismissed_messages')
             .select('message_id')
@@ -816,13 +848,15 @@ export async function getUsersPaginated(page = 1, limit = 20) {
 }
 
 export async function getAllListingsAdmin() {
-    const { data, error } = await supabase.from('listings').select('*, profiles!vendor_id(full_name)').order('created_at', { ascending: false });
+    // Only select the fields required for the admin listings table
+    const { data, error } = await supabase.from('listings').select('id, name, city, monthly_rent, status, created_at, is_featured, is_verified, total_views, vendor_id, profiles!vendor_id(full_name)').order('created_at', { ascending: false });
     if (error) throw error;
     return data || [];
 }
 
 export async function getVendorListings(vendorId) {
-    const { data, error } = await supabase.from('listings').select('*, reviews(rating)').eq('vendor_id', vendorId).neq('status', 'deleted').order('created_at', { ascending: false });
+    // Optimized select for Vendor Dashboard
+    const { data, error } = await supabase.from('listings').select('id, name, city, address, monthly_rent, deposit, gender_allowed, status, created_at, images, total_views, is_featured, is_verified, search_priority, reviews(rating)').eq('vendor_id', vendorId).neq('status', 'deleted').order('created_at', { ascending: false });
     if (error) throw error;
     return data || [];
 }
@@ -1399,22 +1433,28 @@ export async function getVendorPerformanceData() {
 export async function getFraudFlags() {
     const { data, error } = await supabase
         .from('fraud_flags')
-        .select('*, profiles(full_name, email), listings(name)')
+        .select('*, profiles(full_name, email)')
         .order('created_at', { ascending: false });
     if (error) throw error;
     return data || [];
 }
 
 export async function insertFraudFlag(flag) {
-    const { error } = await supabase.from('fraud_flags').insert([flag]);
+    const { listing_id, ...sanitizedFlag } = flag;
+    const { error } = await supabase.from('fraud_flags').insert([sanitizedFlag]);
     if (error) throw error;
 }
 
 export async function upsertFraudFlags(flags) {
     if (!Array.isArray(flags) || flags.length === 0) return [];
+    
+    // Workaround: Sanitize payload to remove listing_id as it currently does not exist in the DB schema
+    const sanitizedFlags = flags.map(({ listing_id, ...rest }) => rest);
+    
+    // Also remove listing_id from the onConflict fields
     const { data, error } = await supabase
         .from('fraud_flags')
-        .upsert(flags, { onConflict: 'flag_type,user_id,listing_id,reason' })
+        .upsert(sanitizedFlags, { onConflict: 'flag_type,user_id,reason' })
         .select();
     if (error) throw error;
     return data || [];

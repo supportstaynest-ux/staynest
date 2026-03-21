@@ -139,12 +139,18 @@ function initAdminEvents() {
 
     const doLogout = async (e) => {
       e.preventDefault();
-      try { await signOut(); } catch (err) { }
+      const btn = e.currentTarget;
+      if (btn.disabled) return;
+      btn.disabled = true;
+      try { await signOut(); } catch (err) { console.error(err); }
       window.location.hash = '/home';
-      window.location.reload();
+      setTimeout(() => window.location.reload(), 100);
     };
-    document.getElementById('logout-btn')?.addEventListener('click', doLogout);
-    document.querySelectorAll('.admin-logout-trigger').forEach(btn => btn.addEventListener('click', doLogout));
+    
+    const mainBtn = document.getElementById('logout-btn');
+    if (mainBtn) mainBtn.onclick = doLogout;
+    
+    document.querySelectorAll('.admin-logout-trigger').forEach(b => b.onclick = doLogout);
   }, 50);
 }
 
