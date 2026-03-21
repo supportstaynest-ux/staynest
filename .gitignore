@@ -24,5 +24,4 @@ dist-ssr
 *.sln
 *.sw?
 backend/.env.example
-*.json
-.env.local
+backend/client_secret_*.json
