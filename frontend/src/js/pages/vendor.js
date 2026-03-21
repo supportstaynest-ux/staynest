@@ -4268,16 +4268,16 @@ export async function renderVendorSupport() {
         <div class="bg-slate-50 dark:bg-slate-800/50 rounded-3xl p-6 md:p-8 border border-slate-200 dark:border-slate-700">
             <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2"><span class="material-symbols-outlined text-primary">menu_book</span> Help Resources</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                ${['Listing Guidelines', 'Payout Setup', 'Managing Reviews', 'Reporting Issues'].map(topic => \`
-                    <button class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-700 text-left hover:shadow-md transition-shadow flex items-center justify-between group" onclick="showToast('Help center article coming soon', 'info')">
-                        <span class="font-medium text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors">\${topic}</span>
-                        <span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">chevron_right</span>
-                    </button>
-                \`).join('')}
+                ${['Listing Guidelines', 'Payout Setup', 'Managing Reviews', 'Reporting Issues'].map(topic => 
+                    '<button class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-700 text-left hover:shadow-md transition-shadow flex items-center justify-between group" onclick="showToast(\'Help center article coming soon\', \'info\')">' +
+                        '<span class="font-medium text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors">' + topic + '</span>' +
+                        '<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">chevron_right</span>' +
+                    '</button>'
+                ).join('')}
             </div>
         </div>
     </div>
-    \`;
+    `;
 
     document.getElementById('app').innerHTML = vendorLayout(content, 'support', 'Vendor Support');
     initVendorEvents();
