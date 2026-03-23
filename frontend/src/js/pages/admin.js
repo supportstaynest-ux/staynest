@@ -1,6 +1,6 @@
 import { state, isLoggedIn, isAdmin, showToast, showLoading, hideLoading, formatPrice } from '../state.js';
 import { navigate } from '../router.js';
-import { signOut, getAdminStats, getAllUsers, getUsersPaginated, getAllListingsAdmin, updateProfile, updateListing, deleteListing, sendNotification, sendBroadcastMessage, getBroadcastHistory, getReports, updateReport, getAdminChatMonitoringStats, getAdminVendorDetails, getAdminListingChats, getPaymentRequestsAdmin, updatePaymentRequestStatus, getPlans, createPlan, updatePlan, deletePlan, resetPassword, getAccessToken } from '../supabase.js';
+import { supabase, signOut, getAdminStats, getAllUsers, getUsersPaginated, getAllListingsAdmin, updateProfile, updateListing, deleteListing, sendNotification, sendBroadcastMessage, getBroadcastHistory, getReports, updateReport, getAdminChatMonitoringStats, getAdminVendorDetails, getAdminListingChats, getPaymentRequestsAdmin, updatePaymentRequestStatus, getPlans, createPlan, updatePlan, deletePlan, resetPassword, getAccessToken } from '../supabase.js';
 
 import { renderNavbar } from '../components/navbar.js';
 
@@ -26,7 +26,7 @@ export function adminLayout(content, active = 'dashboard', title = 'Admin Panel'
     { key: 'reports', icon: 'flag', label: 'Reports', href: '/admin/reports' },
     { key: 'payments', icon: 'payments', label: 'Payments', href: '/admin/payments' },
     { key: 'plans', icon: 'card_membership', label: 'Subscription Plans', href: '/admin/plans' },
-    { key: 'boost', icon: 'rocket_launch', label: 'Boost Plans', href: '/admin/boost' },
+    { key: 'boost', icon: 'rocket_launch', label: 'Boost Plans', href: '/admin/boost-plans' },
     { key: 'notifications', icon: 'mail', label: 'Messaging', href: '/admin/notifications' },
     { key: 'chat-monitoring', icon: 'forum', label: 'Chat Monitoring', href: '/admin/chat-monitoring' },
     { key: 'support', icon: 'forum', label: 'Support Chat', href: '/admin/support' },
@@ -51,7 +51,7 @@ export function adminLayout(content, active = 'dashboard', title = 'Admin Panel'
         <!-- Desktop Sidebar -->
         <aside id="admin-sidebar" class="w-64 border-r border-slate-200 dark:border-slate-800 shadow-sm bg-white dark:bg-slate-900 flex flex-col fixed inset-y-0 left-0 z-50 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 ease-in-out h-full">
             <div class="p-6 flex items-center justify-between md:justify-start gap-3">
-                <a href="#/home" class="flex items-center gap-3 w-full">
+                                <a href="#/home" class="flex items-center gap-3 w-full">
                     <div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white shrink-0">
                         <span class="material-symbols-outlined font-bold text-lg">meeting_room</span>
                     </div>
@@ -819,7 +819,33 @@ export async function renderAdminListings() {
   window._adminFilterTabs = (tab) => { window._adminListingFilter = tab; r(); };
 
   window._adminApprove = async (id, verify = false) => { try { const updates = { status: 'approved' }; if (verify) updates.is_verified = true; await updateListing(id, updates); showToast('PG Approved! Vendor notified.', 'success'); listings = await getAllListingsAdmin(); r(); } catch (e) { showToast(e.message, 'error'); } };
-  window._adminReject = async (id) => { if (confirm('Are you sure you want to reject this PG?')) { try { await updateListing(id, { status: 'rejected' }); showToast('PG Rejected.', 'info'); listings = await getAllListingsAdmin(); r(); } catch (e) { showToast(e.message, 'error'); } } };
+  window._adminReject = async (id) => { 
+    const reason = prompt('Are you sure you want to reject this PG?\\nOptional: Enter rejection reason to notify the vendor:');
+    if (reason !== null) { 
+      try { 
+        const updates = { status: 'rejected' };
+        if (reason.trim()) updates.rejection_reason = reason.trim();
+        await updateListing(id, updates); 
+        showToast('PG Rejected.', 'success'); 
+        listings = await getAllListingsAdmin(); 
+        r(); 
+      } catch (e) { 
+        // If rejection_reason column doesn't exist, fallback to just status update
+        if (e.message?.includes('rejection_reason')) {
+          try {
+            await updateListing(id, { status: 'rejected' });
+            showToast('PG Rejected (reason not saved due to DB schema).', 'success');
+            listings = await getAllListingsAdmin();
+            r();
+          } catch (err) {
+            showToast(err.message, 'error');
+          }
+        } else {
+          showToast(e.message, 'error'); 
+        }
+      } 
+    } 
+  };
   window._adminVerify = async (id, status) => { try { await updateListing(id, { is_verified: status }); showToast(status ? 'PG marked as Verified.' : 'PG Unverified.', 'success'); listings = await getAllListingsAdmin(); r(); } catch (e) { showToast(e.message, 'error'); } };
   window._adminToggleBoost = async (id, status) => { try { await updateListing(id, { is_featured: status }); showToast(status ? 'PG has been Boosted!' : 'Boost removed.', 'success'); listings = await getAllListingsAdmin(); r(); } catch (e) { showToast(e.message, 'error'); } };
   window._adminDelete = async (id) => { if (confirm('WARNING: Permanently delete this listing from the database? This cannot be undone.')) { try { await deleteListing(id); showToast('PG permanently deleted.', 'success'); listings = await getAllListingsAdmin(); r(); } catch (e) { showToast(e.message, 'error'); } } };
@@ -1328,7 +1354,7 @@ export async function renderAdminBoostPlans() {
         <p class="text-sm text-emerald-700 dark:text-emerald-400">Boost Plans are now synchronized directly with the database across all devices.</p>
     </div>`;
 
-  document.getElementById('app').innerHTML = adminLayout(content, 'boost-plans', 'Boost Plans');
+  document.getElementById('app').innerHTML = adminLayout(content, 'boost', 'Boost Plans');
   initAdminEvents();
 
   document.getElementById('save-boost-plans-btn')?.addEventListener('click', async () => {

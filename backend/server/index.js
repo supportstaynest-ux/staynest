@@ -577,6 +577,192 @@ app.post('/api/suspend-user', verifyToken, authorizeRoles('admin'), validateSusp
 });
 
 // ══════════════════════════════════════════════════════════════════
+// POST /api/verify-stay
+// 🔒 Protected: Authenticated user
+// Verifies a user's Stay Code to unlock SOS features
+// ══════════════════════════════════════════════════════════════════
+app.post('/api/verify-stay', verifyToken, async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const { stay_code } = req.body;
+
+        if (!stay_code || stay_code.trim().length < 4) {
+            return res.status(400).json({ error: 'A valid Stay Code is required (minimum 4 characters).' });
+        }
+
+        const normalizedCode = stay_code.trim().toUpperCase();
+
+        // Find a listing that has this stay code
+        const { data: listing, error: listingErr } = await supabase
+            .from('listings')
+            .select('id, name, vendor_id')
+            .eq('stay_code', normalizedCode)
+            .single();
+
+        if (listingErr || !listing) {
+            return res.status(404).json({ error: 'Invalid Stay Code. Please check with your property owner.' });
+        }
+
+        // Mark user as verified resident
+        const { error: updateErr } = await supabase
+            .from('profiles')
+            .update({
+                is_resident_verified: true,
+                stay_code: normalizedCode,
+                updated_at: new Date().toISOString()
+            })
+            .eq('id', userId);
+
+        if (updateErr) throw updateErr;
+
+        console.log(`✅ User ${userId.slice(0, 8)} verified stay at listing: ${listing.name}`);
+        return res.json({ success: true, listing_name: listing.name });
+
+    } catch (err) {
+        console.error('❌ verify-stay error:', err.message);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// ══════════════════════════════════════════════════════════════════
+// POST /api/request-owner-approval
+// 🔒 Protected: Authenticated user
+// Sends approval request email to the PG vendor
+// ══════════════════════════════════════════════════════════════════
+app.post('/api/request-owner-approval', verifyToken, async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const { listing_id } = req.body;
+
+        if (!listing_id) return res.status(400).json({ error: 'listing_id is required.' });
+
+        // Fetch user and listing info
+        const [{ data: profile }, { data: listing }] = await Promise.all([
+            supabase.from('profiles').select('full_name, email').eq('id', userId).single(),
+            supabase.from('listings').select('name, vendor_id, profiles!vendor_id(full_name, email)').eq('id', listing_id).single()
+        ]);
+
+        if (!profile || !listing) return res.status(404).json({ error: 'User or Listing not found.' });
+
+        const vendorEmail = listing.profiles?.email;
+        const vendorName = listing.profiles?.full_name || 'Property Owner';
+        if (!vendorEmail) return res.status(404).json({ error: 'Owner email not found.' });
+
+        await resend.emails.send({
+            from: 'StayNest Safety <onboarding@resend.dev>',
+            to: vendorEmail,
+            subject: `[StayNest] Resident Approval Request from ${profile.full_name}`,
+            html: `
+                <div style="font-family: Inter, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px;">
+                    <h2 style="color: #2BB3C0; margin: 0 0 8px;">StayNest — Resident Approval Request</h2>
+                    <p style="color: #475569;">Hello <strong>${vendorName}</strong>,</p>
+                    <p style="color: #475569;"><strong>${profile.full_name}</strong> (${profile.email}) has requested approval to be verified as a resident at <strong>${listing.name}</strong>.</p>
+                    <p style="color: #475569;">This verification will allow them to access the <span style="color: #EF4444; font-weight: bold;">Emergency SOS Safety Feature</span> on the StayNest platform.</p>
+                    <p style="color: #475569;">If this person is a tenant at your property, please log into your StayNest vendor dashboard and approve this request, or reply to confirm.</p>
+                    <br/>
+                    <p style="color: #94a3b8; font-size: 12px;">© ${new Date().getFullYear()} StayNest. All rights reserved.</p>
+                </div>`
+        });
+
+        console.log(`📧 Owner approval request sent to ${vendorEmail} for listing: ${listing.name}`);
+        return res.json({ success: true });
+
+    } catch (err) {
+        console.error('❌ request-owner-approval error:', err.message);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// ══════════════════════════════════════════════════════════════════
+// POST /api/trigger-sos
+// 🔒 Protected: Authenticated user
+// Dispatches emergency SOS alerts
+// ══════════════════════════════════════════════════════════════════
+app.post('/api/trigger-sos', verifyToken, async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const { type = 'personal', location, location_url } = req.body; // type: 'emergency' | 'personal'
+        const triggeredAt = new Date().toISOString();
+
+        // Fetch user profile + emergency contacts
+        const { data: profile, error: profileErr } = await supabase
+            .from('profiles')
+            .select('full_name, email, emergency_contacts, is_resident_verified')
+            .eq('id', userId)
+            .single();
+
+        if (profileErr || !profile) return res.status(404).json({ error: 'User profile not found.' });
+
+        // For emergency SOS, MUST be verified resident
+        if (type === 'emergency' && !profile.is_resident_verified) {
+            return res.status(403).json({ error: 'Emergency SOS is only available for verified residents.' });
+        }
+
+        const emergencyContacts = Array.isArray(profile.emergency_contacts) ? profile.emergency_contacts : [];
+        const locationText = location || 'Location not shared';
+        const locationLink = location_url ? `<a href="${location_url}" style="color: #2BB3C0;">View on Google Maps</a>` : '';
+        const isEmergency = type === 'emergency';
+
+        const emailHtml = `
+            <div style="font-family: Inter, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 2px solid ${isEmergency ? '#EF4444' : '#F59E0B'}; border-radius: 12px;">
+                <div style="background: ${isEmergency ? '#EF4444' : '#F59E0B'}; border-radius: 8px; padding: 16px 24px; margin-bottom: 24px; text-align: center;">
+                    <h1 style="color: white; margin: 0; font-size: 24px;">⚠️ ${isEmergency ? 'EMERGENCY SOS ALERT' : 'Personal Safety Alert'}</h1>
+                    <p style="color: rgba(255,255,255,0.9); margin: 4px 0 0;">Sent via StayNest Safety System</p>
+                </div>
+                <p style="color: #1e293b; font-size: 16px;"><strong>${profile.full_name}</strong> has triggered a ${isEmergency ? 'EMERGENCY' : 'Personal'} SOS alert.</p>
+                <table style="width: 100%; border-collapse: collapse; margin: 16px 0; background: #f8fafc; border-radius: 8px; overflow: hidden;">
+                    <tr><td style="padding: 10px 16px; color: #64748b; font-weight: 600; border-bottom: 1px solid #e2e8f0;">Name</td><td style="padding: 10px 16px; color: #1e293b; border-bottom: 1px solid #e2e8f0;">${profile.full_name}</td></tr>
+                    <tr><td style="padding: 10px 16px; color: #64748b; font-weight: 600; border-bottom: 1px solid #e2e8f0;">Email</td><td style="padding: 10px 16px; color: #1e293b; border-bottom: 1px solid #e2e8f0;">${profile.email}</td></tr>
+                    <tr><td style="padding: 10px 16px; color: #64748b; font-weight: 600; border-bottom: 1px solid #e2e8f0;">Time</td><td style="padding: 10px 16px; color: #1e293b; border-bottom: 1px solid #e2e8f0;">${new Date(triggeredAt).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST</td></tr>
+                    <tr><td style="padding: 10px 16px; color: #64748b; font-weight: 600;">Location</td><td style="padding: 10px 16px; color: #1e293b;">${locationText} ${locationLink}</td></tr>
+                </table>
+                ${isEmergency ? `<p style="color: #EF4444; font-weight: 700; font-size: 14px;">⚠️ Please attempt to contact this person IMMEDIATELY or notify local authorities if unreachable.</p>` : ''}
+                <p style="color: #94a3b8; font-size: 12px; margin-top: 24px;">© ${new Date().getFullYear()} StayNest Safety System. This is an automated safety alert.</p>
+            </div>`;
+
+        const recipients = [];
+
+        // 1. Send to personal emergency contacts
+        if (emergencyContacts.length > 0) {
+            const contactEmails = emergencyContacts.filter(c => c.email).map(c => c.email);
+            if (contactEmails.length > 0) {
+                await resend.emails.send({
+                    from: 'StayNest Safety <onboarding@resend.dev>',
+                    to: contactEmails,
+                    subject: `🚨 [${isEmergency ? 'EMERGENCY' : 'Safety'} ALERT] ${profile.full_name} needs help!`,
+                    html: emailHtml
+                });
+                recipients.push(...contactEmails);
+            }
+        }
+
+        // 2. For Emergency SOS — also alert admin
+        if (isEmergency) {
+            const { data: admins } = await supabase.from('profiles').select('email').eq('role', 'admin');
+            const adminEmails = (admins || []).map(a => a.email).filter(Boolean);
+            if (adminEmails.length > 0) {
+                await resend.emails.send({
+                    from: 'StayNest Safety <onboarding@resend.dev>',
+                    to: adminEmails,
+                    subject: `🔴 [ADMIN EMERGENCY ALERT] User SOS — ${profile.full_name}`,
+                    html: emailHtml
+                });
+                recipients.push(...adminEmails);
+            }
+        }
+
+        // 3. Log SOS event to DB (optional: create sos_logs table later)
+        console.log(`🚨 SOS [${type.toUpperCase()}] triggered by ${profile.full_name} at ${triggeredAt}. Alerts sent to: ${recipients.join(', ') || 'no contacts saved'}`);
+
+        return res.json({ success: true, alerts_sent: recipients.length });
+
+    } catch (err) {
+        console.error('❌ trigger-sos error:', err.message);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// ══════════════════════════════════════════════════════════════════
 // 404 Handler
 // ══════════════════════════════════════════════════════════════════
 app.use((req, res) => {

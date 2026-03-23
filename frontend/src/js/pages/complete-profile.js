@@ -41,12 +41,11 @@ export function renderCompleteProfile() {
                         
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                             <div>
-                                <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Gender</label>
-                                <select id="cp-gender" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none appearance-none cursor-pointer hidden-scrollbar">
-                                    <option value="">Select Gender</option>
+                                <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Gender <span class="text-red-500">*</span></label>
+                                <select id="cp-gender" required class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none appearance-none cursor-pointer hidden-scrollbar">
+                                    <option value="" disabled selected>Select Gender</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
-                                    <option value="other">Other</option>
                                 </select>
                             </div>
                             <div>
@@ -98,7 +97,13 @@ export function renderCompleteProfile() {
   if (state.profile) {
     document.getElementById('cp-name').value = state.profile.full_name || '';
     document.getElementById('cp-phone').value = state.profile.phone || '';
-    document.getElementById('cp-gender').value = state.profile.gender || '';
+    if (state.profile.gender) {
+        const genLower = state.profile.gender.toLowerCase();
+        const sel = document.getElementById('cp-gender');
+        if (Array.from(sel.options).some(o => o.value === genLower)) {
+            sel.value = genLower;
+        }
+    }
     document.getElementById('cp-city').value = state.profile.preferred_city || '';
     if (state.profile.budget_min !== undefined) budgetMin.value = state.profile.budget_min;
     if (state.profile.budget_max !== undefined) budgetMax.value = state.profile.budget_max;
@@ -137,7 +142,7 @@ export function renderCompleteProfile() {
       const updates = {
         full_name: document.getElementById('cp-name').value,
         phone: document.getElementById('cp-phone').value,
-        gender: document.getElementById('cp-gender').value || null,
+        gender: document.getElementById('cp-gender').value,
         preferred_city: document.getElementById('cp-city').value || null,
         budget_min: Math.min(+budgetMin.value, +budgetMax.value),
         budget_max: Math.max(+budgetMin.value, +budgetMax.value),

@@ -15,6 +15,7 @@ export function renderDashboardLayout(content, activeItem = 'dashboard', title =
         { key: 'visits', icon: 'event_available', label: 'My Visits', href: '/visits' },
         { key: 'enquiries', icon: 'question_answer', label: 'My Enquiries', href: '/enquiries' },
         { divider: true },
+        { key: 'sos', icon: 'sos', label: 'Safety & SOS', href: '/safety-sos', special: true },
         { key: 'profile', icon: 'settings', label: 'Profile Settings', href: '/profile' },
     ];
 
@@ -24,8 +25,9 @@ export function renderDashboardLayout(content, activeItem = 'dashboard', title =
         const activeClass = isActive
             ? 'bg-primary/10 text-primary font-semibold'
             : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors';
+        const specialClass = i.special && !isActive ? 'border border-red-200 dark:border-red-900/40 bg-red-50 dark:bg-red-900/10 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/20' : '';
         return `
-            <a href="#${i.href}" class="dash-link flex items-center gap-3 px-3 py-2.5 rounded-lg ${activeClass}">
+            <a href="#${i.href}" class="dash-link flex items-center gap-3 px-3 py-2.5 rounded-lg ${isActive ? activeClass : specialClass || activeClass}">
                 <span class="material-symbols-outlined text-[22px]">${i.icon}</span>
                 <span>${i.label}</span>
             </a>
@@ -37,7 +39,7 @@ export function renderDashboardLayout(content, activeItem = 'dashboard', title =
         <!-- Sidebar -->
         <aside id="dash-sidebar" class="w-72 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 shadow-sm flex flex-col fixed inset-y-0 left-0 z-50 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 ease-in-out">
             <div class="p-6 flex items-center justify-between md:justify-start gap-3">
-                <a href="#/home" class="flex items-center gap-3">
+                                <a href="#/home" class="flex items-center gap-3">
                     <div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
                         <span class="material-symbols-outlined">home_pin</span>
                     </div>

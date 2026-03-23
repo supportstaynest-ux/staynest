@@ -1,4 +1,4 @@
-// Global state
+// Global state - trigger HMR
 export const state = {
     user: null,
     profile: null,

@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from '@supabase/supabase-js'; // Trigger HMR
 
 const SUPABASE_URL = 'https://cqrcqaiaarqvenlcukci.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNxcmNxYWlhYXJxdmVubGN1a2NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI2MTE2OTYsImV4cCI6MjA4ODE4NzY5Nn0.MaxlJ1dx9huliyTwL-iONxp2L2tU0Xa1dTybgQch3OU';
@@ -290,7 +290,7 @@ export async function getUser() {
 export async function getProfile(userId) {
     const cached = profileCache.get(userId);
     if (cached) return cached;
-    const { data, error } = await supabase.from('profiles').select('id, full_name, role, email, avatar_url, is_verified, subscription_plan, created_at, phone').eq('id', userId).single();
+    const { data, error } = await supabase.from('profiles').select('id, full_name, role, email, avatar_url, is_verified, subscription_plan, created_at, phone, gender, preferred_city, budget_min, budget_max').eq('id', userId).single();
     if (error) throw error;
     if (data) profileCache.set(userId, data);
     return data;
@@ -304,6 +304,18 @@ export async function updateProfile(userId, updates) {
     }
     profileCache.set(userId, data[0]);
     return data[0];
+}
+
+export async function getVendorPublicProfile(vendorId) {
+    const [profileRes, listingsRes] = await Promise.all([
+        supabase.from('profiles').select('id, full_name, avatar_url, created_at').eq('id', vendorId).single(),
+        supabase.from('listings').select('id, name, city, address, monthly_rent, images, total_views, gender_allowed, is_featured, reviews(rating)').eq('vendor_id', vendorId).eq('status', 'approved').order('created_at', { ascending: false })
+    ]);
+    if (profileRes.error) throw profileRes.error;
+    const listings = listingsRes.data || [];
+    const allRatings = listings.flatMap(l => (l.reviews || []).map(r => r.rating));
+    const avgRating = allRatings.length > 0 ? (allRatings.reduce((s, r) => s + r, 0) / allRatings.length).toFixed(1) : null;
+    return { profile: profileRes.data, listings, avgRating, totalReviews: allRatings.length };
 }
 
 export async function uploadAvatar(userId, file) {
@@ -678,6 +690,17 @@ export async function createReview(review) {
     const { data, error } = await supabase.from('reviews').insert(review).select().single();
     if (error) throw error;
     return data;
+}
+
+export async function updateReview(id, rating, comment) {
+    const { data, error } = await supabase.from('reviews').update({ rating, comment }).eq('id', id).select().single();
+    if (error) throw error;
+    return data;
+}
+
+export async function deleteReview(id) {
+    const { error } = await supabase.from('reviews').delete().eq('id', id);
+    if (error) throw error;
 }
 
 export async function replyReview(id, reply) {
@@ -1758,3 +1781,56 @@ export async function getVendorPayouts(userId) {
     }
     return data || [];
 }
+
+// ── SOS Safety System Functions ──
+
+export async function verifyStay(stayCode) {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) throw new Error('Not authenticated');
+    const res = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/verify-stay`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session.access_token}` },
+        body: JSON.stringify({ stay_code: stayCode })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Verification failed');
+    return data;
+}
+
+export async function requestOwnerApproval(listingId) {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) throw new Error('Not authenticated');
+    const res = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/request-owner-approval`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session.access_token}` },
+        body: JSON.stringify({ listing_id: listingId })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Request failed');
+    return data;
+}
+
+export async function triggerSOS(type, location, locationUrl) {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) throw new Error('Not authenticated');
+    const res = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/trigger-sos`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session.access_token}` },
+        body: JSON.stringify({ type, location, location_url: locationUrl })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'SOS trigger failed');
+    return data;
+}
+
+export async function updateEmergencyContacts(userId, contacts) {
+    const { data, error } = await supabase
+        .from('profiles')
+        .update({ emergency_contacts: contacts, updated_at: new Date().toISOString() })
+        .eq('id', userId)
+        .select()
+        .single();
+    if (error) throw error;
+    return data;
+}
+

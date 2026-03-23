@@ -61,7 +61,7 @@ export function renderFooter() {
               </div>
               <div>
                   <h4 class="text-white font-bold mb-6">Contact Us</h4>
-                  <ul class="space-y-4 text-sm">
+                  <ul class="space-y-4 text-sm mb-8">
                       <li class="flex items-start gap-3">
                           <span class="material-symbols-outlined text-primary">mail</span>
                           <a href="mailto:${s.support_email}" class="hover:text-primary transition-colors">${s.support_email}</a>
@@ -75,6 +75,14 @@ export function renderFooter() {
                           <a href="${mapsUrl}" target="_blank" rel="noopener" class="hover:text-primary transition-colors">${s.address}</a>
                       </li>
                   </ul>
+                  
+                  <div class="bg-slate-800/50 p-4 rounded-2xl border border-slate-700/50">
+                      <h5 class="text-white font-bold mb-2 text-sm">Own a property?</h5>
+                      <p class="text-xs text-slate-400 mb-4 leading-relaxed">List your PG with us and reach thousands of students instantly.</p>
+                      <a href="mailto:${s.support_email}?subject=Join%20StayNest%20as%20Vendor" class="inline-flex items-center justify-center w-full px-4 py-2.5 bg-primary/20 hover:bg-primary text-primary hover:text-white rounded-xl font-bold transition-all text-sm gap-2">
+                          <span class="material-symbols-outlined text-[18px]">real_estate_agent</span> Join Us
+                      </a>
+                  </div>
               </div>
           </div>
           <div class="flex flex-col md:flex-row justify-between items-center gap-4">

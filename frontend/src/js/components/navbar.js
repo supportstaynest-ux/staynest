@@ -1,4 +1,4 @@
-import { state, isLoggedIn, isVendor, isAdmin, formatTimeAgo } from '../state.js';
+import { state, isLoggedIn, isVendor, isAdmin } from '../state.js';
 import { signOut, getUserBroadcasts, getVendorBroadcasts, dismissMessage } from '../supabase.js';
 import { navigate } from '../router.js';
 
@@ -8,10 +8,11 @@ export function renderNavbar(title = 'StayNest') {
     const dashRoute = isAdmin() ? '#/admin' : isVendor() ? '#/vendor' : '#/dashboard';
 
     return `
-    <header class="sticky top-0 z-50 w-full bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl shadow-[0_1px_3px_rgba(0,0,0,0.08),0_4px_14px_rgba(0,0,0,0.04)] dark:shadow-[0_1px_3px_rgba(0,0,0,0.3)] border-b border-slate-100 dark:border-slate-800/60 transition-colors duration-300">
+    <div class="h-16 w-full z-50">
+        <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl shadow-[0_1px_3px_rgba(0,0,0,0.08),0_4px_14px_rgba(0,0,0,0.04)] dark:shadow-[0_1px_3px_rgba(0,0,0,0.3)] border-b border-slate-100 dark:border-slate-800/60 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <div class="flex items-center gap-8">
-                <a href="#/home" class="flex items-center gap-2.5 group">
+                                <a href="#/home" class="flex items-center gap-2.5 group">
                     <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-teal-400 flex items-center justify-center shadow-md shadow-primary/20 group-hover:shadow-primary/40 transition-shadow">
                         <span class="material-symbols-outlined text-[20px] text-white">home_pin</span>
                     </div>
@@ -93,32 +94,54 @@ export function renderNavbar(title = 'StayNest') {
                 </button>
             </div>
         </div>
+        </header>
+    </div>
 
-        <!-- Mobile Menu (Drawer) -->
-        <div id="mobile-drawer" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[9999] opacity-0 invisible transition-all duration-300 md:hidden">
-            <div id="mobile-drawer-content" class="absolute right-0 top-0 h-full w-72 bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full transition-transform duration-300 ease-out flex flex-col">
-                <div class="p-6 flex items-center justify-between border-b border-slate-100 dark:border-slate-800">
-                    <span class="font-bold text-lg">Menu</span>
-                    <button class="md-close-btn p-1 text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
-                        <span class="material-symbols-outlined">close</span>
-                    </button>
-                </div>
-                
-                <nav class="flex-1 p-6 space-y-4">
-                    <a href="#/explore" class="block text-lg font-semibold text-slate-700 dark:text-slate-300 hover:text-primary">Explore PGs</a>
-                    <a href="#/compare" class="block text-lg font-semibold text-slate-700 dark:text-slate-300 hover:text-primary">Compare</a>
-                    <a href="#/saved" class="block text-lg font-semibold text-slate-700 dark:text-slate-300 hover:text-primary">Saved</a>
-                    <div class="pt-4 border-t border-slate-100 dark:border-slate-800"></div>
-                    ${!isUserLoggedIn ? `
-                        <a href="#/auth" class="block text-lg font-bold text-primary">Login / Sign Up</a>
-                    ` : `
-                        <a href="${dashRoute}" class="block text-lg font-semibold text-slate-700 dark:text-slate-300">Dashboard</a>
-                        <button id="mobile-logout-btn" class="block w-full text-left text-lg font-semibold text-red-500">Sign Out</button>
-                    `}
-                </nav>
+    <!-- Mobile Menu (Drawer) -->
+    <div id="mobile-drawer" class="fixed inset-0 z-[9999] opacity-0 invisible transition-all duration-300 md:hidden">
+        <!-- Background Overlay -->
+        <div id="mobile-drawer-overlay" class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity"></div>
+        <!-- Drawer Content -->
+        <div id="mobile-drawer-content" class="absolute right-0 top-0 h-full w-[80%] max-w-sm bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full transition-transform duration-300 ease-out flex flex-col overflow-y-auto hidden-scrollbar">
+            <div class="p-5 flex items-center justify-between border-b border-slate-100 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 sticky top-0 z-10">
+                <span class="font-bold text-xl text-slate-900 dark:text-white">Menu</span>
+                <button class="md-close-btn p-2 text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[22px]">close</span>
+                </button>
             </div>
+            
+            <nav class="flex-1 px-5 py-6 space-y-2">
+                <a href="#/explore" class="md-close-btn flex items-center gap-4 px-4 py-3 rounded-xl text-base font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                    <span class="material-symbols-outlined text-slate-400">search</span>
+                    Explore PGs
+                </a>
+                <a href="#/compare" class="md-close-btn flex items-center gap-4 px-4 py-3 rounded-xl text-base font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                    <span class="material-symbols-outlined text-slate-400">compare_arrows</span>
+                    Compare
+                </a>
+                <a href="#/saved" class="md-close-btn flex items-center gap-4 px-4 py-3 rounded-xl text-base font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                    <span class="material-symbols-outlined text-slate-400">favorite</span>
+                    Saved
+                </a>
+                <div class="my-4 border-t border-slate-100 dark:border-slate-800"></div>
+                ${!isUserLoggedIn ? `
+                    <a href="#/auth" class="md-close-btn flex items-center gap-4 px-4 py-3 rounded-xl text-base font-bold bg-primary/10 text-primary hover:bg-primary/20 transition-colors mt-4">
+                        <span class="material-symbols-outlined mt-0.5">login</span>
+                        Login / Sign Up
+                    </a>
+                ` : `
+                    <a href="${dashRoute}" class="md-close-btn flex items-center gap-4 px-4 py-3 rounded-xl text-base font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                        <span class="material-symbols-outlined text-slate-400">dashboard</span>
+                        Dashboard
+                    </a>
+                    <button id="mobile-logout-btn" class="w-full flex items-center gap-4 px-4 py-3 rounded-xl text-base font-semibold text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors mt-2 text-left">
+                        <span class="material-symbols-outlined text-red-400">logout</span>
+                        Sign Out
+                    </button>
+                `}
+            </nav>
         </div>
-    </header>
+    </div>
     `;
 }
 
@@ -151,7 +174,8 @@ export function initNavbarEvents() {
             drawer.classList.add('visible', 'opacity-100');
             drawerContent.classList.remove('translate-x-full');
             drawerContent.classList.add('translate-x-0');
-            document.body.style.overflow = 'hidden';
+            document.body.style.setProperty('overflow', 'hidden', 'important');
+            document.body.style.setProperty('touch-action', 'none', 'important');
         };
     }
 
@@ -162,12 +186,14 @@ export function initNavbarEvents() {
         setTimeout(() => {
             drawer.classList.remove('visible', 'opacity-100');
             drawer.classList.add('invisible', 'opacity-0');
-            document.body.style.overflow = 'auto';
+            document.body.style.removeProperty('overflow');
+            document.body.style.removeProperty('touch-action');
         }, 300);
     };
 
     closeBtns.forEach(btn => btn.onclick = closeDrawer);
-    if (drawer) drawer.onclick = (e) => { if (e.target === drawer) closeDrawer(); };
+    const drawerOverlay = document.getElementById('mobile-drawer-overlay');
+    if (drawerOverlay) drawerOverlay.onclick = closeDrawer;
 
     // Notifications Logic
     (async () => {
@@ -255,4 +281,132 @@ export function initNavbarEvents() {
             header?.classList.add('bg-white/80', 'dark:bg-slate-900/80');
         }
     });
+
+    // ── Smart Female Detection Popup ──
+    setTimeout(() => {
+        if (!isLoggedIn() || state.profile?.role === 'vendor' || state.profile?.role === 'admin') return;
+        
+        // Only show once per session
+        if (sessionStorage.getItem('sos_popup_shown')) return;
+
+        const p = state.profile || {};
+        const isFemale = p.gender === 'Female' || p.gender === 'female' || 
+            (p.full_name && /\b(kumari|devi|sharma|kaur|shree|ben)\b/i.test(p.full_name.split(' ').pop()));
+
+        if (isFemale) {
+            sessionStorage.setItem('sos_popup_shown', 'true');
+            // Inject the popup into body
+            const popupHtml = `
+            <div id="sos-discovery-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300">
+                <div class="bg-white dark:bg-slate-900 w-full max-w-md rounded-3xl shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden text-center transform transition-all animate-in zoom-in-95 duration-300">
+                    <div class="bg-gradient-to-br from-rose-50 to-pink-50 dark:from-rose-900/20 dark:to-pink-900/20 p-8 pb-6 border-b border-rose-100 dark:border-rose-900/30">
+                        <div class="size-16 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto shadow-sm border border-rose-100 dark:border-slate-700 mb-4">
+                            <span class="material-symbols-outlined text-4xl text-rose-500" style="font-variation-settings:'FILL' 1">shield_person</span>
+                        </div>
+                        <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-2">Safety Feature for Women</h2>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Book your PG through StayNest to unlock our Emergency SOS Safety Feature, designed exclusively for your protection.</p>
+                    </div>
+                    <div class="p-6 bg-white dark:bg-slate-900 space-y-3">
+                        <button id="sos-learn-more-btn" class="w-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold py-3.5 rounded-xl transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5">Learn More</button>
+                        <button id="sos-maybe-later-btn" class="w-full bg-transparent text-slate-500 font-bold py-3.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">Maybe Later</button>
+                    </div>
+                </div>
+            </div>`;
+            document.body.insertAdjacentHTML('beforeend', popupHtml);
+            
+            document.getElementById('sos-maybe-later-btn').onclick = () => {
+                const m = document.getElementById('sos-discovery-modal');
+                m.classList.add('fade-out', 'zoom-out-95');
+                setTimeout(() => m.remove(), 300);
+            };
+
+            document.getElementById('sos-learn-more-btn').onclick = () => {
+                const m = document.getElementById('sos-discovery-modal');
+                m.remove();
+                showSOSLearnMoreModal();
+            };
+        }
+    }, 1500); // slight delay after login/navigation
+}
+
+export function showSOSLearnMoreModal() {
+    const modalHtml = `
+    <div id="sos-learn-more-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-lg max-h-[90vh] overflow-y-auto hidden-scrollbar rounded-3xl shadow-2xl border border-slate-100 dark:border-slate-800 relative">
+            
+            <!-- Close Button -->
+            <button id="close-sos-learn-more" class="absolute top-4 right-4 size-8 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors z-10">
+                <span class="material-symbols-outlined text-[20px]">close</span>
+            </button>
+
+            <!-- Header -->
+            <div class="p-8 pb-6 border-b border-slate-100 dark:border-slate-800 text-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-rose-500/5 dark:bg-rose-500/10 pointer-events-none"></div>
+                <div class="size-20 bg-rose-50 dark:bg-rose-900/30 rounded-full flex items-center justify-center mx-auto mb-4 border border-rose-100 dark:border-rose-900/50">
+                    <span class="material-symbols-outlined text-5xl text-rose-500" style="font-variation-settings:'FILL' 1">emergency_home</span>
+                </div>
+                <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-2">How Smart SOS Works</h2>
+                <p class="text-slate-500 text-sm">Your safety is our priority. Here's how StayNest protects verified residents.</p>
+            </div>
+
+            <!-- Content -->
+            <div class="p-8 space-y-6">
+                
+                <div class="flex gap-4">
+                    <div class="size-10 shrink-0 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center font-black text-rose-500">1</div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 dark:text-white mb-1">Book & Verify Stay</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">After moving in, enter your unique 'Stay Code' from your PG owner to become a Verified Resident.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <div class="size-10 shrink-0 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center font-black text-rose-500">2</div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 dark:text-white mb-1">Add Emergency Contacts</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Add phone numbers and emails of trusted family members and friends to your safety profile.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <div class="size-10 shrink-0 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center font-black text-rose-500">3</div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 dark:text-white mb-1">3-Second Press & Hold</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">In an emergency, press and hold the SOS button for 3 seconds to prevent accidental triggers.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <div class="size-10 shrink-0 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center font-black text-rose-500">4</div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 dark:text-white mb-1">Instant Multi-Alert</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Instantly alerts your contacts, the PG owner, and StayNest Admin with your name, time, and live location.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer -->
+            <div class="p-6 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800 flex gap-3">
+                <button id="setup-sos-btn" class="flex-1 bg-rose-500 text-white font-bold py-3.5 rounded-xl transition-all shadow-md shadow-rose-500/20 hover:shadow-rose-500/40 hover:-translate-y-0.5">Setup Safety Now</button>
+            </div>
+            
+        </div>
+    </div>`;
+
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+    const modal = document.getElementById('sos-learn-more-modal');
+    
+    document.getElementById('close-sos-learn-more').onclick = () => {
+        modal.classList.add('fade-out', 'zoom-out-95');
+        setTimeout(() => modal.remove(), 300);
+    };
+
+    document.getElementById('setup-sos-btn').onclick = () => {
+        modal.remove();
+        if (typeof window.location.hash !== 'undefined') {
+            window.location.hash = '/safety-sos';
+        }
+    };
 }

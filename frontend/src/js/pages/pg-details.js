@@ -1,6 +1,6 @@
 import { state, isLoggedIn, isAdmin, formatPrice, avgRating, renderStars, getAmenityIcon, showToast, showLoading, hideLoading, addToCompare, AMENITIES_LIST } from '../state.js';
 import { navigate } from '../router.js';
-import { getListing, saveListing, unsaveListing, addRecentlyViewed, createReview, incrementListingViews, getNearbyPlaces, createVisitRequest, getListingChatMessages, sendListingChatMessage, subscribeToListingChats, unsubscribeChat, sendTargetedNotification, insertRecentActivity, getUserListingVisitRequest, cancelVisitRequest, createReport } from '../supabase.js';
+import { getListing, saveListing, unsaveListing, addRecentlyViewed, createReview, updateReview, deleteReview, incrementListingViews, getNearbyPlaces, createVisitRequest, getListingChatMessages, sendListingChatMessage, subscribeToListingChats, unsubscribeChat, sendTargetedNotification, insertRecentActivity, getUserListingVisitRequest, cancelVisitRequest, createReport } from '../supabase.js';
 import { trackPGView, trackPGSave, trackContactClick, trackScrollDepth } from '../analytics.js';
 import { renderNavbar, initNavbarEvents } from '../components/navbar.js';
 import { renderFooter } from '../components/footer.js';
@@ -187,6 +187,27 @@ export async function renderPGDetails({ id }) {
                         ${pg.food_available ? '<span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-orange-100 text-orange-700 border border-orange-200">Food Included</span>' : ''}
                         ${pg.is_featured ? '<span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-yellow-100 text-yellow-700 border border-yellow-200 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">star</span> Featured</span>' : ''}
                     </div>
+
+                    <!-- Listing ID + SOS Safety Row -->
+                    <div class="flex flex-wrap items-center justify-between gap-3 mt-5 pt-4 border-t border-slate-100 dark:border-slate-800">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs text-slate-400 font-medium">Listing ID:</span>
+                            <span
+                                id="copy-listing-id-badge"
+                                class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg font-mono text-[11px] font-bold text-slate-600 dark:text-slate-300 cursor-pointer hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-all select-all group"
+                                title="Click to copy full Listing ID"
+                                onclick="navigator.clipboard.writeText('${pg.id}'); this.innerHTML = '<span class=\\'material-symbols-outlined text-[12px]\\'>check_circle</span> Copied!'; this.classList.add('text-green-600','bg-green-50','border-green-200'); setTimeout(() => { this.innerHTML = '<span class=\\'material-symbols-outlined text-[12px]\\'>content_copy</span> ${pg.id.substring(0,8).toUpperCase()}…'; this.classList.remove(\\'text-green-600\\',\\'bg-green-50\\',\\'border-green-200\\'); }, 2000);"
+                            >
+                                <span class="material-symbols-outlined text-[12px]">content_copy</span>
+                                ${pg.id.substring(0,8).toUpperCase()}…
+                            </span>
+                        </div>
+                        ${pg.gender_allowed !== 'male' ? `
+                        <a href="#/safety-sos" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800 rounded-lg text-[11px] font-bold text-rose-600 dark:text-rose-400 hover:bg-rose-100 transition-colors">
+                            <span class="material-symbols-outlined text-[14px]" style="font-variation-settings:'FILL' 1">sos</span>
+                            Safety &amp; SOS
+                        </a>` : ''}
+                    </div>
                 </div>
 
                 <!-- Description -->
@@ -344,20 +365,45 @@ export async function renderPGDetails({ id }) {
                         </div>`}
                     </div>
 
-                    ${isLoggedIn() ? `
-                    <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-xl border border-slate-200 dark:border-slate-700">
-                        <h4 class="font-bold mb-4 text-slate-900 dark:text-white">Write a Review</h4>
-                        <div class="flex items-center gap-1 mb-4" id="review-stars">
-                            ${[1, 2, 3, 4, 5].map(i => `<button class="review-star text-slate-300 hover:text-yellow-400 transition-colors focus:outline-none" data-val="${i}"><span class="material-symbols-outlined text-3xl">star_border</span></button>`).join('')}
-                        </div>
-                        <textarea id="review-text" rows="3" class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none text-slate-900 dark:text-white placeholder:text-slate-400 mb-4 resize-y" placeholder="Share details of your experience at this property..."></textarea>
-                        <button id="submit-review" class="bg-primary text-white font-bold px-6 py-2.5 rounded-lg shadow-sm hover:brightness-110 transition-all">Submit Review</button>
-                    </div>` : `
-                    <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-xl border border-dashed border-slate-300 dark:border-slate-700 text-center">
-                        <p class="text-slate-500 text-sm mb-3">You must be logged in to write a review.</p>
-                        <button onclick="window.location.hash='/auth'" class="bg-primary/10 text-primary font-bold px-6 py-2 rounded-lg hover:bg-primary/20 transition-all">Log In</button>
                     </div>
-                    `}
+
+                    ${(() => {
+                        if (!isLoggedIn()) {
+                            return `
+                            <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-xl border border-dashed border-slate-300 dark:border-slate-700 text-center">
+                                <p class="text-slate-500 text-sm mb-3">You must be logged in to write a review.</p>
+                                <button onclick="window.location.hash='/auth'" class="bg-primary/10 text-primary font-bold px-6 py-2 rounded-lg hover:bg-primary/20 transition-all">Log In</button>
+                            </div>`;
+                        }
+                        
+                        const userReview = pg.reviews?.find(r => r.user_id === state.user.id);
+                        if (userReview) {
+                            return `
+                            <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-xl border border-slate-200 dark:border-slate-700">
+                                <h4 class="font-bold mb-4 text-slate-900 dark:text-white">Edit Your Review</h4>
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center gap-1" id="review-stars" data-existing="${userReview.rating}">
+                                        ${[1, 2, 3, 4, 5].map(i => `<button class="review-star focus:outline-none ${i <= userReview.rating ? 'text-yellow-400' : 'text-slate-300 hover:text-yellow-400'} transition-colors" data-val="${i}"><span class="material-symbols-outlined text-3xl font-bold" style="${i <= userReview.rating ? 'font-variation-settings: \\\'FILL\\\' 1;' : ''}">${i <= userReview.rating ? 'star' : 'star_border'}</span></button>`).join('')}
+                                    </div>
+                                    <button id="delete-review-btn" data-id="${userReview.id}" class="text-red-500 hover:text-red-600 bg-red-50 hover:bg-red-100 dark:bg-red-900/20 dark:hover:bg-red-900/40 p-2 rounded-lg transition-colors flex items-center justify-center" title="Delete Review">
+                                        <span class="material-symbols-outlined text-sm">delete</span>
+                                    </button>
+                                </div>
+                                <textarea id="review-text" rows="3" class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none text-slate-900 dark:text-white placeholder:text-slate-400 mb-4 resize-y" placeholder="Share details of your experience...">${userReview.comment || ''}</textarea>
+                                <button id="update-review" data-id="${userReview.id}" class="bg-primary text-white font-bold px-6 py-2.5 rounded-lg shadow-sm hover:brightness-110 transition-all">Update Review</button>
+                            </div>`;
+                        }
+                        
+                        return `
+                        <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-xl border border-slate-200 dark:border-slate-700">
+                            <h4 class="font-bold mb-4 text-slate-900 dark:text-white">Write a Review</h4>
+                            <div class="flex items-center gap-1 mb-4" id="review-stars">
+                                ${[1, 2, 3, 4, 5].map(i => `<button class="review-star text-slate-300 hover:text-yellow-400 transition-colors focus:outline-none" data-val="${i}"><span class="material-symbols-outlined text-3xl">star_border</span></button>`).join('')}
+                            </div>
+                            <textarea id="review-text" rows="3" class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none text-slate-900 dark:text-white placeholder:text-slate-400 mb-4 resize-y" placeholder="Share details of your experience at this property..."></textarea>
+                            <button id="submit-review" class="bg-primary text-white font-bold px-6 py-2.5 rounded-lg shadow-sm hover:brightness-110 transition-all">Submit Review</button>
+                        </div>`;
+                    })()}
                 </div>
             </div>
 
@@ -368,15 +414,18 @@ export async function renderPGDetails({ id }) {
                     <!-- Vendor Profile Card -->
                     <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-md p-6">
                         <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Listed By</h3>
-                        <div class="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100 dark:border-slate-800">
-                            <div class="size-14 rounded-full bg-slate-100 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 overflow-hidden flex items-center justify-center">
-                                ${vendor.avatar_url ? `<img src="${vendor.avatar_url}" class="w-full h-full object-cover">` : `<span class="material-symbols-outlined text-2xl text-slate-400">person</span>`}
+                        <a href="#/vendor/${pg.vendor_id}" class="flex items-center justify-between mb-6 pb-6 border-b border-slate-100 dark:border-slate-800 group hover:opacity-90 transition-opacity">
+                            <div class="flex items-center gap-4">
+                                <div class="size-14 rounded-full bg-slate-100 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 overflow-hidden flex items-center justify-center">
+                                    ${vendor.avatar_url ? `<img src="${vendor.avatar_url}" class="w-full h-full object-cover">` : `<span class="material-symbols-outlined text-2xl text-slate-400">person</span>`}
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-bold text-lg text-slate-900 dark:text-white truncate capitalize group-hover:text-primary transition-colors">${vendor.full_name || 'Property Owner'}</p>
+                                    <p class="text-xs text-slate-500 font-medium">Verified Vendor <span class="material-symbols-outlined text-green-500 text-[14px] relative top-[3px]">verified_user</span></p>
+                                </div>
                             </div>
-                            <div class="flex-1 min-w-0">
-                                <p class="font-bold text-lg text-slate-900 dark:text-white truncate capitalize">${vendor.full_name || 'Property Owner'}</p>
-                                <p class="text-xs text-slate-500 font-medium">Verified Vendor <span class="material-symbols-outlined text-green-500 text-[14px] relative top-[3px]">verified_user</span></p>
-                            </div>
-                        </div>
+                            <span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">chevron_right</span>
+                        </a>
 
                         <div class="flex gap-3 mb-6">
                             <button id="save-pg-btn" class="flex-1 flex flex-col items-center justify-center gap-1 p-3 rounded-xl border ${isSaved ? 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-900 text-red-500' : 'bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:border-primary hover:text-primary'} transition-colors group">
@@ -484,7 +533,9 @@ export async function renderPGDetails({ id }) {
     };
 
     // Review stars logic
-    let reviewRating = 0;
+    const starsContainer = document.getElementById('review-stars');
+    let reviewRating = starsContainer ? parseInt(starsContainer.dataset.existing) || 0 : 0;
+    
     document.querySelectorAll('.review-star').forEach(btn => {
         btn.onclick = () => {
             reviewRating = +btn.dataset.val;
@@ -504,6 +555,31 @@ export async function renderPGDetails({ id }) {
             showToast('Review submitted successfully!', 'success');
             renderPGDetails({ id }); // Refresh
         } catch (e) { showToast(e.message || 'Failed to submit review', 'error'); }
+        hideLoading();
+    });
+
+    document.getElementById('update-review')?.addEventListener('click', async (e) => {
+        if (!reviewRating) { showToast('Please select a rating of at least 1 star', 'error'); return; }
+        const comment = document.getElementById('review-text').value.trim();
+        const reviewId = e.target.dataset.id;
+        showLoading();
+        try {
+            await updateReview(reviewId, reviewRating, comment);
+            showToast('Review updated successfully!', 'success');
+            renderPGDetails({ id }); // Refresh
+        } catch (err) { showToast(err.message || 'Failed to update review', 'error'); }
+        hideLoading();
+    });
+
+    document.getElementById('delete-review-btn')?.addEventListener('click', async (e) => {
+        if (!confirm('Are you sure you want to delete your review?')) return;
+        const reviewId = e.currentTarget.dataset.id;
+        showLoading();
+        try {
+            await deleteReview(reviewId);
+            showToast('Review deleted successfully!', 'success');
+            renderPGDetails({ id }); // Refresh
+        } catch (err) { showToast(err.message || 'Failed to delete review', 'error'); }
         hideLoading();
     });
 
@@ -559,19 +635,33 @@ export async function renderPGDetails({ id }) {
                     </div>
                     <div class="p-5 overflow-y-auto pb-10 sm:pb-5">
                         <form id="book-visit-form" class="space-y-4">
-                            <div>
-                                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">Select Date <span class="text-red-500">*</span></label>
-                                <input type="date" id="visit-date" required min="${today}" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 focus:ring-2 focus:ring-primary focus:border-primary outline-none text-slate-900 dark:text-white dark:color-scheme-dark">
-                            </div>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">Select Date <span class="text-red-500">*</span></label>
+                                    <input type="date" id="visit-date" required min="${today}" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 focus:ring-2 focus:ring-primary focus:border-primary outline-none text-slate-900 dark:text-white dark:color-scheme-dark">
+                                </div>
                                 <div>
                                     <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">Time <span class="text-red-500">*</span></label>
                                     <input type="time" id="visit-time" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 focus:ring-2 focus:ring-primary focus:border-primary outline-none text-slate-900 dark:text-white dark:color-scheme-dark">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="relative">
+                                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">Gender <span class="text-red-500">*</span></label>
+                                    <select id="visit-gender" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 focus:ring-2 focus:ring-primary focus:border-primary outline-none text-slate-900 dark:text-white appearance-none cursor-pointer">
+                                        <option value="" disabled ${!state.profile?.gender ? 'selected' : ''}>Select Gender</option>
+                                        <option value="male" ${state.profile?.gender === 'male' ? 'selected' : ''}>Male</option>
+                                        <option value="female" ${state.profile?.gender === 'female' ? 'selected' : ''}>Female</option>
+                                    </select>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">Phone <span class="text-red-500">*</span></label>
                                     <input type="tel" id="visit-phone" required placeholder="10-digit number" pattern="[0-9]{10}" maxlength="10" value="${state.profile?.phone || ''}" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 focus:ring-2 focus:ring-primary focus:border-primary outline-none text-slate-900 dark:text-white placeholder:text-slate-400">
                                 </div>
+                            </div>
+                            <div id="visit-safety-msg" class="${state.profile?.gender === 'female' ? 'flex' : 'hidden'} bg-pink-50 dark:bg-pink-900/20 border border-pink-200 dark:border-pink-800 p-3 rounded-xl text-xs text-pink-700 dark:text-pink-300 items-start gap-2 mt-[-0.5rem]">
+                                <span class="material-symbols-outlined text-[16px] relative top-px">security</span>
+                                <span>For your safety, please do not share your personal number. Instead, share your father’s, brother’s, or a trusted person’s contact number.</span>
                             </div>
                             <div>
                                 <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">Message (Optional)</label>
@@ -587,6 +677,20 @@ export async function renderPGDetails({ id }) {
             document.body.appendChild(modalObj);
 
             document.getElementById('close-visit-modal').onclick = () => modalObj.remove();
+            
+            const genderSelect = document.getElementById('visit-gender');
+            const safetyMsg = document.getElementById('visit-safety-msg');
+            if (genderSelect && safetyMsg) {
+                genderSelect.addEventListener('change', (e) => {
+                    if (e.target.value === 'female') {
+                        safetyMsg.classList.remove('hidden');
+                        safetyMsg.classList.add('flex');
+                    } else {
+                        safetyMsg.classList.add('hidden');
+                        safetyMsg.classList.remove('flex');
+                    }
+                });
+            }
 
             // Handle Form Submits
             document.getElementById('book-visit-form').onsubmit = async (evt) => {
@@ -599,6 +703,7 @@ export async function renderPGDetails({ id }) {
                     const dt = document.getElementById('visit-date').value;
                     const tm = document.getElementById('visit-time').value;
                     const ph = document.getElementById('visit-phone').value;
+                    const gender = document.getElementById('visit-gender').value;
                     const ms = document.getElementById('visit-message').value;
 
                     const newVisit = await createVisitRequest({
@@ -609,6 +714,7 @@ export async function renderPGDetails({ id }) {
                         visit_time: tm,
                         name: state.user.user_metadata?.full_name || 'User',
                         phone: ph,
+                        gender: gender,
                         message: ms
                     });
 

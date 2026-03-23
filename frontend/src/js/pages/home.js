@@ -299,6 +299,11 @@ export function renderPGCard(pg) {
             </p>
             
             <div class="flex gap-2 mb-4 overflow-x-auto no-scrollbar">
+                ${pg.room_size ? `
+                <div class="flex flex-col items-center p-1.5 bg-slate-50 dark:bg-slate-800/50 rounded-xl flex-1 min-w-[50px]">
+                    <span class="material-symbols-outlined text-primary text-[18px]">square_foot</span>
+                    <span class="text-[9px] uppercase font-bold text-slate-400 mt-1 truncate w-full text-center">${pg.room_size} sq ft</span>
+                </div>` : ''}
                 ${amenities.map(a => {
             const am = getAmenityIcon(a);
             return `

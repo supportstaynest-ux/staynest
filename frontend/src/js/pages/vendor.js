@@ -65,7 +65,7 @@ function vendorLayout(content, active = 'dashboard', title = 'Vendor Dashboard')
         <!-- Desktop Sidebar -->
         <aside id="vendor-sidebar" class="w-64 border-r border-slate-200 dark:border-slate-800 shadow-sm bg-white dark:bg-slate-900 flex flex-col fixed inset-y-0 left-0 z-50 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 ease-in-out h-full">
             <div class="p-6 flex items-center justify-between md:justify-start gap-3">
-                <a href="#/home" class="flex items-center gap-3 w-full">
+                                <a href="#/home" class="flex items-center gap-3 w-full">
                     <div class="size-10 bg-primary rounded-xl flex items-center justify-center text-white shrink-0">
                         <span class="material-symbols-outlined font-bold">home_work</span>
                     </div>
@@ -331,7 +331,7 @@ function initVendorEvents() {
                             html += matchedListings.map(l => `
                                 <a href="#/vendor/listings" class="block px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-800">
                                     <div class="font-bold text-sm text-slate-900 dark:text-white">${l.name}</div>
-                                    <div class="text-xs text-slate-500">${l.city} • ${l.gender} • ₹${l.price_monthly}/mo</div>
+                                    <div class="text-xs text-slate-500">${l.city || ''} • ${l.gender_allowed || 'Any'} • ₹${(l.monthly_rent || 0).toLocaleString('en-IN')}/mo</div>
                                 </a>`).join('');
                         }
                         if (matchedLeads.length > 0) {
@@ -544,7 +544,8 @@ export async function renderVendorDashboard() {
                         <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"><td class="px-6 py-4"><div class="flex items-center gap-3"><div class="size-10 rounded-lg bg-cover bg-center shrink-0" style="background-image: url('${l.images && l.images[0] ? l.images[0] : 'https://placehold.co/100x100/e2e8f0/94a3b8?text=UI'}')"></div>
                                     <div>
                                         <p class="font-bold text-sm text-slate-900 dark:text-white">${l.name}</p>
-                                        <p class="text-xs text-slate-500">${l.city}</p>
+                                        <p class="text-xs text-slate-500 mb-0.5">${l.city}</p>
+                                        <p class="text-[10px] font-mono text-slate-400 cursor-pointer hover:text-primary flex items-center gap-1 w-max bg-slate-50 dark:bg-slate-800 px-1.5 py-0.5 rounded transition-colors" onclick="navigator.clipboard.writeText('${l.id}'); import('../state.js').then(m => m.showToast('Listing ID copied to clipboard!', 'success')); event.stopPropagation(); event.preventDefault();" title="Click to copy ID"><span class="material-symbols-outlined text-[10px]">content_copy</span> ID: ${l.id.substring(0,8).toUpperCase()}</p>
                                     </div>
                                 </div>
                             </td>
@@ -722,7 +723,7 @@ export async function renderVendorListings(filter = 'all', page = 1) {
             <div class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col"><div class="relative h-48 overflow-hidden ${isPending ? 'grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500' : ''}"><div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" ${bgImage}></div>
                     ${statusBadge}
                     ${!isPending ? (() => {
-                        const listingReviews = (window._vendorReviewsAll || reviews || []).filter(r => r.listing_id === l.id);
+                        const listingReviews = (window._vendorReviewsAll || []).filter(r => r.listing_id === l.id);
                         const realRating = listingReviews.length > 0 ? (listingReviews.reduce((s, r) => s + r.rating, 0) / listingReviews.length).toFixed(1) : null;
                         return realRating ? `<div class="absolute top-3 right-3 bg-white/90 dark:bg-slate-900/90 p-1.5 rounded-lg text-slate-800 dark:text-white backdrop-blur flex items-center gap-1 shadow-sm"><span class="material-symbols-outlined text-sm text-yellow-500 fill-1">star</span>
                         <span class="text-xs font-bold">${realRating}</span>
@@ -731,9 +732,12 @@ export async function renderVendorListings(filter = 'all', page = 1) {
                 </div>
                 <div class="p-5 flex-1 flex flex-col"><div class="flex justify-between items-start mb-2"><div>
                             <h3 class="font-bold text-lg leading-tight mb-1 ${isPending ? 'text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors' : ''}">${l.name}</h3>
-                            <div class="flex items-center gap-1 ${isPending ? 'text-slate-400' : 'text-slate-500'} text-xs relative"><span class="material-symbols-outlined text-sm">location_on</span>
+                            <div class="flex items-center gap-1 ${isPending ? 'text-slate-400' : 'text-slate-500'} text-xs relative mb-2"><span class="material-symbols-outlined text-sm">location_on</span>
                                 <span class="truncate block max-w-[150px] relative top-[1px]">${l.address || l.city}</span>
                             </div>
+                            <span class="text-[10px] bg-slate-50 dark:bg-slate-800 text-slate-500 px-2 py-1 rounded cursor-pointer hover:bg-primary/10 hover:text-primary transition-colors flex items-center gap-1 w-max border border-slate-100 dark:border-slate-800 uppercase font-mono tracking-widest font-bold shadow-sm" onclick="navigator.clipboard.writeText('${l.id}'); import('../state.js').then(m => m.showToast('Listing ID copied!', 'success')); event.preventDefault(); event.stopPropagation();" title="Copy Listing ID">
+                                <span class="material-symbols-outlined text-[10px]">content_copy</span> ID: ${l.id.substring(0,8)}
+                            </span>
                         </div>
                         <div class="text-right shrink-0"><span class="${isPending ? 'text-slate-400 group-hover:text-primary transition-colors' : 'text-primary'} font-black text-lg truncate">₹${(l.monthly_rent || 0).toLocaleString('en-IN')}</span>
                             <span class="text-slate-400 text-[10px] block">per month</span>
@@ -747,9 +751,16 @@ export async function renderVendorListings(filter = 'all', page = 1) {
                             <span class="text-sm font-bold">${leads}</span>
                         </div>
                         <div class="flex flex-col"><span class="text-slate-400 text-[10px] uppercase font-bold tracking-tighter">Rating</span>
-                            <span class="text-sm font-bold">${(() => { const lr = (window._vendorReviewsAll || reviews || []).filter(r => r.listing_id === l.id); return lr.length > 0 ? (lr.reduce((s,r)=> s+r.rating,0)/lr.length).toFixed(1) : 'New'; })()}</span>
+                            <span class="text-sm font-bold">${(() => { const lr = (window._vendorReviewsAll || []).filter(r => r.listing_id === l.id); return lr.length > 0 ? (lr.reduce((s,r)=> s+r.rating,0)/lr.length).toFixed(1) : 'New'; })()}</span>
                         </div>
                     </div>
+
+                    ${l.status === 'rejected' && l.rejection_reason ? `
+                    <div class="my-2 p-3 bg-red-50 dark:bg-red-900/10 rounded-xl border border-red-100 dark:border-red-900/30">
+                        <p class="text-[10px] font-black uppercase tracking-widest text-red-500 flex items-center gap-1 mb-1"><span class="material-symbols-outlined text-[12px]">info</span> Rejection Reason</p>
+                        <p class="text-xs text-red-700 dark:text-red-400 font-medium leading-relaxed">${l.rejection_reason}</p>
+                    </div>
+                    ` : ''}
                     
                     <div class="flex items-center gap-2 mt-auto pt-2">
                         <button onclick="window.location.hash='/vendor/edit-listing/${l.id}'" class="flex-1 bg-slate-100 dark:bg-slate-800 ${isPending ? 'text-slate-400 group-hover:text-slate-700' : 'text-slate-700 dark:text-slate-300'} py-2 rounded-lg text-xs font-bold hover:bg-primary hover:text-white transition-all flex items-center justify-center gap-1">
@@ -1089,7 +1100,10 @@ export async function renderAddListing() {
                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div class="flex flex-col gap-2"><label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Available Rooms</label>
                         <input id="al-rooms" type="number" min="0" value="1" class="w-full rounded-xl border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 focus:border-primary focus:ring-primary focus:ring-1 text-base font-mono transition-colors"/>
                     </div>
-                    <div class="flex flex-col gap-2"><label class="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Target Audience (Gender)</label>
+                    <div class="flex flex-col gap-2"><label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Room Size (in sq ft) <span class="text-red-500">*</span></label>
+                        <input id="al-room-size" type="number" min="1" required class="w-full rounded-xl border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 focus:border-primary focus:ring-primary focus:ring-1 text-base font-mono transition-colors" placeholder="e.g. 150"/>
+                    </div>
+                    <div class="flex flex-col gap-2 md:col-span-2"><label class="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Target Audience (Gender)</label>
                         <div class="flex flex-wrap gap-4 mt-2"><label class="relative flex items-center gap-2 cursor-pointer group"><input type="radio" name="al-gender" value="any" checked class="peer sr-only"><div class="size-5 rounded-full border-2 border-slate-300 dark:border-slate-600 peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center transition-colors after:content-[''] after:size-2 after:rounded-full after:bg-white after:opacity-0 peer-checked:after:opacity-100 group-hover:border-primary/50"></div>
                                 <span class="text-sm font-medium text-slate-700 dark:text-slate-300 peer-checked:text-primary transition-colors">Co-ed</span>
                             </label>
@@ -1443,6 +1457,7 @@ export async function renderAddListing() {
         const rent = parseFloat(document.getElementById('al-rent').value);
         const city = document.getElementById('al-city').value;
         const address = document.getElementById('al-address').value.trim();
+        const roomSize = parseFloat(document.getElementById('al-room-size').value);
         const amenities = [...document.querySelectorAll('.al-amenity:checked')];
         const lat = parseFloat(document.getElementById('al-lat').value);
         const lng = parseFloat(document.getElementById('al-lng').value);
@@ -1462,6 +1477,7 @@ export async function renderAddListing() {
             { ok: rent > 0, field: 'al-rent' },
             { ok: city.length > 0, field: 'al-city' },
             { ok: address.length > 0, field: 'al-address' },
+            { ok: !isNaN(roomSize) && roomSize > 0, field: 'al-room-size' },
             { ok: amenities.length >= 1, valId: 'val-amenities' },
             { ok: selectedFiles.length >= 3, valId: 'val-images' },
             { ok: mapPinned, valId: 'val-map' },
@@ -1495,7 +1511,7 @@ export async function renderAddListing() {
     };
 
     // Bind validation to all form inputs
-    ['al-name', 'al-desc', 'al-rent', 'al-city', 'al-address'].forEach(id => {
+    ['al-name', 'al-desc', 'al-rent', 'al-room-size', 'al-city', 'al-address'].forEach(id => {
         const el = document.getElementById(id);
         if (el) {
             el.addEventListener('input', validateForm);
@@ -1560,6 +1576,7 @@ export async function renderAddListing() {
                 monthly_rent: +document.getElementById('al-rent').value,
                 deposit: +document.getElementById('al-deposit').value,
                 available_rooms: +document.getElementById('al-rooms').value,
+                room_size: +document.getElementById('al-room-size').value,
                 gender_allowed: genderRadio ? genderRadio.value : 'any',
                 amenities,
                 food_available: document.getElementById('al-food').checked,
@@ -1778,7 +1795,10 @@ export async function renderEditListing({ id }) {
                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div class="flex flex-col gap-2"><label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Available Rooms</label>
                         <input id="al-rooms" type="number" min="0" value="${listing.available_rooms || 1}" class="w-full rounded-xl border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 focus:border-primary focus:ring-primary focus:ring-1 text-base font-mono transition-colors"/>
                     </div>
-                    <div class="flex flex-col gap-2"><label class="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Target Audience (Gender)</label>
+                    <div class="flex flex-col gap-2"><label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Room Size (in sq ft) <span class="text-red-500">*</span></label>
+                        <input id="al-room-size" type="number" min="1" required class="w-full rounded-xl border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 focus:border-primary focus:ring-primary focus:ring-1 text-base font-mono transition-colors" placeholder="e.g. 150" value="${listing.room_size || ''}"/>
+                    </div>
+                    <div class="flex flex-col gap-2 md:col-span-2"><label class="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Target Audience (Gender)</label>
                         <div class="flex flex-wrap gap-4 mt-2"><label class="relative flex items-center gap-2 cursor-pointer group"><input type="radio" name="al-gender" value="any" ${(listing.gender_allowed || 'any') === 'any' ? 'checked' : ''} class="peer sr-only"><div class="size-5 rounded-full border-2 border-slate-300 dark:border-slate-600 peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center transition-colors after:content-[''] after:size-2 after:rounded-full after:bg-white after:opacity-0 peer-checked:after:opacity-100 group-hover:border-primary/50"></div>
                                 <span class="text-sm font-medium text-slate-700 dark:text-slate-300 peer-checked:text-primary transition-colors">Co-ed</span>
                             </label>
@@ -2087,8 +2107,9 @@ export async function renderEditListing({ id }) {
         const rent = parseFloat(document.getElementById('al-rent').value);
         const city = document.getElementById('al-city').value;
         const address = document.getElementById('al-address').value.trim();
+        const roomSize = parseFloat(document.getElementById('al-room-size').value);
 
-        if (!name || !desc || !rent || !city || !address) {
+        if (!name || !desc || !rent || !city || !address || isNaN(roomSize) || roomSize <= 0) {
             showToast('Please fill in all required fields', 'error');
             return;
         }
@@ -2167,6 +2188,7 @@ export async function renderEditListing({ id }) {
                 monthly_rent: rent,
                 deposit: +document.getElementById('al-deposit').value,
                 available_rooms: +document.getElementById('al-rooms').value,
+                room_size: +document.getElementById('al-room-size').value,
                 gender_allowed: genderRadio ? genderRadio.value : 'any',
                 amenities,
                 food_available: document.getElementById('al-food').checked,
@@ -2292,7 +2314,10 @@ export async function renderVendorEnquiries() {
         return `
                             <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
                                 <td class="px-6 py-4">
-                                    <p class="font-bold text-sm text-slate-900 dark:text-white mb-0.5">${v.name}</p>
+                                    <p class="font-bold text-sm text-slate-900 dark:text-white mb-0.5 flex items-center gap-2">
+                                        ${v.name}
+                                        ${v.gender ? `<span class="px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider ${v.gender === 'female' ? 'bg-pink-100 text-pink-700 border border-pink-200' : 'bg-blue-100 text-blue-700 border border-blue-200'}">${v.gender}</span>` : ''}
+                                    </p>
                                     <p class="text-[13px] font-medium text-slate-500 flex items-center gap-1">
                                         <span class="material-symbols-outlined text-[14px]">call</span> ${maskPhone(v.phone)}
                                         ${!showContact ? '<span class="material-symbols-outlined text-[12px] text-amber-500 ml-1" title="Masked due to plan restrictions">lock</span>' : ''}
@@ -2897,7 +2922,7 @@ export async function renderVendorAnalytics() {
     };
 
     const processAnalyticsData = (data, days = 30) => {
-        const { listings, visits, chats, views } = data;
+        const { listings = [], visits = [], chats = [], views = [] } = data || {};
         let activeListings = 0, totalRent = 0;
         const demographics = { male: 0, female: 0, any: 0 };
 
@@ -2922,6 +2947,7 @@ export async function renderVendorAnalytics() {
 
         const totalViews = currentViews.length;
         const totalLeads = currentLeads.length;
+        const totalVisits = visits.filter(v => new Date(v.created_at) >= periodStart).length;
         const conversionRate = totalViews > 0 ? ((totalLeads / totalViews) * 100).toFixed(1) : 0;
         
         const calcTrend = (curr, prev) => {
@@ -3038,7 +3064,7 @@ export async function renderVendorAnalytics() {
         // Update Comparison Table
         const compTable = document.getElementById('analytics-comparison-body');
         if (compTable) {
-            compTable.innerHTML = d.comparison.map(c => `
+            compTable.innerHTML = d.comparison.length > 0 ? d.comparison.map(c => `
                 <tr class="border-b border-slate-50 dark:border-slate-800/50 hover:bg-slate-50/50 dark:hover:bg-slate-800/20 transition-colors">
                     <td class="py-4 pl-4 text-sm font-bold text-slate-900 dark:text-white">${c.name}</td>
                     <td class="py-4 text-sm text-slate-600 dark:text-slate-400">${c.views}</td>
@@ -3048,7 +3074,7 @@ export async function renderVendorAnalytics() {
                         <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase ${c.status === 'approved' ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-600'}">${c.status}</span>
                     </td>
                 </tr>
-            `).join('');
+            `).join('') : `<tr><td colspan="5" class="px-6 py-12 text-center text-slate-500">No properties available for comparison</td></tr>`;
         }
 
         // Update Funnel
@@ -3891,11 +3917,31 @@ export async function renderVendorSettings() {
                             <input type="tel" id="vendor-profile-phone" value="${profile.phone || ''}" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-primary" placeholder="+91 XXXXX">
                         </div>
                     </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Email</label>
-                        <input type="email" value="${state.user?.email || ''}" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-2.5 text-sm outline-none text-slate-400 cursor-not-allowed" disabled>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Gender <span class="text-red-500">*</span></label>
+                            <select id="vendor-profile-gender" required class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-primary appearance-none cursor-pointer">
+                                <option value="" disabled ${!profile.gender ? 'selected' : ''}>Select Gender</option>
+                                <option value="male" ${profile.gender === 'male' ? 'selected' : ''}>Male</option>
+                                <option value="female" ${profile.gender === 'female' ? 'selected' : ''}>Female</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Email</label>
+                            <input type="email" value="${state.user?.email || ''}" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-2.5 text-sm outline-none text-slate-400 cursor-not-allowed" disabled>
+                        </div>
                     </div>
-                    <button id="vendor-save-profile-btn" class="bg-primary hover:bg-primary/90 text-white font-bold py-2 px-6 rounded-xl text-sm transition-all shadow-md shadow-primary/20 flex items-center gap-2">
+                    <div class="space-y-4 pt-4 mt-2 border-t border-slate-100 dark:border-slate-800">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">About Your PG Business (Description)</label>
+                            <textarea id="vendor-profile-description" rows="3" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-primary resize-y" placeholder="Tell students about your PGs...">${profile.description || ''}</textarea>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Business Address</label>
+                            <input type="text" id="vendor-profile-address" value="${profile.address || ''}" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-primary" placeholder="Your main office or PG location">
+                        </div>
+                    </div>
+                    <button id="vendor-save-profile-btn" class="bg-primary hover:bg-primary/90 text-white font-bold py-2 px-6 rounded-xl text-sm transition-all shadow-md shadow-primary/20 flex items-center gap-2 mt-4">
                         <span class="material-symbols-outlined text-sm">save</span> Save Profile
                     </button>
                 </div>
@@ -4047,6 +4093,9 @@ export async function renderVendorSettings() {
     document.getElementById('vendor-save-profile-btn')?.addEventListener('click', async () => {
         const nameInput = document.getElementById('vendor-profile-name')?.value.trim();
         const phoneInput = document.getElementById('vendor-profile-phone')?.value.trim();
+        const genderInput = document.getElementById('vendor-profile-gender')?.value;
+        const descInput = document.getElementById('vendor-profile-description')?.value.trim();
+        const addressInput = document.getElementById('vendor-profile-address')?.value.trim();
         if (!nameInput) { showToast('Please enter your full name', 'error'); return; }
 
         const btn = document.getElementById('vendor-save-profile-btn');
@@ -4054,7 +4103,13 @@ export async function renderVendorSettings() {
         btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-sm">refresh</span> Saving...';
         btn.disabled = true;
         try {
-            const p = await updateProfile(userId, { full_name: nameInput, phone: phoneInput });
+            const p = await updateProfile(userId, {
+                full_name: nameInput,
+                phone: phoneInput || null,
+                gender: genderInput || null,
+                description: descInput || null,
+                address: addressInput || null
+            });
             state.profile = p;
             showToast('Profile updated!', 'success');
         } catch (err) { showToast(err.message || 'Error saving profile', 'error'); }
@@ -4219,6 +4274,128 @@ export async function renderVendorMfa() {
     });
 }
 
+export async function renderVendorProfile(params) {
+    const vendorId = params?.id;
+    if (!vendorId) { navigate('/home'); return; }
+
+    showLoading();
+    let vendorData;
+    try {
+        const { getVendorPublicProfile } = await import('../supabase.js');
+        vendorData = await getVendorPublicProfile(vendorId);
+    } catch (e) {
+        hideLoading();
+        document.getElementById('app').innerHTML = `
+            <div class="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-900 font-display">
+                ${renderNavbar()}
+                <div class="flex-1 flex items-center justify-center p-4">
+                    <div class="text-center"><span class="material-symbols-outlined text-6xl text-slate-300 mb-4">person_off</span>
+                        <h2 class="text-2xl font-bold text-slate-700 dark:text-slate-300 mb-2">Vendor Not Found</h2>
+                        <p class="text-slate-500 mb-6">This vendor profile could not be loaded.</p>
+                        <a href="#/home" class="bg-primary text-white px-6 py-3 rounded-xl font-bold">Return Home</a>
+                    </div>
+                </div>
+            </div>`;
+        const { initNavbarEvents } = await import('../components/navbar.js');
+        initNavbarEvents();
+        return;
+    }
+    hideLoading();
+
+    const { profile: v, listings, avgRating, totalReviews } = vendorData;
+    const joinedDate = new Date(v.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    const totalViews = listings.reduce((s, l) => s + (l.total_views || 0), 0);
+    const { renderFooter } = await import('../components/footer.js');
+
+    document.getElementById('app').innerHTML = `
+    <div class="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-900 font-display text-slate-900 dark:text-slate-100">
+        ${renderNavbar()}
+        <main class="flex-1 w-full max-w-6xl mx-auto px-4 py-8 md:py-12">
+            <!-- Vendor Header -->
+            <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 md:p-10 mb-8 shadow-sm">
+                <div class="flex flex-col sm:flex-row items-center gap-6">
+                    <div class="size-24 rounded-full bg-primary/20 border-4 border-primary/30 flex items-center justify-center overflow-hidden shrink-0">
+                        ${v.avatar_url
+                            ? `<img src="${v.avatar_url}" class="w-full h-full object-cover" alt="${v.full_name}">`
+                            : `<span class="text-primary text-3xl font-bold">${(v.full_name || 'V').charAt(0).toUpperCase()}</span>`}
+                    </div>
+                    <div class="text-center sm:text-left flex-1">
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-1">
+                            <h1 class="text-2xl md:text-3xl font-black tracking-tight">${v.full_name || 'Vendor'}</h1>
+                            <span class="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold uppercase tracking-wider">
+                                <span class="material-symbols-outlined text-sm">verified</span> Verified Vendor
+                            </span>
+                        </div>
+                        <p class="text-slate-500 text-sm flex items-center justify-center sm:justify-start gap-1 mb-2">
+                            <span class="material-symbols-outlined text-sm">calendar_month</span> Member since ${joinedDate}
+                        </p>
+                        ${v.address ? `
+                        <p class="text-slate-600 dark:text-slate-400 text-sm flex items-center justify-center sm:justify-start gap-1 mb-3 font-medium">
+                            <span class="material-symbols-outlined text-sm text-primary">location_on</span> ${v.address}
+                        </p>` : ''}
+                        ${v.description ? `
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-6 max-w-3xl leading-relaxed">
+                            ${v.description}
+                        </p>` : '<div class="mb-5"></div>'}
+                        <div class="flex flex-wrap justify-center sm:justify-start gap-4">
+                            <div class="bg-slate-50 dark:bg-slate-800 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-center">
+                                <p class="text-xl font-black text-primary">${listings.length}</p>
+                                <p class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Active PGs</p>
+                            </div>
+                            <div class="bg-slate-50 dark:bg-slate-800 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-center">
+                                <p class="text-xl font-black">${avgRating || '–'}</p>
+                                <p class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Avg Rating</p>
+                            </div>
+                            <div class="bg-slate-50 dark:bg-slate-800 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-center">
+                                <p class="text-xl font-black">${totalReviews}</p>
+                                <p class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Reviews</p>
+                            </div>
+                            <div class="bg-slate-50 dark:bg-slate-800 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-center">
+                                <p class="text-xl font-black">${totalViews.toLocaleString('en-IN')}</p>
+                                <p class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Total Views</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Listings -->
+            <h2 class="text-xl font-bold mb-6 flex items-center gap-2"><span class="material-symbols-outlined text-primary">home_work</span> Properties by ${v.full_name || 'this vendor'}</h2>
+            ${listings.length > 0 ? `
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                ${listings.map(l => {
+                    const rating = l.reviews?.length > 0 ? (l.reviews.reduce((s, r) => s + r.rating, 0) / l.reviews.length).toFixed(1) : null;
+                    return `
+                    <a href="#/pg/${l.id}" class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col">
+                        <div class="relative h-48 overflow-hidden">
+                            <div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" style="background-image: url('${l.images?.[0] || 'https://placehold.co/600x400/e2e8f0/94a3b8?text=No+Image'}')"></div>
+                            ${l.is_featured ? '<div class="absolute top-3 left-3 bg-primary text-white text-[10px] font-bold px-2 py-1 rounded-md uppercase shadow-sm">Featured</div>' : ''}
+                            ${rating ? `<div class="absolute top-3 right-3 bg-white/90 dark:bg-slate-900/90 p-1.5 rounded-lg backdrop-blur flex items-center gap-1 shadow-sm"><span class="material-symbols-outlined text-sm text-yellow-500">star</span><span class="text-xs font-bold">${rating}</span></div>` : ''}
+                            <div class="absolute bottom-3 left-3 bg-black/50 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wide">${l.gender_allowed === 'female' ? 'Girls' : l.gender_allowed === 'male' ? 'Boys' : 'Unisex'}</div>
+                        </div>
+                        <div class="p-5 flex-1 flex flex-col">
+                            <h3 class="font-bold text-lg leading-tight mb-1 group-hover:text-primary transition-colors">${l.name}</h3>
+                            <p class="text-xs text-slate-500 flex items-center gap-1 mb-3"><span class="material-symbols-outlined text-sm">location_on</span>${l.city || l.address || ''}</p>
+                            <div class="mt-auto flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800">
+                                <span class="text-primary font-black text-lg">₹${(l.monthly_rent || 0).toLocaleString('en-IN')}<span class="text-slate-400 text-[10px] font-medium">/mo</span></span>
+                                <span class="text-xs text-slate-500">${(l.total_views || 0).toLocaleString('en-IN')} views</span>
+                            </div>
+                        </div>
+                    </a>`;
+                }).join('')}
+            </div>` : `
+            <div class="py-16 text-center bg-white dark:bg-slate-900 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700">
+                <span class="material-symbols-outlined text-5xl text-slate-300 mb-3">domain_disabled</span>
+                <p class="text-slate-500 font-medium">This vendor has no listed properties yet.</p>
+            </div>`}
+        </main>
+        ${renderFooter()}
+    </div>`;
+
+    const { initNavbarEvents } = await import('../components/navbar.js');
+    initNavbarEvents();
+}
+
 export async function renderVendorSupport() {
     if (!isLoggedIn()) { navigate('/auth'); return; }
     if (!isVendor() && !isAdmin()) { showToast('You need vendor access to view this page', 'error'); navigate('/dashboard'); return; }
@@ -4239,9 +4416,9 @@ export async function renderVendorSupport() {
                 </div>
                 <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Live Chat Support</h3>
                 <p class="text-slate-500 text-sm max-w-sm mx-auto mb-8">Connect with our support team instantly for urgent queries regarding your properties or payouts.</p>
-                <button class="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-xl transition-all shadow-md flex items-center gap-2" onclick="showToast('Live support chat is currently offline. Please send us an email.', 'info')">
+                <a href="mailto:support@staynest.in?subject=Vendor%20Live%20Support%20Request" class="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-xl transition-all shadow-md flex items-center gap-2 inline-flex">
                     <span class="material-symbols-outlined">chat</span> Start Conversation
-                </button>
+                </a>
             </div>
             
             <div class="col-span-1 space-y-6">
@@ -4269,10 +4446,10 @@ export async function renderVendorSupport() {
             <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2"><span class="material-symbols-outlined text-primary">menu_book</span> Help Resources</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 ${['Listing Guidelines', 'Payout Setup', 'Managing Reviews', 'Reporting Issues'].map(topic => 
-                    '<button class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-700 text-left hover:shadow-md transition-shadow flex items-center justify-between group" onclick="showToast(\'Help center article coming soon\', \'info\')">' +
-                        '<span class="font-medium text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors">' + topic + '</span>' +
-                        '<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">chevron_right</span>' +
-                    '</button>'
+                    `<a href="mailto:support@staynest.in?subject=Help%20with%20${encodeURIComponent(topic)}" class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-700 text-left hover:shadow-md transition-shadow flex items-center justify-between group block w-full">
+                        <span class="font-medium text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors">${topic}</span>
+                        <span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">chevron_right</span>
+                    </a>`
                 ).join('')}
             </div>
         </div>

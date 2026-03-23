@@ -1,5 +1,5 @@
 import { signIn, signUp, signInWithGoogle, sendResetPassword, getUser, getProfile, resendVerification, verifyEmail, resetPasswordWithToken } from '../supabase.js';
-import { trackLogin, trackSignup } from '../analytics.js';
+import { trackLogin, trackSignup } from '../analytics.js'; // Trigger HMR
 import { state, setState, showToast, showLoading, hideLoading } from '../state.js';
 import { navigate } from '../router.js';
 
@@ -75,7 +75,7 @@ export function renderAuth() {
           
           <!-- Header -->
           <header class="flex flex-col items-center gap-3 pt-10 pb-6 px-8 text-center">
-            <a href="#/home" class="flex items-center gap-2 text-primary hover:opacity-90 transition-opacity">
+                            <a href="#/home" class="flex items-center gap-2 text-primary hover:opacity-90 transition-opacity">
               <span class="material-symbols-outlined text-4xl">home_pin</span>
               <h2 class="text-2xl font-black leading-tight tracking-tight">StayNest</h2>
             </a>

@@ -181,6 +181,7 @@ route('/visits', userGuard(lazy(() => import('./js/pages/user-pages.js'), 'rende
 route('/compare', userGuard(lazy(() => import('./js/pages/user-pages.js'), 'renderComparePGs')));
 route('/recent', userGuard(lazy(() => import('./js/pages/user-pages.js'), 'renderRecentlyViewed')));
 route('/enquiries', userGuard(lazy(() => import('./js/pages/user-pages.js'), 'renderMyEnquiries')));
+route('/safety-sos', userGuard(lazy(() => import('./js/pages/user-pages.js'), 'renderSOSSafety')));
 route('/notifications', userGuard(lazy(() => import('./js/pages/notifications.js'), 'renderNotifications')));
 route('/profile', userGuard(lazy(() => import('./js/pages/complete-profile.js'), 'renderCompleteProfile')));
 
@@ -197,6 +198,7 @@ route('/vendor/subscriptions', vendorGuard(lazy(() => import('./js/pages/vendor.
 route('/vendor/settings', vendorGuard(lazy(() => import('./js/pages/vendor.js'), 'renderVendorSettings')));
 route('/vendor/settings/mfa', vendorGuard(lazy(() => import('./js/pages/vendor.js'), 'renderVendorMfa')));
 route('/vendor/support', vendorGuard(lazy(() => import('./js/pages/vendor.js'), 'renderVendorSupport')));
+route('/vendor/:id', lazy(() => import('./js/pages/vendor.js'), 'renderVendorProfile'));
 
 // ── Admin routes (lazy – admin.js is ~85KB, only loaded for admins) ──
 route('/admin', adminGuard(lazy(() => import('./js/pages/admin.js'), 'renderAdminDashboard')));
