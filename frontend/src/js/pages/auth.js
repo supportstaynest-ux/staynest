@@ -67,7 +67,7 @@ export function renderAuth() {
       <div class="font-display bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 text-slate-900 dark:text-slate-100 min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
         <!-- Background decoration -->
         <div class="absolute inset-0 pointer-events-none select-none flex flex-col items-center justify-center gap-4">
-          <img src="/namaste-bg.png" alt="" class="w-[320px] sm:w-[400px] h-auto" style="opacity:0.12;" />
+          <img src="/namaste-bg.webp" alt="" loading="lazy" decoding="async" class="w-[320px] sm:w-[400px] h-auto" style="opacity:0.12;" />
           <p class="text-4xl sm:text-5xl font-bold text-slate-400" style="opacity:0.08; font-family:'Noto Sans Devanagari',serif;">अतिथि देवो भव</p>
         </div>
 

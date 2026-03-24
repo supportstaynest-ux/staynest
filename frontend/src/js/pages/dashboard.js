@@ -7,29 +7,36 @@ import { renderNavbar } from '../components/navbar.js';
 export function renderDashboardLayout(content, activeItem = 'dashboard', title = 'Dashboard') {
     const p = state.profile || {};
     const items = [
-        { key: 'dashboard', icon: 'dashboard', label: 'Dashboard', href: '/dashboard' },
-        { key: 'explore', icon: 'explore', label: 'Explore PGs', href: '/explore' },
-        { key: 'saved', icon: 'favorite', label: 'Saved PGs', href: '/saved' },
-        { key: 'compare', icon: 'compare_arrows', label: 'Compare PGs', href: '/compare' },
-        { key: 'recent', icon: 'history', label: 'Recently Viewed', href: '/recent' },
-        { key: 'visits', icon: 'event_available', label: 'My Visits', href: '/visits' },
-        { key: 'enquiries', icon: 'question_answer', label: 'My Enquiries', href: '/enquiries' },
+        { key: 'dashboard', icon: '🏠', label: 'Dashboard', href: '/dashboard' },
+        { key: 'explore', icon: '🔍', label: 'Explore PGs', href: '/explore' },
+        { key: 'saved', icon: '❤️', label: 'Saved PGs', href: '/saved' },
+        { key: 'compare', icon: '⚖️', label: 'Compare PGs', href: '/compare' },
+        { key: 'recent', icon: '🕒', label: 'Recently Viewed', href: '/recent' },
+        { key: 'visits', icon: '📅', label: 'My Visits', href: '/visits' },
+        { key: 'enquiries', icon: '💬', label: 'My Enquiries', href: '/enquiries' },
         { divider: true },
-        { key: 'sos', icon: 'sos', label: 'Safety & SOS', href: '/safety-sos', special: true },
-        { key: 'profile', icon: 'settings', label: 'Profile Settings', href: '/profile' },
+        { key: 'sos', icon: '🚨', label: 'Safety & SOS', href: '/safety-sos', special: true },
+        { key: 'profile', icon: '⚙️', label: 'Profile Settings', href: '/profile' },
     ];
 
     const sidebarLinks = items.map(i => {
-        if (i.divider) return `<div class="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800"></div>`;
+        if (i.divider) return `<div class="my-3 border-t border-slate-200 dark:border-slate-800/60 opacity-60"></div>`;
         const isActive = activeItem === i.key;
-        const activeClass = isActive
-            ? 'bg-primary/10 text-primary font-semibold'
-            : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors';
-        const specialClass = i.special && !isActive ? 'border border-red-200 dark:border-red-900/40 bg-red-50 dark:bg-red-900/10 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/20' : '';
+        
+        let linkClass = isActive
+            ? 'bg-teal-50 dark:bg-teal-900/20 text-teal-700 dark:text-teal-400 font-semibold shadow-sm'
+            : 'text-slate-600 dark:text-slate-400 font-medium hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-200';
+            
+        if (i.special) {
+            linkClass = isActive 
+                ? 'bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300 font-semibold shadow-sm'
+                : 'bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 text-red-600 dark:text-red-400 font-medium hover:bg-red-50 dark:hover:bg-red-900/20';
+        }
+
         return `
-            <a href="#${i.href}" class="dash-link flex items-center gap-3 px-3 py-2.5 rounded-lg ${isActive ? activeClass : specialClass || activeClass}">
-                <span class="material-symbols-outlined text-[22px]">${i.icon}</span>
-                <span>${i.label}</span>
+            <a href="#${i.href}" class="flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-200 ${linkClass} mb-1">
+                <span class="text-xl w-6 flex justify-center">${i.icon}</span>
+                <span class="tracking-wide">${i.label}</span>
             </a>
         `;
     }).join('');
@@ -37,40 +44,36 @@ export function renderDashboardLayout(content, activeItem = 'dashboard', title =
     return `
     <div class="flex h-screen overflow-hidden bg-slate-50 dark:bg-slate-900 font-display text-slate-900 dark:text-slate-100 transition-colors duration-300">
         <!-- Sidebar -->
-        <aside id="dash-sidebar" class="w-72 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 shadow-sm flex flex-col fixed inset-y-0 left-0 z-50 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 ease-in-out">
-            <div class="p-6 flex items-center justify-between md:justify-start gap-3">
-                                <a href="#/home" class="flex items-center gap-3">
-                    <div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
-                        <span class="material-symbols-outlined">home_pin</span>
+        <aside id="dash-sidebar" class="w-72 bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-900/90 border-r border-slate-200/80 dark:border-slate-800 shadow-[4px_0_24px_rgba(0,0,0,0.02)] flex flex-col fixed inset-y-0 left-0 z-50 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 ease-out">
+            <div class="p-6 flex items-center justify-between md:justify-start gap-4 border-b border-slate-100 dark:border-slate-800/80 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm">
+                                <a href="#/home" class="flex items-center gap-3 group">
+                    <div class="size-10 bg-gradient-to-br from-primary to-teal-400 rounded-xl flex items-center justify-center text-white shadow-md shadow-primary/20 group-hover:shadow-primary/40 transition-all">
+                        <span class="text-xl">🏠</span>
                     </div>
-                    <h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">StayNest</h1>
+                    <h1 class="text-2xl font-black tracking-tight text-slate-900 dark:text-white">Stay<span class="text-primary">Nest</span></h1>
                 </a>
-                <button id="close-sidebar-btn" class="md:hidden text-slate-400 hover:text-slate-600 p-1">
-                    <span class="material-symbols-outlined relative top-1">close</span>
+                <button id="close-sidebar-btn" class="md:hidden text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                    <span class="material-symbols-outlined relative top-0.5">close</span>
                 </button>
             </div>
             
-            <nav class="flex-1 px-4 py-4 space-y-1 overflow-y-auto hidden-scrollbar">
+            <nav class="flex-1 px-5 py-6 overflow-y-auto hidden-scrollbar flex flex-col">
                 ${sidebarLinks}
             </nav>
             
-            <div class="p-4 border-t border-slate-100 dark:border-slate-800">
-                <a href="#/profile" class="flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group">
-                    <div class="flex items-center gap-3">
-                        <div class="size-10 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden flex items-center justify-center border border-slate-200 dark:border-slate-700">
-                            ${p.avatar_url ? `<img src="${p.avatar_url}" loading="lazy" decoding="async" class="w-full h-full object-cover">` : `<span class="material-symbols-outlined text-slate-400">person</span>`}
-                        </div>
-                        <div class="flex-1 overflow-hidden">
-                            <p class="text-sm font-semibold truncate capitalize group-hover:text-primary transition-colors text-slate-900 dark:text-white">${p.full_name || 'User'}</p>
-                            <p class="text-xs text-slate-500 truncate capitalize">${p.role || 'user'}</p>
-                        </div>
+            <div class="p-5 border-t border-slate-100 dark:border-slate-800/80 bg-white/30 dark:bg-slate-900/30">
+                <a href="#/profile" class="flex items-center gap-3 p-3 rounded-2xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-800/50 shadow-sm hover:shadow-md hover:border-slate-200 dark:hover:border-slate-700 transition-all group mb-3">
+                    <div class="size-11 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden flex items-center justify-center shadow-inner">
+                        ${p.avatar_url ? `<img src="${p.avatar_url}" loading="lazy" decoding="async" class="w-full h-full object-cover">` : `<span class="text-xl text-slate-400">👤</span>`}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-bold truncate capitalize text-slate-900 dark:text-white group-hover:text-primary transition-colors">${p.full_name || 'User'}</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 truncate capitalize font-medium">${p.role || 'user'}</p>
                     </div>
                 </a>
-                <button id="sidebar-logout-btn" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/10 text-slate-600 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-400 transition-colors group">
-                    <div class="size-10 rounded-full flex items-center justify-center">
-                        <span class="material-symbols-outlined">logout</span>
-                    </div>
-                    <span class="text-sm font-semibold">Logout</span>
+                <button id="sidebar-logout-btn" class="w-full flex items-center gap-3 p-3 rounded-xl border border-transparent hover:border-red-100 dark:hover:border-red-900/30 hover:bg-red-50 dark:hover:bg-red-900/10 text-slate-600 dark:text-slate-400 hover:text-red-600 font-medium transition-all group">
+                    <span class="text-xl w-6 flex justify-center group-hover:scale-110 transition-transform">🚪</span>
+                    <span class="tracking-wide">Sign Out</span>
                 </button>
             </div>
         </aside>

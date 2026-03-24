@@ -46,7 +46,7 @@ export async function renderHome() {
             <div class="hidden sm:flex relative h-[440px] md:h-[500px] items-center justify-center">
                 <div class="absolute inset-0 z-0">
                     <div class="absolute inset-0 bg-gradient-to-b from-slate-900/40 to-slate-900/20 z-10"></div>
-                    <img src="/hero-skyline.jpg" alt="Indian Landmarks Skyline" class="w-full h-full object-cover object-center" />
+                    <img src="/hero-skyline.webp" alt="Indian Landmarks Skyline" class="w-full h-full object-cover object-center" />
                 </div>
                 <div class="relative z-20 w-full max-w-4xl mx-auto px-4 text-center">
                     <div class="animate-in slideInDown duration-700">
@@ -90,7 +90,7 @@ export async function renderHome() {
                 </div>
                 <!-- Skyline Image at bottom -->
                 <div class="relative w-full h-48 mt-2 pointer-events-none">
-                    <img src="/hero-skyline.jpg" alt="Indian Landmarks Skyline" class="w-full h-full object-cover object-top opacity-90" />
+                    <img src="/hero-skyline.webp" alt="Indian Landmarks Skyline" class="w-full h-full object-cover object-top opacity-90" />
                 </div>
             </div>
         </section>
@@ -123,13 +123,13 @@ export async function renderHome() {
             
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 ${[
-            { name: 'Lucknow', img: '/images/lucknow.jpg' },
+            { name: 'Lucknow', img: '/images/lucknow.webp' },
             { name: 'Delhi', img: 'https://images.unsplash.com/photo-1587474260584-136574528ed5?q=80&w=800&auto=format&fit=crop' },
             { name: 'Mumbai', img: 'https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=800&auto=format&fit=crop' },
             { name: 'Bangalore', img: 'https://images.unsplash.com/photo-1596176530529-78163a4f7af2?q=80&w=800&auto=format&fit=crop' }
         ].map((city) => `
                 <div class="group relative overflow-hidden rounded-xl h-64 shadow-md cursor-pointer" onclick="window.location.hash='/explore?city=${city.name}'">
-                    <img src="${city.img}" alt="${city.name} architecture" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    <img src="${city.img}" alt="${city.name} architecture" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6">
                         <h3 class="text-white text-2xl font-bold">${city.name}</h3>
                         <div class="flex justify-between items-center mt-2">
@@ -159,7 +159,7 @@ export async function renderHome() {
         <section class="relative py-20 overflow-hidden">
             <!-- Subtle Indian Culture Background -->
             <div class="absolute inset-0 z-0 pointer-events-none">
-                <img src="/hero-skyline.jpg" alt="" class="w-full h-full object-contain object-bottom" style="opacity:0.25;" />
+                <img src="/hero-skyline.webp" alt="" loading="lazy" decoding="async" class="w-full h-full object-contain object-bottom" style="opacity:0.25;" />
             </div>
             <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">

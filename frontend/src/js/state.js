@@ -8,7 +8,7 @@ export const state = {
     sidebarOpen: false,
 };
 
-const listeners = [];
+let greetingShown = false;
 
 export function subscribe(fn) {
     listeners.push(fn);
@@ -18,6 +18,96 @@ export function subscribe(fn) {
 export function setState(updates) {
     Object.assign(state, updates);
     listeners.forEach(fn => fn(state));
+    
+    if (!greetingShown && state.user && state.profile?.full_name) {
+        greetingShown = true;
+        showSmartGreeting(state.profile.full_name.split(' ')[0]);
+    }
+}
+
+function showSmartGreeting(username) {
+    if (!username) return;
+    
+    const now = new Date();
+    const todayStr = now.toLocaleDateString();
+    const lsKeyFirst = 'staynest_first_login_done';
+    const lsKeyDate = 'staynest_last_greeting_date';
+    
+    const isFirstLogin = !localStorage.getItem(lsKeyFirst);
+    const lastGreetingDate = localStorage.getItem(lsKeyDate);
+    
+    if (isFirstLogin) {
+        localStorage.setItem(lsKeyFirst, 'true');
+        localStorage.setItem(lsKeyDate, todayStr);
+        renderGreetingToast(`👋🏼 Hi ${username}, welcome to StayNest!`);
+        return;
+    }
+    
+    if (lastGreetingDate === todayStr) return;
+    
+    localStorage.setItem(lsKeyDate, todayStr);
+    
+    const hour = now.getHours();
+    let msg = '';
+    if (hour >= 5 && hour < 12) {
+        msg = `☀️ Good Morning, ${username}`;
+    } else if (hour >= 12 && hour < 17) {
+        msg = `🌤 Good Afternoon, ${username}`;
+    } else if (hour >= 17 && hour < 22) {
+        msg = `🌙 Good Evening, ${username}`;
+    } else {
+        msg = `🌙 Welcome back, ${username}`;
+    }
+    
+    renderGreetingToast(msg);
+}
+
+function renderGreetingToast(message) {
+    if (document.getElementById('smart-greeting-toast')) return;
+    
+    const toast = document.createElement('div');
+    toast.id = 'smart-greeting-toast';
+    toast.className = 'fixed top-20 right-4 z-[9999] bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm shadow-md border border-slate-100 dark:border-slate-800 rounded-xl px-4 py-2.5 max-w-xs flex items-center justify-between gap-3 transform translate-x-full opacity-0 transition-all duration-300 ease-out cursor-default group';
+    
+    toast.innerHTML = `
+        <span class="text-sm font-medium text-slate-800 dark:text-slate-200 tracking-tight whitespace-nowrap">${message}</span>
+        <button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors opacity-0 group-hover:opacity-100 flex items-center shrink-0 justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800" onclick="this.parentElement.remove()">
+            <span class="material-symbols-outlined text-[16px]">close</span>
+        </button>
+    `;
+    
+    document.body.appendChild(toast);
+    
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            toast.classList.remove('translate-x-full', 'opacity-0');
+        });
+    });
+    
+    let timeout;
+    let isHovered = false;
+    
+    const startDismiss = () => {
+        if (isHovered) return;
+        timeout = setTimeout(() => {
+            if (toast && document.body.contains(toast)) {
+                toast.classList.add('translate-x-full', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }
+        }, 3000);
+    };
+    
+    startDismiss();
+    
+    toast.addEventListener('mouseenter', () => {
+        isHovered = true;
+        clearTimeout(timeout);
+    });
+    
+    toast.addEventListener('mouseleave', () => {
+        isHovered = false;
+        startDismiss();
+    });
 }
 
 export function isLoggedIn() { return !!state.user; }

@@ -1,6 +1,6 @@
 import { state, isLoggedIn, isAdmin, showToast, showLoading, hideLoading, formatPrice } from '../state.js';
 import { navigate } from '../router.js';
-import { supabase, signOut, getAdminStats, getAllUsers, getUsersPaginated, getAllListingsAdmin, updateProfile, updateListing, deleteListing, sendNotification, sendBroadcastMessage, getBroadcastHistory, getReports, updateReport, getAdminChatMonitoringStats, getAdminVendorDetails, getAdminListingChats, getPaymentRequestsAdmin, updatePaymentRequestStatus, getPlans, createPlan, updatePlan, deletePlan, resetPassword, getAccessToken } from '../supabase.js';
+import { supabase, signOut, getAdminStats, getAllUsers, getUsersPaginated, getAllListingsAdmin, updateProfile, updateListing, deleteListing, sendNotification, sendBroadcastMessage, getBroadcastHistory, deleteBroadcastMessage, getReports, updateReport, getAdminChatMonitoringStats, getAdminVendorDetails, getAdminListingChats, getPaymentRequestsAdmin, updatePaymentRequestStatus, getPlans, createPlan, updatePlan, deletePlan, resetPassword, getAccessToken } from '../supabase.js';
 
 import { renderNavbar } from '../components/navbar.js';
 
@@ -1000,7 +1000,12 @@ export async function renderAdminNotifications() {
                   </div>
                   <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed">${n.message}</p>
                 </div>
-                <span class="text-[10px] text-slate-400 font-bold shrink-0 mt-1">${date}</span>
+                <div class="flex flex-col items-end gap-2 shrink-0">
+                  <span class="text-[10px] text-slate-400 font-bold mt-1">${date}</span>
+                  <button class="p-1.5 border border-slate-200 dark:border-slate-700/50 rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 hover:border-red-200 dark:hover:border-red-800 transition-all flex items-center justify-center bg-white dark:bg-slate-800" onclick="window._deleteBroadcast('${n.id}')" title="Delete Announcement">
+                    <span class="material-symbols-outlined text-[16px]">delete</span>
+                  </button>
+                </div>
               </div>
             </div>`;
           }).join('') : `
@@ -1034,6 +1039,19 @@ export async function renderAdminNotifications() {
     } catch (e) { showToast(e.message, 'error'); }
     hideLoading();
   });
+
+  window._deleteBroadcast = async (id) => {
+    if (!confirm('Are you sure you want to delete this announcement? It will be removed from all user and vendor notification panels globally.')) return;
+    showLoading();
+    try {
+      await deleteBroadcastMessage(id);
+      showToast('Announcement deleted successfully!', 'success');
+      renderAdminNotifications();
+    } catch (e) {
+      showToast(e.message || 'Failed to delete announcement', 'error');
+    }
+    hideLoading();
+  };
 }
 
 export async function renderAdminSettings() {

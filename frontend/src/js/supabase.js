@@ -48,7 +48,8 @@ const DEFAULT_SITE_SETTINGS = {
     support_phone: '+91 (800) 123-4567',
     address: '123 Tech Park, Hitech City, Lucknow, UP 226010',
     website_url: 'https://quiet-cucurucho-bdfce4.netlify.app',
-    banner_text: 'Find Your Perfect PG Stay'
+    banner_text: 'Find Your Perfect PG Stay',
+    admin_upi_id: 'staynest@upi'
 };
 
 export async function getSiteSettings() {
@@ -766,6 +767,16 @@ export async function sendBroadcastMessage({ title, message, receiverType, sende
     if (error) throw error;
 }
 
+export async function deleteBroadcastMessage(id) {
+    const { error } = await supabase.from('notifications').delete().eq('id', id);
+    if (error) throw error;
+    try {
+        await supabase.from('dismissed_messages').delete().eq('message_id', id);
+    } catch (e) {
+        console.warn('Failed to clean up dismissed_messages', e);
+    }
+}
+
 export async function getUserBroadcasts(userId) {
     const { data, error } = await supabase
         .from('notifications')
@@ -872,14 +883,14 @@ export async function getUsersPaginated(page = 1, limit = 20) {
 
 export async function getAllListingsAdmin() {
     // Only select the fields required for the admin listings table
-    const { data, error } = await supabase.from('listings').select('id, name, city, monthly_rent, status, created_at, is_featured, is_verified, total_views, vendor_id, profiles!vendor_id(full_name)').order('created_at', { ascending: false });
+    const { data, error } = await supabase.from('listings').select('id, name, city, monthly_rent, status, created_at, is_featured, is_verified, stay_code, total_views, vendor_id, profiles!vendor_id(full_name)').order('created_at', { ascending: false });
     if (error) throw error;
     return data || [];
 }
 
 export async function getVendorListings(vendorId) {
     // Optimized select for Vendor Dashboard
-    const { data, error } = await supabase.from('listings').select('id, name, city, address, monthly_rent, deposit, gender_allowed, status, created_at, images, total_views, is_featured, is_verified, search_priority, reviews(rating)').eq('vendor_id', vendorId).neq('status', 'deleted').order('created_at', { ascending: false });
+    const { data, error } = await supabase.from('listings').select('id, name, city, address, monthly_rent, deposit, gender_allowed, status, created_at, images, total_views, is_featured, is_verified, stay_code, search_priority, reviews(rating)').eq('vendor_id', vendorId).neq('status', 'deleted').order('created_at', { ascending: false });
     if (error) throw error;
     return data || [];
 }

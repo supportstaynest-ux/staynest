@@ -45,7 +45,6 @@ const injectMobileUI = () => {
             <h2 id="mobile-page-title" class="text-lg font-extrabold text-slate-900 dark:text-white">StayNest</h2>
         </div>
         <div class="flex items-center gap-3">
-            <button class="pwa-install-btn hidden text-white font-bold text-[11px] bg-primary px-3 py-1.5 rounded-full uppercase tracking-wide shadow-sm">Install</button>
             <a href="#/faq" class="text-slate-500 hover:text-primary transition-colors flex items-center justify-center">
                 <span class="material-symbols-outlined text-xl">help</span>
             </a>
@@ -93,21 +92,6 @@ const injectMobileUI = () => {
     setInterval(updateUIState, 1000);
 
     setTimeout(updateUIState, 50);
-
-    // Global intercept for install button if deferredPrompt exists
-    document.addEventListener('click', async (e) => {
-        const installBtn = e.target.closest('.pwa-install-btn');
-        if (installBtn && window.deferredPrompt) {
-            window.deferredPrompt.prompt();
-            const { outcome } = await window.deferredPrompt.userChoice;
-            console.log(`User ${outcome} the PWA installation`);
-            window.deferredPrompt = null;
-        }
-    });
-
-    if (window.deferredPrompt) {
-        document.querySelectorAll('.pwa-install-btn').forEach(btn => btn.classList.remove('hidden'));
-    }
 };
 
 if (document.readyState === 'loading') {

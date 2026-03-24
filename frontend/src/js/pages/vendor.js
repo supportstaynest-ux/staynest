@@ -639,6 +639,23 @@ window.deleteListing = async (id) => {
     }
 };
 
+window.generateStayCode = async (id) => {
+    try {
+        const { updateListing } = await import('../supabase.js');
+        // Generate random 6 character alphanumeric code
+        const code = 'PG' + Math.random().toString(36).substring(2, 6).toUpperCase();
+        await updateListing(id, { stay_code: code });
+        import('../state.js').then(m => m.showToast('Stay Code generated successfully!', 'success'));
+        if (window.location.hash.includes('vendor/listings')) {
+            renderVendorListings();
+        } else {
+            window.location.hash = '/vendor/listings';
+        }
+    } catch (e) {
+        import('../state.js').then(m => m.showToast(e.message || 'Failed to generate code', 'error'));
+    }
+};
+
 export async function renderVendorListings(filter = 'all', page = 1) {
     if (!isLoggedIn()) { navigate('/auth'); return; }
     if (!isVendor() && !isAdmin()) { showToast('You need vendor access to view this page', 'error'); navigate('/dashboard'); return; }
@@ -703,7 +720,7 @@ export async function renderVendorListings(filter = 'all', page = 1) {
     </div>
 
     <!-- Listings Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">${currentListings.length ? currentListings.map(l => {
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">${currentListings.length ? currentListings.map(l => {
         const isPending = l.status !== 'approved';
         const views = l.total_views || 0;
         const leads = enquiries.filter(e => e.listing_id === l.id).length;
@@ -720,7 +737,7 @@ export async function renderVendorListings(filter = 'all', page = 1) {
 
         return `
             <!-- Listing Card -->
-            <div class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col"><div class="relative h-48 overflow-hidden ${isPending ? 'grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500' : ''}"><div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" ${bgImage}></div>
+            <div class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col"><div class="relative h-40 overflow-hidden ${isPending ? 'grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500' : ''}"><div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" ${bgImage}></div>
                     ${statusBadge}
                     ${!isPending ? (() => {
                         const listingReviews = (window._vendorReviewsAll || []).filter(r => r.listing_id === l.id);
@@ -761,6 +778,24 @@ export async function renderVendorListings(filter = 'all', page = 1) {
                         <p class="text-xs text-red-700 dark:text-red-400 font-medium leading-relaxed">${l.rejection_reason}</p>
                     </div>
                     ` : ''}
+
+                    ${l.status === 'approved' ? `
+                    <div class="my-2 p-3 bg-emerald-50 relative dark:bg-emerald-900/10 rounded-xl border border-emerald-100 dark:border-emerald-900/30">
+                        <p class="text-[10px] font-black uppercase tracking-widest text-emerald-600 flex items-center gap-1 mb-1"><span class="material-symbols-outlined text-[12px]">verified_user</span> Stay Code</p>
+                        ${l.stay_code ? `
+                            <div class="flex items-center justify-between">
+                                <p class="text-sm text-emerald-800 dark:text-emerald-400 font-mono font-bold tracking-widest">${l.stay_code}</p>
+                                <button onclick="navigator.clipboard.writeText('${l.stay_code}'); import('../state.js').then(m => m.showToast('Stay Code copied!', 'success')); event.preventDefault(); event.stopPropagation();" class="text-[10px] bg-emerald-200/50 text-emerald-700 px-2 py-1 rounded hover:bg-emerald-300/50 transition-colors flex items-center gap-1 font-bold">
+                                    <span class="material-symbols-outlined text-[12px]">content_copy</span> Copy
+                                </button>
+                            </div>
+                        ` : `
+                            <button onclick="window.generateStayCode('${l.id}'); event.preventDefault(); event.stopPropagation();" class="text-xs w-full mt-1 bg-emerald-500 hover:bg-emerald-600 text-white py-1.5 rounded-lg font-bold transition-all shadow-sm flex items-center justify-center gap-1">
+                                <span class="material-symbols-outlined text-[14px]">vpn_key</span> Generate Code
+                            </button>
+                        `}
+                    </div>
+                    ` : ''}
                     
                     <div class="flex items-center gap-2 mt-auto pt-2">
                         <button onclick="window.location.hash='/vendor/edit-listing/${l.id}'" class="flex-1 bg-slate-100 dark:bg-slate-800 ${isPending ? 'text-slate-400 group-hover:text-slate-700' : 'text-slate-700 dark:text-slate-300'} py-2 rounded-lg text-xs font-bold hover:bg-primary hover:text-white transition-all flex items-center justify-center gap-1">
@@ -784,7 +819,7 @@ export async function renderVendorListings(filter = 'all', page = 1) {
             </div>
         `;
     }).join('') : `
-            <div class="col-span-1 md:col-span-2 xl:col-span-3 py-16 flex flex-col items-center justify-center text-center bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700"><span class="material-symbols-outlined text-6xl text-slate-300 mb-4">domain_disabled</span>
+            <div class="col-span-1 sm:col-span-2 xl:col-span-3 py-16 flex flex-col items-center justify-center text-center bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700"><span class="material-symbols-outlined text-6xl text-slate-300 mb-4">domain_disabled</span>
                 <h3 class="text-xl font-bold text-slate-700 dark:text-slate-300">No properties listed</h3>
                 <p class="text-slate-500 mt-2 max-w-sm">Add your first property to start receiving enquiries and bookings.</p>
                 <a href="#/vendor/add-listing" class="mt-6 bg-primary text-white px-6 py-2 rounded-lg font-bold shadow-sm hover:scale-105 transition-transform">Add New PG</a>
@@ -793,11 +828,11 @@ export async function renderVendorListings(filter = 'all', page = 1) {
         
         <!-- Empty State Suggestion for promoting (if listings exist) -->
         ${allListings.length > 0 && currentListings.length === 0 ? `
-            <div class="col-span-1 md:col-span-2 xl:col-span-3 py-12 text-center text-slate-500">No ${filter} properties found.
+            <div class="col-span-1 sm:col-span-2 xl:col-span-3 py-12 text-center text-slate-500">No ${filter} properties found.
             </div>
         ` : ''}
         ${allListings.length > 0 ? `
-        <div class="col-span-1 md:col-span-2 xl:col-span-3 flex flex-col items-center justify-center py-12 px-6 bg-primary/5 rounded-3xl border-2 border-dashed border-primary/20 mt-4 text-center"><div class="size-16 rounded-full bg-primary/20 flex items-center justify-center text-primary mb-4"><span class="material-symbols-outlined text-4xl">rocket_launch</span>
+        <div class="col-span-1 sm:col-span-2 xl:col-span-3 flex flex-col items-center justify-center py-12 px-6 bg-primary/5 rounded-3xl border-2 border-dashed border-primary/20 mt-4 text-center"><div class="size-16 rounded-full bg-primary/20 flex items-center justify-center text-primary mb-4"><span class="material-symbols-outlined text-4xl">rocket_launch</span>
             </div>
             <h4 class="text-xl font-bold mb-2">Boost Your Listings Visibility</h4>
             <p class="text-slate-500 max-w-md mb-6">Promoted listings get up to 5x more views and 3x more leads. Start a promotion campaign today.</p>
@@ -3666,28 +3701,56 @@ export async function renderVendorSubscriptions() {
                         <p class="text-3xl font-black text-primary">₹<span id="modalPlanPrice">0</span></p>
                     </div>
 
-                    <div class="bg-indigo-50 border border-indigo-100 dark:bg-indigo-900/20 dark:border-indigo-800/50 rounded-xl p-4 flex flex-col items-center justify-center mb-6">
-                        <span class="material-symbols-outlined text-4xl text-indigo-500 mb-2">qr_code_scanner</span>
-                        <p class="text-sm font-semibold text-indigo-900 dark:text-indigo-200 text-center">Scan with any UPI App</p>
-                        <!-- Placeholder UPI ID -->
-                        <div class="mt-3 bg-white dark:bg-slate-800 px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-center">
-                            <p class="text-xs text-slate-500 mb-1">Company UPI ID:</p>
-                            <p class="font-bold tracking-wider text-slate-800 dark:text-white select-all">staynest@upi</p>
+                    <!-- Step 1: Pay via UPI Apps -->
+                    <div id="paymentStep1" class="text-center transition-all duration-300">
+                        <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Pay securely using any UPI app on your device.</p>
+                        <a id="upiDeepLinkUrl" href="#" class="w-full flex items-center justify-center gap-3 bg-primary text-white py-4 px-6 rounded-2xl font-bold hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/30 mb-4 text-lg">
+                            <span class="material-symbols-outlined text-2xl">account_balance_wallet</span> Open UPI App to Pay
+                        </a>
+                        <div class="relative flex py-5 items-center">
+                            <div class="flex-grow border-t border-slate-200 dark:border-slate-700"></div>
+                            <span class="flex-shrink-0 mx-4 text-slate-400 text-sm font-medium">Or manually</span>
+                            <div class="flex-grow border-t border-slate-200 dark:border-slate-700"></div>
                         </div>
+                        <div class="bg-indigo-50 border border-indigo-100 dark:bg-indigo-900/20 dark:border-indigo-800/50 rounded-xl p-4 flex flex-col items-center justify-center mb-6">
+                            <span class="material-symbols-outlined text-4xl text-indigo-500 mb-2">qr_code_scanner</span>
+                            <p class="text-xs text-indigo-900/70 dark:text-indigo-200/70 mb-1">Company UPI ID:</p>
+                            <p id="upiIdText" class="font-bold tracking-wider text-indigo-900 dark:text-indigo-100 select-all text-lg mb-2">loading...</p>
+                            <p class="text-[11px] text-indigo-600 dark:text-indigo-400 text-center">Copy this ID to scan and pay from another device.</p>
+                        </div>
+                        <button type="button" onclick="document.getElementById('paymentStep1').classList.add('hidden'); document.getElementById('paymentStep2').classList.remove('hidden');" class="w-full border-2 border-primary text-primary hover:bg-primary/10 dark:hover:bg-primary/20 py-4 px-4 rounded-xl font-bold transition-colors">
+                            I have paid the amount
+                        </button>
                     </div>
 
-                    <form id="paymentForm" class="space-y-4">
+                    <!-- Step 2: Verification Form -->
+                    <form id="paymentForm" class="space-y-4 hidden animate-in slideInRight" id="paymentStep2">
                         <input type="hidden" id="paymentPlanId" value="">
                         <input type="hidden" id="paymentPlanName" value="">
                         <input type="hidden" id="paymentPlanPrice" value="">
                         
-                        <div>
-                            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Upload Payment Screenshot <span class="text-red-500">*</span></label>
-                            <input type="file" id="paymentScreenshot" accept="image/*" required class="block w-full text-sm text-slate-500 dark:text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 transition-colors">
-                            <p class="text-xs text-slate-400 mt-2">Required for admin verification.</p>
+                        <div class="bg-amber-50 dark:bg-amber-900/20 px-4 py-3 rounded-lg border border-amber-200 dark:border-amber-800 mt-2 mb-4">
+                            <p class="text-xs text-amber-800 dark:text-amber-200 font-medium text-center">Please provide at least ONE proof of payment (UTR number or screenshot).</p>
                         </div>
 
-                        <button type="submit" id="submitPaymentBtn" class="w-full mt-4 flex items-center justify-center gap-2 bg-primary text-white py-3 px-4 rounded-xl font-bold hover:bg-primary/90 transition-all shadow-[0_4px_12px_rgba(var(--primary-rgb),0.2)]">
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">UTR / Reference Number</label>
+                            <input type="text" id="paymentUtr" placeholder="e.g. 123456789012" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary/50 outline-none transition-all font-mono tracking-widest">
+                            <p class="text-[11px] text-slate-400 mt-2">12-digit number found in your UPI app transaction details.</p>
+                        </div>
+
+                        <div class="relative flex py-2 items-center">
+                            <div class="flex-grow border-t border-slate-200 dark:border-slate-700"></div>
+                            <span class="flex-shrink-0 mx-4 text-slate-400 text-[10px] font-bold uppercase tracking-widest">AND / OR</span>
+                            <div class="flex-grow border-t border-slate-200 dark:border-slate-700"></div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Upload Screenshot</label>
+                            <input type="file" id="paymentScreenshot" accept="image/*" class="block w-full text-sm text-slate-500 dark:text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 transition-colors">
+                        </div>
+
+                        <button type="submit" id="submitPaymentBtn" class="w-full mt-4 flex items-center justify-center gap-2 bg-primary text-white py-4 px-4 rounded-xl font-bold hover:bg-primary/90 transition-all shadow-[0_4px_12px_rgba(var(--primary-rgb),0.2)]">
                             Submit for Verification
                         </button>
                     </form>
@@ -3716,12 +3779,30 @@ export async function renderVendorSubscriptions() {
     }
 
     // Setup Modals
-    window.openPaymentModal = (planId, planName, planPrice) => {
+    window.openPaymentModal = async (planId, planName, planPrice) => {
         document.getElementById('paymentPlanId').value = planId;
         document.getElementById('paymentPlanName').value = planName;
         document.getElementById('paymentPlanPrice').value = planPrice;
         document.getElementById('modalPlanName').textContent = planName;
         document.getElementById('modalPlanPrice').textContent = planPrice;
+
+        // Reset steps
+        const step1 = document.getElementById('paymentStep1');
+        const step2 = document.getElementById('paymentStep2');
+        if(step1) step1.classList.remove('hidden');
+        if(step2) step2.classList.add('hidden');
+        const formObj = document.getElementById('paymentForm');
+        if(formObj) formObj.reset();
+
+        try {
+            const { getSiteSettings } = await import('../supabase.js');
+            const settings = await getSiteSettings();
+            const upiId = settings.admin_upi_id || 'staynest@upi';
+            
+            document.getElementById('upiIdText').textContent = upiId;
+            const upiLink = `upi://pay?pa=${upiId}&pn=StayNest&am=${planPrice}&cu=INR&tn=${encodeURIComponent(planName)}`;
+            document.getElementById('upiDeepLinkUrl').href = upiLink;
+        } catch(e) { console.error('Failed fetching UPI ID', e); }
 
         const modal = document.getElementById('paymentModal');
         const inner = document.getElementById('paymentModalInner');
@@ -3749,35 +3830,44 @@ export async function renderVendorSubscriptions() {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const fileInput = document.getElementById('paymentScreenshot');
-            if (!fileInput.files.length) {
-                showToast('Please upload a screenshot', 'error');
+            const utrInput = document.getElementById('paymentUtr').value.trim();
+            
+            if (!fileInput.files.length && !utrInput) {
+                showToast('Please provide a UTR number OR upload a screenshot.', 'error');
                 return;
             }
 
-            const file = fileInput.files[0];
             const planId = document.getElementById('paymentPlanId').value;
             const planName = document.getElementById('paymentPlanName').value;
             const planPrice = document.getElementById('paymentPlanPrice').value;
 
             const btn = document.getElementById('submitPaymentBtn');
             const originalText = btn.innerHTML;
-            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Uploading...';
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Processing...';
             btn.disabled = true;
 
             try {
-                // Upload screenshot
-                const screenshotUrl = await uploadPaymentScreenshot(file, state.user.id);
+                let screenshotUrl = null;
+                // Upload screenshot if provided
+                if (fileInput.files.length > 0) {
+                    const file = fileInput.files[0];
+                    screenshotUrl = await uploadPaymentScreenshot(file, state.user.id);
+                }
                 
                 // Submit request to admin
-                await createPaymentRequest({
+                const payload = {
                     vendor_id: state.user.id,
                     vendor_email: state.user.email,
                     plan_id: planId,
                     plan_name: planName,
                     price: parseInt(planPrice, 10),
                     payment_type: 'subscription',
-                    screenshot_url: screenshotUrl
-                });
+                    payment_status: 'pending'
+                };
+                if (screenshotUrl) payload.screenshot_url = screenshotUrl;
+                if (utrInput) payload.utr_number = utrInput;
+
+                await createPaymentRequest(payload);
 
                 showToast('Payment verification requested successfully! Admin will review it shortly.', 'success');
                 window.closePaymentModal();

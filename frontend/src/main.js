@@ -351,38 +351,15 @@ async function init() {
   // Pre-load site settings for footer (non-blocking)
   loadFooterSettings().catch(() => {});
 
-  // initOneSignal().catch(() => {});
-
-  // Register PWA Service Worker
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/service-worker.js')
-        .catch(err => console.error('PWA Service Worker registration failed.', err));
-    });
-  }
 
   // Initialize Analytics globally
   initAnalytics();
 
-  // Capture PWA Install Prompt for custom install buttons
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    window.deferredPrompt = e;
-    // Show install buttons globally if they exist in DOM
-    document.querySelectorAll('.pwa-install-btn').forEach(btn => btn.classList.remove('hidden'));
-  });
 
-  // Listen for successful installation
-  window.addEventListener('appinstalled', () => {
-    window.deferredPrompt = null;
-    document.querySelectorAll('.pwa-install-btn').forEach(btn => btn.classList.add('hidden'));
-  });
 
   // Load auth state synchronously BEFORE drawing the app
   try {
-    console.log('Fetching session...');
     const { data: { session } } = await supabase.auth.getSession();
-    console.log('Session fetched:', session ? 'Active' : 'None');
     state.user = session?.user;
 
     // Track login if it's a new session and we haven't tracked it yet

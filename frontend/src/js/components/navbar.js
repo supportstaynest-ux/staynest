@@ -16,7 +16,7 @@ export function renderNavbar(title = 'StayNest') {
                     <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-teal-400 flex items-center justify-center shadow-md shadow-primary/20 group-hover:shadow-primary/40 transition-shadow">
                         <span class="material-symbols-outlined text-[20px] text-white">home_pin</span>
                     </div>
-                    <h2 class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white hidden sm:block">Stay<span class="text-primary">Nest</span></h2>
+                    <h2 class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">Stay<span class="text-primary">Nest</span></h2>
                 </a>
             </div>
 
@@ -102,42 +102,52 @@ export function renderNavbar(title = 'StayNest') {
         <!-- Background Overlay -->
         <div id="mobile-drawer-overlay" class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity"></div>
         <!-- Drawer Content -->
-        <div id="mobile-drawer-content" class="absolute right-0 top-0 h-full w-[80%] max-w-sm bg-white dark:bg-slate-900 shadow-2xl transform translate-x-full transition-transform duration-300 ease-out flex flex-col overflow-y-auto hidden-scrollbar">
-            <div class="p-5 flex items-center justify-between border-b border-slate-100 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 sticky top-0 z-10">
-                <span class="font-bold text-xl text-slate-900 dark:text-white">Menu</span>
-                <button class="md-close-btn p-2 text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors flex items-center justify-center">
-                    <span class="material-symbols-outlined text-[22px]">close</span>
+        <div id="mobile-drawer-content" class="absolute right-0 top-0 h-full w-[80%] max-w-sm bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-900/90 shadow-[4px_0_24px_rgba(0,0,0,0.02)] transform translate-x-full transition-transform duration-300 ease-out flex flex-col overflow-y-auto hidden-scrollbar">
+            <div class="p-6 flex items-center justify-between border-b border-slate-100 dark:border-slate-800/80 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm sticky top-0 z-10">
+                <a href="#/home" class="flex items-center gap-3">
+                    <div class="size-10 bg-gradient-to-br from-primary to-teal-400 rounded-xl flex items-center justify-center text-white shadow-md shadow-primary/20">
+                        <span class="text-xl inline-block">🏠</span>
+                    </div>
+                    <h1 class="text-2xl font-black tracking-tight text-slate-900 dark:text-white">Stay<span class="text-primary">Nest</span></h1>
+                </a>
+                <button class="md-close-btn p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[24px]">close</span>
                 </button>
             </div>
             
-            <nav class="flex-1 px-5 py-6 space-y-2">
-                <a href="#/explore" class="md-close-btn flex items-center gap-4 px-4 py-3 rounded-xl text-base font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
-                    <span class="material-symbols-outlined text-slate-400">search</span>
-                    Explore PGs
+            <nav class="flex-1 px-5 py-6 flex flex-col gap-1">
+                <a href="#/explore" class="md-close-btn flex items-center gap-4 px-4 py-3 rounded-xl text-base font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-200 transition-all duration-200">
+                    <span class="text-xl w-6 flex justify-center">🔍</span>
+                    <span class="tracking-wide">Explore PGs</span>
                 </a>
-                <a href="#/compare" class="md-close-btn flex items-center gap-4 px-4 py-3 rounded-xl text-base font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
-                    <span class="material-symbols-outlined text-slate-400">compare_arrows</span>
-                    Compare
+                <a href="#/compare" class="md-close-btn flex items-center gap-4 px-4 py-3 rounded-xl text-base font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-200 transition-all duration-200">
+                    <span class="text-xl w-6 flex justify-center">⚖️</span>
+                    <span class="tracking-wide">Compare</span>
                 </a>
-                <a href="#/saved" class="md-close-btn flex items-center gap-4 px-4 py-3 rounded-xl text-base font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
-                    <span class="material-symbols-outlined text-slate-400">favorite</span>
-                    Saved
+                <a href="#/saved" class="md-close-btn flex items-center gap-4 px-4 py-3 rounded-xl text-base font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-200 transition-all duration-200">
+                    <span class="text-xl w-6 flex justify-center">❤️</span>
+                    <span class="tracking-wide">Saved</span>
                 </a>
-                <div class="my-4 border-t border-slate-100 dark:border-slate-800"></div>
+                
+                <div class="my-4 border-t border-slate-200 dark:border-slate-800/60 opacity-60"></div>
+                
                 ${!isUserLoggedIn ? `
-                    <a href="#/auth" class="md-close-btn flex items-center gap-4 px-4 py-3 rounded-xl text-base font-bold bg-primary/10 text-primary hover:bg-primary/20 transition-colors mt-4">
-                        <span class="material-symbols-outlined mt-0.5">login</span>
-                        Login / Sign Up
+                    <a href="#/auth" class="md-close-btn flex items-center gap-4 px-4 py-3 rounded-xl text-base font-semibold bg-teal-50 dark:bg-teal-900/20 text-teal-700 dark:text-teal-400 hover:bg-teal-100 dark:hover:bg-teal-900/40 transition-all duration-200 mt-2 shadow-sm">
+                        <span class="text-xl w-6 flex justify-center">👤</span>
+                        <span class="tracking-wide">Login / Sign Up</span>
                     </a>
                 ` : `
-                    <a href="${dashRoute}" class="md-close-btn flex items-center gap-4 px-4 py-3 rounded-xl text-base font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
-                        <span class="material-symbols-outlined text-slate-400">dashboard</span>
-                        Dashboard
+                    <a href="${dashRoute}" class="md-close-btn flex items-center gap-4 px-4 py-3 rounded-xl text-base font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-200 transition-all duration-200">
+                        <span class="text-xl w-6 flex justify-center">🏠</span>
+                        <span class="tracking-wide">Dashboard</span>
                     </a>
-                    <button id="mobile-logout-btn" class="w-full flex items-center gap-4 px-4 py-3 rounded-xl text-base font-semibold text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors mt-2 text-left">
-                        <span class="material-symbols-outlined text-red-400">logout</span>
-                        Sign Out
-                    </button>
+                    
+                    <div class="mt-auto border-t border-slate-100 dark:border-slate-800/80 pt-4 mt-6">
+                        <button id="mobile-logout-btn" class="w-full flex items-center gap-4 px-4 py-3 rounded-xl text-base font-medium text-slate-600 dark:text-slate-400 hover:bg-red-50 dark:hover:bg-red-900/10 hover:text-red-600 dark:hover:text-red-400 transition-all duration-200 text-left">
+                            <span class="text-xl w-6 flex justify-center">🚪</span>
+                            <span class="tracking-wide">Sign Out</span>
+                        </button>
+                    </div>
                 `}
             </nav>
         </div>

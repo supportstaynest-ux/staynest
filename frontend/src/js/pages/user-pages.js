@@ -328,6 +328,21 @@ export async function renderSOSSafety() {
     try { profile = await getProfile(state.user.id); } catch (e) { profile = state.profile; }
     hideLoading();
 
+    // Gender guard — SOS is exclusively for female users
+    if (profile?.gender !== 'female') {
+        const appEl = document.getElementById('app');
+        appEl.innerHTML = renderDashboardLayout(
+            '<div class="flex flex-col items-center justify-center min-h-[50vh] text-center gap-4 py-16">' +
+            '<div class="p-4 bg-slate-100 dark:bg-slate-800 rounded-2xl"><span class="material-symbols-outlined text-5xl text-slate-400">lock</span></div>' +
+            '<h2 class="text-xl font-bold text-slate-800 dark:text-white">Access Restricted</h2>' +
+            '<p class="text-slate-500 max-w-sm text-sm">The Safety &amp; SOS feature is designed exclusively for female residents and is not available for your account.</p>' +
+            '<a href="#/dashboard" class="bg-primary text-white font-bold px-6 py-2.5 rounded-xl hover:brightness-110 transition-all">Go to Dashboard</a>' +
+            '</div>'
+        , 'sos', 'Safety & SOS');
+        initDashboardEvents();
+        return;
+    }
+
     const isVerified = profile?.is_resident_verified === true;
     const contacts = Array.isArray(profile?.emergency_contacts) ? profile.emergency_contacts : [];
 
@@ -530,13 +545,20 @@ export async function renderSOSSafety() {
     });
 
     document.getElementById('send-approval-btn')?.addEventListener('click', async () => {
-        const lid = document.getElementById('listing-id-input').value.trim();
+        const lid = (document.getElementById('listing-id-input').value || '').trim().replace(/\s+/g, '');
         if (!lid) { showToast('Please enter a Listing ID', 'error'); return; }
         showLoading();
         try {
             await requestOwnerApproval(lid);
             showToast('Approval request sent to property owner!', 'success');
-        } catch (e) { showToast(e.message || 'Failed to send', 'error'); }
+        } catch (e) {
+            const msg = (e.message || '').toLowerCase();
+            if (msg.includes('not found') || msg.includes('404') || msg.includes('listing') || msg.includes('invalid')) {
+                showToast('Invalid Listing ID or not eligible for verification', 'error');
+            } else {
+                showToast(e.message || 'Failed to send approval request', 'error');
+            }
+        }
         hideLoading();
     });
 
@@ -600,6 +622,68 @@ export async function renderSOSSafety() {
         btn.addEventListener('touchcancel', clearHold);
     }
 
+    // SOS awareness popup — show once per female user
+    (function() {
+        var uid = (typeof state !== 'undefined' && state.user) ? state.user.id : null;
+        if (uid && !localStorage.getItem('sos_popup_shown_' + uid)) {
+            _showSOSAwarenessPopup(uid);
+        }
+    })();
+
     initSOSButton('emergency-sos-btn', 'emergency', 'red');
     initSOSButton('personal-sos-btn', 'personal', 'amber');
+}
+
+// SOS Awareness Popup — shown once per female user via localStorage
+function _showSOSAwarenessPopup(userId) {
+    if (document.getElementById('sos-awareness-popup')) return;
+
+    var popup = document.createElement('div');
+    popup.id = 'sos-awareness-popup';
+    popup.className = 'fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm';
+    popup.style.cssText = 'animation: fadeIn 0.25s ease';
+    popup.innerHTML = '<div style="animation: slideUp 0.3s ease" class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden border border-rose-100 dark:border-rose-900/30">' +
+        '<div class="bg-gradient-to-r from-rose-500 to-pink-500 p-5 text-white text-center">' +
+            '<span class="material-symbols-outlined text-4xl mb-2 block" style="font-variation-settings:\u0027FILL\u0027 1">security</span>' +
+            '<h2 class="text-lg font-black">Your Safety Matters</h2>' +
+            '<p class="text-rose-100 text-xs mt-1">StayNest SOS \u2014 built for women</p>' +
+        '</div>' +
+        '<div class="p-6 space-y-3">' +
+            '<div class="flex items-start gap-3">' +
+                '<span class="material-symbols-outlined text-rose-500 text-xl shrink-0 mt-0.5" style="font-variation-settings:\u0027FILL\u0027 1">sos</span>' +
+                '<p class="text-sm text-slate-700 dark:text-slate-300"><strong>Emergency SOS</strong> instantly alerts your family &amp; admin with your location.</p>' +
+            '</div>' +
+            '<div class="flex items-start gap-3">' +
+                '<span class="material-symbols-outlined text-amber-500 text-xl shrink-0 mt-0.5" style="font-variation-settings:\u0027FILL\u0027 1">warning</span>' +
+                '<p class="text-sm text-slate-700 dark:text-slate-300"><strong>Personal SOS</strong> privately alerts your saved emergency contacts only.</p>' +
+            '</div>' +
+            '<div class="flex items-start gap-3">' +
+                '<span class="material-symbols-outlined text-green-500 text-xl shrink-0 mt-0.5" style="font-variation-settings:\u0027FILL\u0027 1">verified_user</span>' +
+                '<p class="text-sm text-slate-700 dark:text-slate-300">Verify your stay using a <strong>Listing ID</strong> or <strong>Stay Code</strong> to unlock full SOS.</p>' +
+            '</div>' +
+        '</div>' +
+        '<div class="px-6 pb-6 flex gap-3">' +
+            '<button id="sos-popup-learn" class="flex-1 bg-rose-500 hover:bg-rose-600 text-white font-bold py-2.5 rounded-xl text-sm transition-all shadow-sm">Learn More</button>' +
+            '<button id="sos-popup-dismiss" class="flex-1 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold py-2.5 rounded-xl text-sm transition-all">Dismiss</button>' +
+        '</div>' +
+    '</div>';
+
+    document.body.appendChild(popup);
+
+    function dismiss() {
+        localStorage.setItem('sos_popup_shown_' + userId, 'true');
+        popup.style.opacity = '0';
+        popup.style.transition = 'opacity 0.25s';
+        setTimeout(function() { popup.remove(); }, 250);
+    }
+
+    document.getElementById('sos-popup-dismiss').onclick = dismiss;
+    document.getElementById('sos-popup-learn').onclick = function() {
+        dismiss();
+        setTimeout(function() {
+            var target = document.getElementById('emergency-sos-btn');
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 300);
+    };
+    popup.addEventListener('click', function(e) { if (e.target === popup) dismiss(); });
 }

@@ -194,15 +194,15 @@ export async function renderPGDetails({ id }) {
                             <span class="text-xs text-slate-400 font-medium">Listing ID:</span>
                             <span
                                 id="copy-listing-id-badge"
-                                class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg font-mono text-[11px] font-bold text-slate-600 dark:text-slate-300 cursor-pointer hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-all select-all group"
+                                data-listing-id="${pg.id}"
+                                class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg font-mono text-[11px] font-bold text-slate-600 dark:text-slate-300 cursor-pointer hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-all select-none group"
                                 title="Click to copy full Listing ID"
-                                onclick="navigator.clipboard.writeText('${pg.id}'); this.innerHTML = '<span class=\\'material-symbols-outlined text-[12px]\\'>check_circle</span> Copied!'; this.classList.add('text-green-600','bg-green-50','border-green-200'); setTimeout(() => { this.innerHTML = '<span class=\\'material-symbols-outlined text-[12px]\\'>content_copy</span> ${pg.id.substring(0,8).toUpperCase()}…'; this.classList.remove(\\'text-green-600\\',\\'bg-green-50\\',\\'border-green-200\\'); }, 2000);"
                             >
                                 <span class="material-symbols-outlined text-[12px]">content_copy</span>
                                 ${pg.id.substring(0,8).toUpperCase()}…
                             </span>
                         </div>
-                        ${pg.gender_allowed !== 'male' ? `
+                        ${pg.gender_allowed !== 'male' && state.profile?.gender === 'female' ? `
                         <a href="#/safety-sos" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800 rounded-lg text-[11px] font-bold text-rose-600 dark:text-rose-400 hover:bg-rose-100 transition-colors">
                             <span class="material-symbols-outlined text-[14px]" style="font-variation-settings:'FILL' 1">sos</span>
                             Safety &amp; SOS
@@ -476,6 +476,36 @@ export async function renderPGDetails({ id }) {
   `;
 
     initNavbarEvents();
+
+    // Listing ID one-click copy
+    const _copyBadge = document.getElementById('copy-listing-id-badge');
+    if (_copyBadge) {
+        _copyBadge.addEventListener('click', function() {
+            const lid = this.dataset.listingId || '';
+            if (!lid) return;
+            const badge = this;
+            navigator.clipboard.writeText(lid).then(function() {
+                badge.innerHTML = '<span class="material-symbols-outlined text-[12px]">check_circle</span> Copied!';
+                badge.classList.add('text-green-600', 'bg-green-50', 'border-green-200');
+                badge.classList.remove('hover:bg-primary/10', 'hover:text-primary', 'hover:border-primary/30');
+                if (typeof showToast === 'function') showToast('Listing ID copied', 'success');
+                setTimeout(function() {
+                    badge.innerHTML = '<span class="material-symbols-outlined text-[12px]">content_copy</span> ' + lid.substring(0, 8).toUpperCase() + '\u2026';
+                    badge.classList.remove('text-green-600', 'bg-green-50', 'border-green-200');
+                    badge.classList.add('hover:bg-primary/10', 'hover:text-primary', 'hover:border-primary/30');
+                }, 2500);
+            }).catch(function() {
+                var ta = document.createElement('textarea');
+                ta.value = lid;
+                ta.style.cssText = 'position:fixed;opacity:0';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                ta.remove();
+                if (typeof showToast === 'function') showToast('Listing ID copied', 'success');
+            });
+        });
+    }
 
     if (pg.latitude && pg.longitude) {
         setTimeout(() => {
